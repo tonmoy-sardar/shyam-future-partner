@@ -1,0 +1,18 @@
+<ScrollView row="0">
+        <StackLayout class="full-dashboard">
+            <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+                <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="250px"
+                    height="250px" alignSelf="flex-start">
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="app-icon">
+                            <Image [src]="app_details.logo" *ngIf="app_details.logo != ''"></Image>
+                            <Image src="~/images/no-logo.png" *ngIf="app_details.logo == ''"></Image>
+                        </StackLayout>
+                        <Label class="app-name" [text]="app_details.business_name"></Label>
+    
+                    </StackLayout>
+                </CardView>
+            </FlexboxLayout>
+           
+        </StackLayout>
+    </ScrollView>

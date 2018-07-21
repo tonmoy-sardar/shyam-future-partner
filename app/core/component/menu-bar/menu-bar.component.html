@@ -1,0 +1,17 @@
+<StackLayout row="1" orientation="horizontal">
+    <Button textWrap="true" width="33.33%" (tap)="goTodashboard()">
+        <FormattedString>
+            <Span text="dashboard"></Span>
+        </FormattedString>
+    </Button>
+    <Button textWrap="true" width="33.33%" [nsRouterLink]="['/explore']">
+        <FormattedString>
+            <Span text="Explore"></Span>
+        </FormattedString>
+    </Button>
+    <Button textWrap="true" width="33.33%" [nsRouterLink]="['.']">
+        <FormattedString>
+            <Span text="All Apps"></Span>
+        </FormattedString>
+    </Button>
+</StackLayout>
