@@ -10,6 +10,7 @@ import { EditProductCategoyComponent } from "./edit-product-category/edit-produc
 import { EditProductComponent } from "./edit-product/edit-product.component";
 
 import { CustomersComponent } from "./customers/customers.component";
+import { MessagesComponent } from "./messages/messages.component";
 
 const routes: Routes = [
     { path: "details/:id", component: CreatedAppComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: "edit-product-category/:app_id/:id", component: EditProductCategoyComponent },
     { path: "edit-product/:app_id/:id", component: EditProductComponent },
     { path: "customers/:id", component: CustomersComponent },
+    { path: "messages/:id", component: MessagesComponent },
 ];
 
 

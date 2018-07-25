@@ -10,6 +10,7 @@ import { EditProductCategoyComponent } from "./edit-product-category/edit-produc
 import { EditProductComponent } from "./edit-product/edit-product.component";
 
 import { CustomersComponent } from "./customers/customers.component";
+import { MessagesComponent } from "./messages/messages.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -26,7 +27,8 @@ import { CoreModule } from "../../core/core.module";
         ProductsComponent,
         EditProductCategoyComponent,
         EditProductComponent,
-        CustomersComponent
+        CustomersComponent,
+        MessagesComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
