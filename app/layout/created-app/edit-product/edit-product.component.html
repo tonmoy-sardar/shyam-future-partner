@@ -1,0 +1,35 @@
+<ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <StackLayout class="form" [formGroup]="form" novalidate>
+            <GridLayout rows="auto, auto, auto, auto, auto">
+                <StackLayout class="input-filld" row="0">
+                    <TextField hint="Product Name" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
+                    <StackLayout *ngIf="isFieldValid('product_name')" class="invalid-feedback">
+                        <Label text="Product Name is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout class="input-filld" row="1">
+                    <TextField hint="Price" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="price" [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')"></TextField>
+                    <StackLayout *ngIf="isFieldValid('price')" class="invalid-feedback">
+                        <Label text="Price is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout class="input-filld" row="2">
+                    <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="discounted_price" [(ngModel)]="product_data.discounted_price" ></TextField>
+                </StackLayout>
+                <StackLayout class="input-filld" row="3">
+                    <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="packing_charges" [(ngModel)]="product_data.packing_charges" ></TextField>
+                </StackLayout>
+
+                <StackLayout class="input-filld" row="4">
+                    <TextField hint="Tags" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="tags" [(ngModel)]="product_data.tags" ></TextField>
+                </StackLayout>
+               
+                <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+            </GridLayout>
+
+            <Button class="btn" text="Update" [isEnabled]="!processing" (tap)="updateProduct()" backgroundColor="#41bffe" color="#fff" width="100%">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

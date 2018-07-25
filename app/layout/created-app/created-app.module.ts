@@ -4,7 +4,12 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { CreatedAppRoutingModule } from './created-app.routing';
 import { CreatedAppComponent } from './created-app.component';
 import { ManageAppComponent } from './manage-app/manage-app.component';
+import { EditAppComponent } from './edit-app/edit-app.component';
+import { ProductsComponent } from './products/products.component';
+import { EditProductCategoyComponent } from "./edit-product-category/edit-product-category.component";
+import { EditProductComponent } from "./edit-product/edit-product.component";
 
+import { CustomersComponent } from "./customers/customers.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -16,7 +21,12 @@ import { CoreModule } from "../../core/core.module";
     ],
     declarations: [
         CreatedAppComponent,
-        ManageAppComponent
+        ManageAppComponent,
+        EditAppComponent,
+        ProductsComponent,
+        EditProductCategoyComponent,
+        EditProductComponent,
+        CustomersComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

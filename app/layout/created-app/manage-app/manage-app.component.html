@@ -1,18 +1,29 @@
 <ScrollView row="0">
-        <StackLayout class="full-dashboard">
-            <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-                <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="250px"
-                    height="250px" alignSelf="flex-start">
-                    <StackLayout orientation="vertical">
-                        <StackLayout class="app-icon">
-                            <Image [src]="app_details.logo" *ngIf="app_details.logo != ''"></Image>
-                            <Image src="~/images/no-logo.png" *ngIf="app_details.logo == ''"></Image>
-                        </StackLayout>
-                        <Label class="app-name" [text]="app_details.business_name"></Label>
-    
+    <StackLayout class="full-dashboard">
+        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+            <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="250px"
+                height="250px" alignSelf="flex-start">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="app-icon">
+                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
+                        <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
                     </StackLayout>
-                </CardView>
-            </FlexboxLayout>
-           
-        </StackLayout>
-    </ScrollView>
+                    <Label class="app-name" [text]="app_data.business_name"></Label>
+
+                </StackLayout>
+            </CardView>
+        </FlexboxLayout>
+        <GridLayout columns="*,*" rows="*" backgroundColor="lightgray" VerticalAlignment="middle" marginTop="10" >
+            <StackLayout class="action-section" col="0" row="0" borderTopWidth="1"  borderLeftWidth="1" borderColor="#3aa6fe" VerticalAlignment="middle" [nsRouterLink]="['/created-app/edit-app', app_id]">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
+                <Label class="action-text" text="Edit App"></Label>
+            </StackLayout>
+            <StackLayout class="action-section" col="1" row="0" borderTopWidth="1"  borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"  VerticalAlignment="middle" [nsRouterLink]="['/created-app/products', app_id]">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
+                <Label class="action-text" text="Edit Product"></Label>
+            </StackLayout>
+            
+
+        </GridLayout>
+    </StackLayout>
+</ScrollView>

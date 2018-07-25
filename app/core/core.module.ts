@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 // import { DropDownModule } from "nativescript-drop-down/angular";
-// import { AccordionModule } from "nativescript-accordion/angular";
+import { AccordionModule } from "nativescript-accordion/angular";
 // directive
 import { MinLengthDirective, MaxLengthDirective, IsEmailDirective } from "./directive/input.directive";
 import { CarouselDirective } from "./directive/carousel.directive";
@@ -32,6 +32,7 @@ import { SignUpModalComponent } from './component/signup-modal/signup-modal.comp
         NativeScriptRouterModule,
         NativeScriptFormsModule,
         ReactiveFormsModule,
+        AccordionModule,
         NativeScriptHttpClientModule,
         TNSFontIconModule.forRoot({
             'fa': './css/font-awesome.min.css'
@@ -53,6 +54,7 @@ import { SignUpModalComponent } from './component/signup-modal/signup-modal.comp
         MinLengthDirective,
         MaxLengthDirective,
         IsEmailDirective,
+        AccordionModule,
         ActionBarComponent,
         NativeScriptFormsModule,
         ReactiveFormsModule,

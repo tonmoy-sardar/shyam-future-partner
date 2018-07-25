@@ -1,0 +1,38 @@
+<ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+            <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="250px"
+                height="250px" alignSelf="flex-start">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="app-icon">
+                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
+                        <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
+                    </StackLayout>
+                    <Label class="app-name" [text]="app_data.business_name"></Label>
+
+                </StackLayout>
+            </CardView>
+        </FlexboxLayout>
+        <StackLayout class="form" [formGroup]="form" novalidate>
+            <GridLayout rows="auto, auto">
+                <StackLayout class="input-filld" row="0">
+                    <TextField hint="Name Of Your Business" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="business_name" [(ngModel)]="app_data.business_name" [ngClass]="displayFieldCss('business_name')"></TextField>
+                    <StackLayout *ngIf="isFieldValid('business_name')" class="invalid-feedback">
+                        <Label text="Name Of Your Business is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout class="input-filld" row="1">
+                    <TextField hint="Description Of Your Business" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="done" [isEnabled]="!processing" formControlName="business_description" [(ngModel)]="app_data.business_description" [ngClass]="displayFieldCss('business_description')"></TextField>
+                    <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
+                        <Label text="Description Of Your Business is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+            </GridLayout>
+
+            <Button class="btn" text="Update" [isEnabled]="!processing" (tap)="updateAppInfo()" backgroundColor="#41bffe" color="#fff" width="100%">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

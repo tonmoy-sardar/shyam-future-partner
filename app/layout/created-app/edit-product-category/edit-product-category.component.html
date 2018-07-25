@@ -1,0 +1,26 @@
+<ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <StackLayout class="form" [formGroup]="form" novalidate>
+            <GridLayout rows="auto, auto">
+                <StackLayout class="input-filld" row="0">
+                    <TextField hint="Product Category" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="category_name" [(ngModel)]="product_category_data.category_name" [ngClass]="displayFieldCss('category_name')"></TextField>
+                    <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
+                        <Label text="Product Category is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout class="input-filld" row="1">
+                    <TextField hint="Product Category" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="category_name" [(ngModel)]="product_category_data.category_name" [ngClass]="displayFieldCss('category_name')"></TextField>
+                    <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
+                        <Label text="Product Category is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                
+                <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+            </GridLayout>
+
+            <Button class="btn" text="Update" [isEnabled]="!processing" (tap)="updateProductCategory()" backgroundColor="#41bffe" color="#fff" width="100%">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

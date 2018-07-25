@@ -1,0 +1,46 @@
+<!-- <ScrollView row="0">
+    <StackLayout class="full-dashboard"> -->
+        <!-- <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+            <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="250px"
+                height="250px" alignSelf="flex-start">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="app-icon">
+                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
+                        <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
+                    </StackLayout>
+                    <Label class="app-name" [text]="app_data.business_name"></Label>
+
+                </StackLayout>
+            </CardView>
+        </FlexboxLayout> -->
+
+        
+    <!-- </StackLayout>
+</ScrollView> -->
+<Accordion [items]="category_list" itemTapped="tapped" class="category_product_accordian" separatorColor="transparent">
+
+    <ng-template accordionHeaderTemplate let-item="item" let-i="index">
+        <GridLayout columns="*,40" rows="*" class="category_heading" borderWidth="1" borderColor="#ccc"  >
+            <Label [text]="item.category_name" textWrap="true" row="0" col="0"></Label>
+            <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="1" [nsRouterLink]="['/created-app/edit-product-category', app_id, item.id]"></Label>
+        </GridLayout>
+    </ng-template>
+
+    <ng-template accordionItemTemplate let-item="item" let-parent="parentIndex" let-even="even" let-child="childIndex">
+        <StackLayout class="product_list" borderRightWidth="1" borderLeftWidth="1" borderColor="#ccc">
+            <CardView class="whiteCard">
+                <GridLayout rows="*" columns="*,*,40" padding="5" verticalAlignment="center" [nsRouterLink]="['/created-app/edit-product', app_id, item.id]">
+                    <Label [text]="item.product_name" textWrap="true" row="0" col="0" verticalAlignment="center" class="product_name"></Label>
+                    <StackLayout row="0" col="1" verticalAlignment="center" orientation="horizontal">
+                        <Label [text]="item.discounted_price" class="discounted_price" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
+                        <Label [text]="item.price" class="original_price" textWrap="true" [ngClass]="[item.discounted_price > 0 ? 'isDiscount' : '']"></Label>
+                        <Label [text]="getDiscount(item.price,item.discounted_price)" class="discount" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
+                        
+                    </StackLayout>
+                    <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="2"></Label>
+                </GridLayout>
+            </CardView>
+        </StackLayout>
+    </ng-template>
+
+</Accordion>
