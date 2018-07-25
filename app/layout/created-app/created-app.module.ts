@@ -11,6 +11,7 @@ import { EditProductComponent } from "./edit-product/edit-product.component";
 
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
+import { ChatComponent } from "./chat/chat.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -28,7 +29,8 @@ import { CoreModule } from "../../core/core.module";
         EditProductCategoyComponent,
         EditProductComponent,
         CustomersComponent,
-        MessagesComponent
+        MessagesComponent,
+        ChatComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
