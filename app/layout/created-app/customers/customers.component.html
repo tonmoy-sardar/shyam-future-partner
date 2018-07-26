@@ -1,3 +1,14 @@
 <StackLayout class="full-dashboard">
-    
+    <StackLayout padding="10">
+        <StackLayout borderWidth="1" borderColor="#ccc" *ngFor="let customer of customer_list" style="margin-bottom: 5px;" class="list-group">
+            <CardView class="whiteCard">
+                <GridLayout rows="auto, auto" columns="auto, *, auto" class="list-group-item" padding="10" verticalAlignment="center">
+                    <Image row="0" col="0" rowSpan="2" src="~/images/user.png" class="thumb" verticalAlignment="center"></Image>
+                    <Label row="0" col="1" [text]="customer.customer.customer_name" verticalAlignment="center"></Label>
+                    <Label row="1" col="1" [text]="customer.customer.email" class="body" verticalAlignment="center"></Label>
+                    <Label row="0" col="2" [text]="customer.customer.contact_no" class="body" verticalAlignment="center"></Label>
+                </GridLayout>
+            </CardView>
+        </StackLayout>
+    </StackLayout>
 </StackLayout>

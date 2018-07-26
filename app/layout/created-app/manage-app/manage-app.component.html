@@ -13,17 +13,46 @@
                 </StackLayout>
             </CardView>
         </FlexboxLayout>
-        <GridLayout columns="*,*" rows="*" backgroundColor="lightgray" VerticalAlignment="middle" marginTop="10" >
-            <StackLayout class="action-section" col="0" row="0" borderTopWidth="1"  borderLeftWidth="1" borderColor="#3aa6fe" VerticalAlignment="middle" [nsRouterLink]="['/created-app/edit-app', app_id]">
+        <GridLayout columns="*,*" rows="*,*" backgroundColor="lightgray" VerticalAlignment="middle" marginTop="10">
+            <StackLayout class="action-section" col="0" row="0" borderTopWidth="1" borderLeftWidth="1" borderColor="#3aa6fe" VerticalAlignment="middle"
+                [nsRouterLink]="['/created-app/edit-app', app_id]">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
                 <Label class="action-text" text="Edit App"></Label>
             </StackLayout>
-            <StackLayout class="action-section" col="1" row="0" borderTopWidth="1"  borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"  VerticalAlignment="middle" [nsRouterLink]="['/created-app/products', app_id]">
+            <StackLayout class="action-section" col="1" row="0" borderTopWidth="1" borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"
+                VerticalAlignment="middle" [nsRouterLink]="['/created-app/products', app_id]">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
                 <Label class="action-text" text="Edit Product"></Label>
             </StackLayout>
-            
+            <StackLayout class="action-section" col="0" row="1" borderTopWidth="1" borderLeftWidth="1" borderColor="#3aa6fe" VerticalAlignment="middle">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
+                <Label class="action-text" text="Edit Owner Info"></Label>
+            </StackLayout>
+            <StackLayout class="action-section" col="1" row="1" borderTopWidth="1" borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"
+                VerticalAlignment="middle">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
+                <Label class="action-text" text="Edit Business Images"></Label>
+            </StackLayout>
 
+        </GridLayout>
+        <GridLayout rows=" *, auto">
+            <Image row="0" [src]="cameraImage" stretch="fill" margin="10" width="40" height="40" horizontalAlignment="center"></Image>
+            <Button text="Take Picture" (tap)='onTakePictureTap($event)' row="1"  horizontalAlignment="center"></Button>
+        </GridLayout>
+        <GridLayout rows="*, auto, auto">
+            <StackLayout row="0">
+                <StackLayout borderWidth="1" borderColor="#ccc" *ngFor="let image of imageAssets; let i = index" style="margin-bottom: 5px;"
+                    class="list-group">
+                    <CardView class="whiteCard">
+                        <GridLayout columns="auto, *">
+                            <Image [width]="thumbSize" [height]="thumbSize" [src]="image" stretch="fill"></Image>
+                            <Label col="1" [text]="'image ' + i"></Label>
+                        </GridLayout>
+                    </CardView>
+                </StackLayout>
+            </StackLayout>
+            <Button row="1" text="Pick Single" (tap)="onSelectSingleTap()" horizontalAlignment="center"></Button>
+            <Button row="2" text="Pick Multiple" (tap)="onSelectMultipleTap()" horizontalAlignment="center"></Button>
         </GridLayout>
     </StackLayout>
 </ScrollView>
