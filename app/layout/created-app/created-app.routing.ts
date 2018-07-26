@@ -11,6 +11,7 @@ import { EditProductComponent } from "./edit-product/edit-product.component";
 
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
+import { ChatComponent } from "./chat/chat.component";
 
 const routes: Routes = [
     { path: "details/:id", component: CreatedAppComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: "edit-product/:app_id/:id", component: EditProductComponent },
     { path: "customers/:id", component: CustomersComponent },
     { path: "messages/:id", component: MessagesComponent },
+    { path: "chat/:id/:user/:uri", component: ChatComponent },
 ];
 
 
