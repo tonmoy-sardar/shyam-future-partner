@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { CreatedAppService } from "../../../core/services/created-app.service";
-import { takePicture, requestPermissions } from 'nativescript-camera';
-import { ImageAsset } from 'tns-core-modules/image-asset';
-import * as imagepicker from "nativescript-imagepicker";
+
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
+
 @Component({
   selector: 'manage-app',
   moduleId: module.id,
@@ -19,20 +20,25 @@ export class ManageAppComponent implements OnInit {
     business_name: ''
   }
   visible_key: boolean;
-  cameraImage: ImageAsset;
-  imageAssets = [];
-  isSingleMode: boolean = true;
-  thumbSize: number = 80;
-  previewSize: number = 300;
+
+  options = {
+    context: {},
+    fullscreen: false,
+    viewContainerRef: this.vcRef
+  };
+  imageUrl: any;
   constructor(
     private route: ActivatedRoute,
-    private CreatedAppService: CreatedAppService
+    private CreatedAppService: CreatedAppService,
+    private modal: ModalDialogService,
+    private vcRef: ViewContainerRef,
   ) { }
 
   ngOnInit() {
     this.app_id = this.route.snapshot.params["id"];
     console.log(this.route.snapshot.params["id"]);
     this.getAppDetails(this.app_id);
+    this.imageUrl = null;
   }
 
   getAppDetails(id) {
@@ -51,73 +57,23 @@ export class ManageAppComponent implements OnInit {
     )
   }
 
-  onTakePictureTap(args) {
-    requestPermissions().then(
-      () => {
-        takePicture({ width: 200, height: 200, keepAspectRatio: true, saveToGallery: true })
-          .then((imageAsset: any) => {
-            this.cameraImage = imageAsset;
-            imageAsset.getImageAsync(function (nativeImage) {
-              let scale = 1;
-              let height = 0;
-              let width = 0;
-              if (imageAsset.android) {
-                scale = nativeImage.getDensity();
-                height = imageAsset.options.height;
-                width = imageAsset.options.width;
-              } else {
-                scale = nativeImage.scale;
-                width = nativeImage.size.width * scale;
-                height = nativeImage.size.height * scale;
-              }
-              console.log(`Displayed Size: ${width}x${height} with scale ${scale}`);
-              console.log(`Image Size: ${width / scale}x${height / scale}`);
-            });
-          }, (error) => {
-            console.log("Error: " + error);
-          });
-      },
-      () => alert('permissions rejected')
-    );
+  pickLogo() {
+    this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
+      console.log(res);
+      if (res != undefined) {
+        if (res.camera == true) {
+          console.log(res.image)
+          this.imageUrl = res.image
+        }
+        else if (res.gallery == true) {
+          console.log(res.image)
+          this.imageUrl = res.image
+        }
+      }
+    })
   }
 
-  onSelectMultipleTap() {
-    this.isSingleMode = false;
 
-    let context = imagepicker.create({
-      mode: "multiple"
-    });
-    this.startSelection(context);
-  }
-
-  onSelectSingleTap() {
-    this.isSingleMode = true;
-
-    let context = imagepicker.create({
-      mode: "single"
-    });
-    this.startSelection(context);
-  }
-
-  startSelection(context) {
-    let that = this;
-
-    context
-      .authorize()
-      .then(() => {
-        that.imageAssets = [];
-        return context.present();
-      })
-      .then((selection) => {
-        selection.forEach(function (element) {
-          element.options.width = that.isSingleMode ? that.previewSize : that.thumbSize;
-          element.options.height = that.isSingleMode ? that.previewSize : that.thumbSize;
-          that.imageAssets.push(element)
-        });
-      }).catch(function (e) {
-        console.log(e);
-      });
-  }
 
 
 }

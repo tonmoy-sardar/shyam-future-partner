@@ -5,7 +5,7 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
-// import { DropDownModule } from "nativescript-drop-down/angular";
+import { DropDownModule } from "nativescript-drop-down/angular";
 import { AccordionModule } from "nativescript-accordion/angular";
 // directive
 import { MinLengthDirective, MaxLengthDirective, IsEmailDirective } from "./directive/input.directive";
@@ -25,8 +25,9 @@ import { ActionBarComponent } from './component/action-bar/action-bar.component'
 import { MenuBarComponent } from './component/menu-bar/menu-bar.component';
 import { LoginModalComponent } from './component/login-modal/login-modal.component';
 import { SignUpModalComponent } from './component/signup-modal/signup-modal.component';
-// import { LocationModalComponent } from './component/location-modal/location-modal.component';
-
+import { UploadSingleImageModalComponent } from './component/upload-single-image-modal/upload-single-image-modal.component';
+import { UploadMultipleImageModalComponent } from './component/upload-multiple-image-modal/upload-multiple-image-modal.component';
+import { LocationModalComponent } from './component/location-modal/location-modal.component';
 
 @NgModule({
     imports: [
@@ -39,7 +40,7 @@ import { SignUpModalComponent } from './component/signup-modal/signup-modal.comp
         TNSFontIconModule.forRoot({
             'fa': './css/font-awesome.min.css'
         }),
- 
+        DropDownModule
     ],
     declarations: [
         MinLengthDirective,
@@ -49,7 +50,10 @@ import { SignUpModalComponent } from './component/signup-modal/signup-modal.comp
         MenuBarComponent,
         LoginModalComponent,
         SignUpModalComponent,
-        CarouselDirective
+        CarouselDirective,
+        UploadSingleImageModalComponent,
+        UploadMultipleImageModalComponent,
+        LocationModalComponent
     ],
     exports: [
         TNSFontIconModule,
@@ -61,12 +65,15 @@ import { SignUpModalComponent } from './component/signup-modal/signup-modal.comp
         NativeScriptFormsModule,
         ReactiveFormsModule,
         MenuBarComponent,
-        CarouselDirective
+        CarouselDirective,
+        DropDownModule
     ],
     entryComponents: [
         LoginModalComponent,
         SignUpModalComponent,
-        // LocationModalComponent
+        UploadSingleImageModalComponent,
+        UploadMultipleImageModalComponent,
+        LocationModalComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -12,6 +12,9 @@ import { EditProductComponent } from "./edit-product/edit-product.component";
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { ChatComponent } from "./chat/chat.component";
+import { EditOwnerInfoComponent } from "./edit-owner-info/edit-owner-info.component";
+import { EditBusinessImagesComponent } from "./edit-business-images/edit-business-images.component";
+import { ReportComponent } from "./report/report.component";
 
 const routes: Routes = [
     { path: "details/:id", component: CreatedAppComponent },
@@ -23,6 +26,9 @@ const routes: Routes = [
     { path: "customers/:id", component: CustomersComponent },
     { path: "messages/:id", component: MessagesComponent },
     { path: "chat/:id/:user/:uri", component: ChatComponent },
+    { path: "edit-owner-info/:id", component: EditOwnerInfoComponent },
+    { path: "edit-business-images/:id", component: EditBusinessImagesComponent },
+    { path: "report/:id", component: ReportComponent },
 ];
 
 

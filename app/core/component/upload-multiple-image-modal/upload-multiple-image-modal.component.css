@@ -1,0 +1,10 @@
+.apps-container {
+    background: #fff;
+    border-radius: 20;
+    -webkit-box-shadow: 0 0 18 3 rgba(0, 0, 0, 0.61);
+    -moz-box-shadow: 0 0 18 3 rgba(0, 0, 0, 0.61);
+    box-shadow: 0 0 18 3 rgba(0, 0, 0, 0.61);
+    height: 60%;
+    margin: 3% auto;
+    padding: 5 25;
+}
