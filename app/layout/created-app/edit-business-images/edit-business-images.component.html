@@ -1,4 +1,15 @@
 <StackLayout class="full-dashboard">
-   <Label text="edit business images" textWrap="true"></Label>
-   
+    <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+        <CardView *ngFor="let image of gallery" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0"
+            width="250px" height="250px" alignSelf="flex-start">
+            <StackLayout orientation="vertical">
+                <StackLayout>
+                    <Image [src]="image.image"></Image>
+                </StackLayout>
+            </StackLayout>
+        </CardView>
+    </FlexboxLayout>
+    <Button class="btn" text="Update" [isEnabled]="!processing" (tap)="pickBusinessImages()" backgroundColor="#41bffe" color="#fff"
+        width="100%">
+    </Button>
 </StackLayout>

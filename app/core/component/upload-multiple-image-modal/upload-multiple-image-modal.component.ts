@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
-import { takePicture, requestPermissions } from 'nativescript-camera';
-import { ImageAsset } from 'tns-core-modules/image-asset';
 import * as imagepicker from "nativescript-imagepicker";
-
+import * as camera from "nativescript-camera";
+import * as permissions from "nativescript-permissions";
+import * as imageSource from 'tns-core-modules/image-source';
+var platformModule = require("platform");
+declare var android: any;
 @Component({
     selector: "upload-multiple-image-modal",
     moduleId: module.id,
@@ -13,18 +15,16 @@ import * as imagepicker from "nativescript-imagepicker";
 
 export class UploadMultipleImageModalComponent implements OnInit {
     processing = false;
-    cameraImage: ImageAsset;
-    imageAssets = [];
-    isSingleMode: boolean = true;
-    thumbSize: number = 80;
-    previewSize: number = 300;
+    imageSource: imageSource.ImageSource;
+    imagesUrl: any = [];
+    previewSize: number = 300
     constructor(
         private params: ModalDialogParams,
     ) {
     }
 
     ngOnInit() {
-
+        this.imagesUrl = [];
     }
 
     cancel() {
@@ -32,71 +32,60 @@ export class UploadMultipleImageModalComponent implements OnInit {
     }
 
     onTakePictureTap(args) {
-        requestPermissions().then(
-            () => {
-                takePicture({ width: 200, height: 200, keepAspectRatio: true, saveToGallery: true })
-                    .then((imageAsset: any) => {
-                        this.cameraImage = imageAsset;
-                        // imageAsset.getImageAsync(nativeImage => {
-                        //     let scale = 1;
-                        //     let height = 0;
-                        //     let width = 0;
-                        //     if (imageAsset.android) {
-                        //         scale = nativeImage.getDensity();
-                        //         height = imageAsset.options.height;
-                        //         width = imageAsset.options.width;
-                        //     } else {
-                        //         scale = nativeImage.scale;
-                        //         width = nativeImage.size.width * scale;
-                        //         height = nativeImage.size.height * scale;
-                        //     }
-                        //     console.log(`Displayed Size: ${width}x${height} with scale ${scale}`);
-                        //     console.log(`Image Size: ${width / scale}x${height / scale}`);
-                        // });
-                        this.params.closeCallback({ camera: true, image: this.cameraImage });
-                    }, (error) => {
-                        console.log("Error: " + error);
-                    });
-            },
-            () => alert('permissions rejected')
-        );
+        if (camera.isAvailable()) {
+            permissions.requestPermission([android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE])
+                .then(() => {
+                    camera.takePicture({ width: 300, height: 300, keepAspectRatio: true })
+                        .then((imageAsset) => {
+                            let source = new imageSource.ImageSource();
+                            source.fromAsset(imageAsset).then((source) => {
+                                const base64image = source.toBase64String("png", 60);
+                                this.imagesUrl.push({
+                                    url: base64image
+                                })
+                                this.params.closeCallback({ camera: true, images: this.imagesUrl });
+                            });
+                        }).catch((err) => {
+                            console.log("Error -> " + err.message);
+                        });
+                })
+                .catch(() => {
+                    // When user denies permission
+                    console.log("User denied permissions");
+                });
+        }
     }
 
     onSelectMultipleTap() {
-        this.isSingleMode = false;
-
         let context = imagepicker.create({
             mode: "multiple"
         });
         this.startSelection(context);
     }
 
-    onSelectSingleTap() {
-        this.isSingleMode = true;
-
-        let context = imagepicker.create({
-            mode: "single"
-        });
-        this.startSelection(context);
-    }
-
     startSelection(context) {
-        let that = this;
-
         context
             .authorize()
             .then(() => {
-                that.imageAssets = [];
                 return context.present();
             })
             .then((selection) => {
-                selection.forEach(element => {
-                    element.options.width = that.isSingleMode ? that.previewSize : that.thumbSize;
-                    element.options.height = that.isSingleMode ? that.previewSize : that.thumbSize;
-                    that.imageAssets.push(element)
-                });
-                this.params.closeCallback({ gallery: true, image: that.imageAssets });
-            }).catch(e => {
+                selection.forEach((selected) => {
+                    var localPath = null;
+                    if (platformModule.device.os === "Android") {
+                        localPath = selected.android;
+                    } else {
+                        localPath = selected.ios;
+                    }
+                    const base64image = localPath.toBase64String("png", 60);
+                    this.imagesUrl.push({
+                        url: base64image
+                    })
+                });                
+                
+                this.params.closeCallback({ gallery: true, images: this.imagesUrl });
+            })
+            .catch((e) => {
                 console.log(e);
             });
     }

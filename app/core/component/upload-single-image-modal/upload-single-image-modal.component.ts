@@ -5,7 +5,6 @@ import { ImageCropper } from 'nativescript-imagecropper';
 import * as camera from "nativescript-camera";
 import * as permissions from "nativescript-permissions";
 import * as imageSource from 'tns-core-modules/image-source';
-var platformModule = require("platform");
 declare var android: any;
 
 @Component({
@@ -46,13 +45,8 @@ export class UploadSingleImageModalComponent implements OnInit {
                                 this.imageCropper.show(source).then((args) => {
                                     if (args.image !== null) {
                                         this.imageUrl = args.image;
-                                        var localPath = null;
-                                        if (platformModule.device.os === "Android") {
-                                            localPath = imageAsset.android;
-                                        } else {
-                                            localPath = imageAsset.ios;
-                                        }
-                                        this.params.closeCallback({ camera: true, image: args.image });
+                                        const base64image = args.image.toBase64String("png", 60);
+                                        this.params.closeCallback({ camera: true, image: base64image });
                                     }
                                 })
                                     .catch((e) => {
@@ -92,13 +86,8 @@ export class UploadSingleImageModalComponent implements OnInit {
                             .then((args) => {
                                 if (args.image !== null) {
                                     this.imageUrl = args.image;
-                                    var localPath = null;
-                                    if (platformModule.device.os === "Android") {
-                                        localPath = selected.android;
-                                    } else {
-                                        localPath = selected.ios;
-                                    }
-                                    this.params.closeCallback({ gallery: true, image: localPath });
+                                    const base64image = args.image.toBase64String("png", 60);
+                                    this.params.closeCallback({ gallery: true, image: base64image });
                                 }
                             })
                             .catch((e) => {

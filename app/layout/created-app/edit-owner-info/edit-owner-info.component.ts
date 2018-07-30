@@ -10,9 +10,6 @@ import { UploadSingleImageModalComponent } from "../../../core/component/upload-
 import { SelectedIndexChangedEventData, ValueList } from "nativescript-drop-down";
 import { LocationModalComponent } from '../../../core/component/location-modal/location-modal.component';
 import * as Globals from '../../../core/globals';
-import * as bgHttp from "nativescript-background-http";
-import { ObservableArray } from "data/observable-array";
-import * as fs from "file-system";
 @Component({
     selector: 'edit-owner-info',
     moduleId: module.id,
@@ -40,18 +37,11 @@ export class EditOwnerInfoComponent implements OnInit {
         fullscreen: false,
         viewContainerRef: this.vcRef
     };
-    imageUrl: any;
     selectedIndex: number = null;
     hint = "Select Designation";
     designations: ValueList<string>;
 
-    // upload 
-    public tasks: bgHttp.Task[] = [];
-    public events: { eventTitle: string, eventData: any }[] = [];
-    private file: string;
-    private url: string;
-    private counter: number = 0;
-    private session: any;
+
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -60,26 +50,21 @@ export class EditOwnerInfoComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
     ) {
-        
+
     }
 
     ngOnInit() {
         this.app_id = this.route.snapshot.params["id"];
         console.log(this.route.snapshot.params["id"]);
-        this.imageUrl = null;
         this.form = this.formBuilder.group({
             owner_name: ['', Validators.required],
             owner_designation: [''],
-            owner_pic: [''],
             business_est_year: [''],
             store_address: [''],
             lat: [''],
             long: ['']
         });
-        // this.file = fs.path.normalize(fs.knownFolders.currentApp().path + "/images/shyam-wheel.png");
-        // this.file = "~/images/shyam-wheel.png";
-        this.url = Globals.apiEndpoint + 'edit_owner_info/' + this.app_id + '/';
-        this.session = bgHttp.session("image-upload");
+
         this.getDesignationDropdown();
     }
 
@@ -148,18 +133,36 @@ export class EditOwnerInfoComponent implements OnInit {
             if (res != undefined) {
                 if (res.camera == true) {
                     console.log(res.image)
-                    this.imageUrl = res.image
-                    this.owner_details.owner_pic = res.image
-                    this.file = res.image
+                    this.owner_details.owner_pic = 'data:image/png;base64,' + res.image;
+                    var data = {
+                        id: this.app_id,
+                        owner_pic: 'data:image/png;base64,' + res.image
+                    }
+                    this.updateOwnerLogo(data);
                 }
                 else if (res.gallery == true) {
                     console.log(res.image)
-                    this.imageUrl = res.image
-                    this.owner_details.owner_pic = res.image
-                    this.file = res.image
+                    var data = {
+                        id: this.app_id,
+                        owner_pic: 'data:image/png;base64,' + res.image
+                    }
+                    this.updateOwnerLogo(data);
+                    this.owner_details.owner_pic = 'data:image/png;base64,' + res.image
                 }
             }
         })
+    }
+
+    updateOwnerLogo(data) {
+        this.CreatedAppService.editOwnerLogo(data).subscribe(
+            res => {
+                this.getAppOwnerDetails(this.app_id);
+                console.log(res)
+            },
+            error => {
+                console.log(error)
+            }
+        )
     }
 
 
@@ -201,82 +204,6 @@ export class EditOwnerInfoComponent implements OnInit {
             'is-invalid': this.form.get(field).invalid && (this.form.get(field).dirty || this.form.get(field).touched),
             'is-valid': this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched)
         };
-    }
-
-
-
-    // 
-    upload(args) {
-        console.log("start")
-        this.start_upload(false, false);
-    }
-
-    upload_error(args) {
-        this.start_upload(true, false);
-    }
-
-    upload_multi(args) {
-        this.start_upload(false, true);
-    }
-
-    start_upload(should_fail, isMulti) {
-        console.log((should_fail ? "Testing error during upload of " : "Uploading file: ") + this.file + (isMulti ? " using multipart." : ""));
-
-        const name = this.file.substr(this.file.lastIndexOf("/") + 1);
-        const description = `${name} (${++this.counter})`;
-        const request = {
-            url: this.url,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/octet-stream",
-                "File-Name": name
-            },
-            description: description,
-            androidAutoDeleteAfterUpload: false,
-            androidNotificationTitle: 'NativeScript HTTP background',
-        };
-
-        if (should_fail) {
-            request.headers["Should-Fail"] = true;
-        }
-
-        let task: bgHttp.Task;
-        let lastEvent = "";
-        if (isMulti) {
-            const params = [
-                { name: "test", value: "value" },
-                { name: "owner_pic", filename: this.file, mimeType: 'image/jpeg' }
-            ];
-            task = this.session.multipartUpload(params, request);
-        } else {
-            task = this.session.uploadFile(this.file, request);
-        }
-
-        function onEvent(e) {
-            if (lastEvent !== e.eventName) {
-                // suppress all repeating progress events and only show the first one
-                lastEvent = e.eventName;
-            } else {
-                return;
-            }
-
-            this.events.push({
-                eventTitle: e.eventName + " " + e.object.description,
-                eventData: JSON.stringify({
-                    error: e.error ? e.error.toString() : e.error,
-                    currentBytes: e.currentBytes,
-                    totalBytes: e.totalBytes,
-                    body: e.data
-                })
-            });
-        }
-
-        task.on("progress", onEvent.bind(this));
-        task.on("error", onEvent.bind(this));
-        task.on("responded", onEvent.bind(this));
-        task.on("complete", onEvent.bind(this));
-        lastEvent = "";
-        this.tasks.push(task);
     }
 
 

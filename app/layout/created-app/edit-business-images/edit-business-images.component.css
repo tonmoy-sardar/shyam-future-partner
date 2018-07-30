@@ -3,6 +3,9 @@
     background-size: cover;
     padding: 30 0 30;
 }
-.thumb {
-    border-radius: 50%
+
+.card {
+    background-color: transparent;
+    color: #ffffff;
+    margin: 15 15 0;
 }
