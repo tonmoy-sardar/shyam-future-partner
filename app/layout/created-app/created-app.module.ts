@@ -12,6 +12,9 @@ import { EditProductComponent } from "./edit-product/edit-product.component";
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { ChatComponent } from "./chat/chat.component";
+import { EditOwnerInfoComponent } from "./edit-owner-info/edit-owner-info.component";
+import { EditBusinessImagesComponent } from "./edit-business-images/edit-business-images.component";
+import { ReportComponent } from "./report/report.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -30,7 +33,10 @@ import { CoreModule } from "../../core/core.module";
         EditProductComponent,
         CustomersComponent,
         MessagesComponent,
-        ChatComponent
+        ChatComponent,
+        EditOwnerInfoComponent,
+        EditBusinessImagesComponent,
+        ReportComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

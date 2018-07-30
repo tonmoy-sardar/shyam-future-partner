@@ -1,0 +1,44 @@
+<ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <StackLayout class="form" [formGroup]="form" novalidate>
+            <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+                <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="280px"
+                    height="280px" alignSelf="flex-start">
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="app-icon" (tap)="pickLogo()">
+                            <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                            <Image [src]="owner_details.owner_pic" *ngIf="owner_details.owner_pic != null"></Image>
+                            <Image src="~/images/no-logo.png" *ngIf="owner_details.owner_pic == null"></Image>
+                        </StackLayout>
+                    </StackLayout>
+                </CardView>
+            </FlexboxLayout>
+            <GridLayout rows="auto, auto, auto, auto">
+                <StackLayout class="input-filld" row="0">
+                    <TextField hint="Owner Name" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing"
+                        formControlName="owner_name" [(ngModel)]="owner_details.owner_name" [ngClass]="displayFieldCss('owner_name')" ></TextField>
+                    <StackLayout *ngIf="isFieldValid('owner_name')" class="invalid-feedback">
+                        <Label text="Owner Name is required"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout class="input-filld" row="1">
+                    <DropDown #dd class="input input-border cyan-border m-t-10" borderColor="#49ddff" [items]="designations" [(ngModel)]="selectedIndex" [hint]="hint" (selectedIndexChanged)="onchange($event)" height="60"></DropDown>
+                </StackLayout>
+                <StackLayout class="input-filld" row="2">
+                    <TextField hint="Establishment Year" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next"
+                        [isEnabled]="!processing" formControlName="business_est_year" [(ngModel)]="owner_details.business_est_year"></TextField>
+                </StackLayout>
+                <StackLayout class="input-filld" row="3">
+                    <TextField hint="Business Location" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next"
+                        [isEnabled]="!processing" formControlName="store_address" [(ngModel)]="owner_details.store_address" (tap)="searchLocation($event)" ></TextField>
+                </StackLayout>
+
+                <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+            </GridLayout>
+            <Button class="btn" text="Update" [isEnabled]="!processing" (tap)="updateOwnerInfo()" backgroundColor="#41bffe" color="#fff"
+                width="100%">
+            </Button>
+            <Button text="Upload!" (tap)="upload_multi($event)"></Button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

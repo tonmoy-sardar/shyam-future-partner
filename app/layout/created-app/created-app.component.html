@@ -18,7 +18,7 @@
                 <Label class="fa fa-building-o" [text]="'fa-building-o' | fonticon"></Label>
                 <Label class="action-text" text="Manage App"></Label>
             </StackLayout>
-            <StackLayout class="action-section" col="1" row="0" borderTopWidth="1"  borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"  VerticalAlignment="middle">
+            <StackLayout class="action-section" col="1" row="0" borderTopWidth="1"  borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"  VerticalAlignment="middle" [nsRouterLink]="['/created-app/report', app_id]">
                 <Label class="fa fa-newspaper-o" [text]="'fa-newspaper-o' | fonticon"></Label>
                 <Label class="action-text" text="Reports"></Label>
             </StackLayout>
