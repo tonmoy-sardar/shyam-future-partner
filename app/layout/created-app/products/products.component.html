@@ -35,7 +35,6 @@
                         <Label [text]="item.discounted_price" class="discounted_price" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
                         <Label [text]="item.price" class="original_price" textWrap="true" [ngClass]="[item.discounted_price > 0 ? 'isDiscount' : '']"></Label>
                         <Label [text]="getDiscount(item.price,item.discounted_price)" class="discount" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
-                        
                     </StackLayout>
                     <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="2"></Label>
                 </GridLayout>

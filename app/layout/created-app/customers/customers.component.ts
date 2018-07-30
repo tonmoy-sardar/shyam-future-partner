@@ -17,7 +17,8 @@ export class CustomersComponent implements OnInit {
     processing = false;
 
     app_id: string;
-    
+    customer_list: any = [];
+
     visible_key: boolean;
     constructor(
         private route: ActivatedRoute,
@@ -29,11 +30,21 @@ export class CustomersComponent implements OnInit {
     ngOnInit() {
         this.app_id = this.route.snapshot.params["id"];
         console.log(this.route.snapshot.params["id"]);
-        // this.getAppDetails(this.app_id);
+        this.getCustomerListByAppID(this.app_id);
+    }
 
-        // this.form = this.formBuilder.group({
-        //     business_name: ['', Validators.required],
-        //     business_description: ['', Validators.required]
-        // });
+
+    getCustomerListByAppID(id) {
+        this.CreatedAppService.getCustomerListByAppID(id).subscribe(
+            res => {
+                this.customer_list = res;
+                console.log(res)
+                console.log(this.customer_list)
+                this.visible_key = true
+            },
+            error => {
+                console.log(error)
+            }
+        )
     }
 }

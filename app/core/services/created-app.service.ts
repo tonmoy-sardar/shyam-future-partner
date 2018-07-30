@@ -45,4 +45,8 @@ export class CreatedAppService {
   createProduct(data) {
     return this.http.post(Globals.apiEndpoint + 'create_app_products/', data)
   }
+
+  getCustomerListByAppID(id) {
+    return this.http.get(Globals.apiEndpoint + 'customer_list_by_app_id/' + id + '/')
+  }
 }
