@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, Inject } from "@angular/core";
+import { Component, OnInit, OnDestroy, NgZone, Inject, ViewChild, ElementRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from '@angular/common';
 import { CreatedAppService } from "../../../core/services/created-app.service";
@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     socket: any;
     messages: Array<any>;
     user_id: string;
-    uri: string;
+    @ViewChild("ScrollList") scrollList: ElementRef;
     constructor(
         private route: ActivatedRoute,
         private location: Location,
@@ -28,65 +28,73 @@ export class ChatComponent implements OnInit, OnDestroy {
         private zone: NgZone,
         private CreatedAppService: CreatedAppService,
     ) {
-        
+
         this.messages = [];
         this.message = "";
-        // this.socket = new WebSocket("wss://echo.websocket.org:443", []);
-        // this.socket.onopen = (evt) => this.onOpen(evt)
-        // this.socket.onclose = (evt) => this.onClose(evt)
-        // this.socket.onmessage = (evt) => this.onMessage(evt)
-        // this.socket.onerror = (evt) => this.onError(evt)
     }
     ngOnInit() {
         this.app_id = this.route.snapshot.params["id"];
         this.user_id = this.route.snapshot.params["user"];
-        this.uri = this.route.snapshot.params["uri"];
         this.createChatSession();
+        this.socket = new WebSocket("ws://132.148.147.239:8001/messages/?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer");
+        this.socket.onopen = (evt) => this.onOpen(evt)
+        this.socket.onclose = (evt) => this.onClose(evt)
+        this.socket.onmessage = (evt) => this.onMessage(evt)
+        this.socket.onerror = (evt) => this.onError(evt)
     }
 
     onOpen(evt) {
         console.log(evt)
-        this.zone.run(() => {
-            var data = {
-                text: "Welcome to the chat!",
-                created: new Date(),
-                sender: true
-            }
-            this.messages.push(data);
-        });
+        // this.zone.run(() => {
+        //     var data = {
+        //         text: "Welcome to the chat!",
+        //         created: new Date(),
+        //         sender: false
+        //     }
+        //     this.messages.push(data);
+        // });
+        console.log("Welcome to the chat!");
     }
 
     onClose(evt) {
-        this.zone.run(() => {
-            var data = {
-                text: "You have been disconnected",
-                created: new Date(),
-                sender: true
-            }
-            this.messages.push(data);
-        });
+        // this.zone.run(() => {
+        //     var data = {
+        //         text: "You have been disconnected",
+        //         created: new Date(),
+        //         sender: false
+        //     }
+        //     this.messages.push(data);
+        // });
+        console.log("You have been disconnected");
     }
 
     onMessage(evt) {
-        console.log(evt)
+        console.log(JSON.parse(evt.data))
+        var msgData = JSON.parse(evt.data)
         this.zone.run(() => {
             var data = {
-                text: evt.data,
-                created: new Date(),
-                sender: false
+                text: msgData.message,
+                created: msgData.datetime
+            }
+            if (msgData.chat_user == this.app_id) {
+                data['sender'] = true
+            }
+            else {
+                data['sender'] = false
             }
             this.messages.push(data);
+            this.scrollToBottom();
         });
     }
 
     onError(evt) {
-        console.log("The socket had an error", evt.error);
+        console.log("The socket had an error");
     }
 
     ngOnDestroy() {
         // this.socket.close();
     }
-    
+
 
 
     isViewed(message) {
@@ -95,8 +103,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     send() {
         if (this.message) {
-            // this.socket.send(this.message);
-            this.sendMessageToApp();
+            var data = {
+                chat_user: this.app_id,
+                chat_user_type: "app_master",
+                message: this.message
+            }
+            this.socket.send(JSON.stringify(data));
             this.message = "";
         }
     }
@@ -104,16 +116,16 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     createChatSession() {
         var data = {
-            sender: this.app_id,
-            sender_type: "app_master",
-            receiver: this.user_id,
-            receiver_type: "customer"
+            chat_user: '',
+            message: '',
+            chat_user_type: ''
         }
-        this.messageService.createChatSessionView(data).subscribe(
+        var param = "?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer"
+        this.messageService.createChatSessionView(param, data).subscribe(
             res => {
                 console.log(res)
-                this.uri = res['uri'];
-                this.getMessageList();
+                var thread = res['thread']
+                this.getMessageList(thread);
             },
             error => {
                 console.log(error)
@@ -122,23 +134,24 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
 
 
-    getMessageList() {
-        this.messageService.getMessageListByCustomer(this.uri).subscribe(
-            res => {
+    getMessageList(thread) {
+        this.messageService.getMessageListByCustomer(thread).subscribe(
+            (res: any[]) => {
                 console.log(res)
-                res['messages'].forEach(x => {
-                    var type = x['user_type'];
+                res.forEach(x => {
                     var data = {
-                        text: '',
-                        created: new Date(),
-                        sender: false
+                        text: x.message,
+                        created: x.datetime
                     }
-                    data.text = x['message']
-                    if(type.toLowerCase() == "app_master"){
-                        data.sender = true;
+                    if (x.chat_user == this.app_id) {
+                        data['sender'] = true
+                    }
+                    else {
+                        data['sender'] = false
                     }
                     this.messages.push(data)
-                    
+                    console.log(this.messages)
+                    this.scrollToBottom();
                 })
             },
             error => {
@@ -147,26 +160,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         )
     }
 
-    sendMessageToApp() {
-        var data = {
-            user_id: this.app_id,
-            user_type: "app_master",
-            message: this.message
-        }
-        this.messageService.messageToCustomer(data, this.uri).subscribe(
-            res => {
-                console.log(res)
-                var data = {
-                    text: '',
-                    created: new Date(),
-                    sender: true
-                }
-                data.text = res['message'];                
-                this.messages.push(data)
-            },
-            error => {
-                console.log(error)
-            }
-        )
+
+    scrollToBottom() {
+        setTimeout(() => {
+            this.scrollList.nativeElement.scrollToVerticalOffset(100000);
+        }, 1000);
     }
 }

@@ -14,16 +14,12 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }  
 
-  createChatSessionView(data) {
-    return this.http.post(Globals.apiEndpoint + 'chats/', data)
+  createChatSessionView(param, data) {
+    return this.http.post(Globals.apiEndpoint + 'messages/' + param, data)
   }
 
-  getMessageListByCustomer(uri) {
-    return this.http.get(Globals.apiEndpoint + 'chats/' + uri + '/messages/')
-  }
-
-  messageToCustomer(data, uri) {
-    return this.http.post(Globals.apiEndpoint + 'chats/' + uri + '/messages/', data)
+  getMessageListByCustomer(thread) {
+    return this.http.get(Globals.apiEndpoint + 'messages/' + thread + "/")
   }
 
   getChatMembersDetails(data){
