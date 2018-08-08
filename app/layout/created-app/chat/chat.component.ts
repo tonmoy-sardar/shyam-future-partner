@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.zone.run(() => {
             var data = {
                 text: msgData.message,
-                created: msgData.datetime
+                created: new Date()
             }
             if (msgData.chat_user == this.app_id) {
                 data['sender'] = true

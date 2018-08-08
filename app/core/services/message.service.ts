@@ -21,9 +21,9 @@ export class MessageService {
   getMessageListByCustomer(thread) {
     return this.http.get(Globals.apiEndpoint + 'messages/' + thread + "/")
   }
-
-  getChatMembersDetails(data){
-    return this.http.post(Globals.apiEndpoint + 'chat_members_details/', data)
+  // http://192.168.24.208:8000/chat_members/?user=3&user_type=app_master
+  getChatMembersDetails(param){
+    return this.http.get(Globals.apiEndpoint + 'chat_members/'+ param)
   }
 
 }
