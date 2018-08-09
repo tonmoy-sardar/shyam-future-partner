@@ -22,7 +22,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout class="input-filld" row="1">
-                    <DropDown #dd class="input input-border cyan-border m-t-10" borderColor="#49ddff" [items]="designations" [(ngModel)]="selectedIndex" [hint]="hint" (selectedIndexChanged)="onchange($event)" height="60"></DropDown>
+                    <DropDown #dd class="input input-border cyan-border m-t-10" borderColor="#49ddff"  formControlName="owner_designation" [items]="designations" selectedIndex="{{ selectedIndex }}"  [(ngModel)]="owner_details.owner_designation" [hint]="hint" (selectedIndexChanged)="onchange($event)" height="60"></DropDown>
                 </StackLayout>
                 <StackLayout class="input-filld" row="2">
                     <TextField hint="Establishment Year" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next"

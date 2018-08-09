@@ -7,6 +7,8 @@ import { ManageAppComponent } from "./manage-app/manage-app.component";
 import { EditAppComponent } from "./edit-app/edit-app.component";
 import { ProductsComponent } from "./products/products.component";
 import { EditProductCategoyComponent } from "./edit-product-category/edit-product-category.component";
+import { AddProductCategoyComponent } from "./add-product-category/add-product-category.component";
+import { AddProductComponent } from "./add-product/add-product.component";
 import { EditProductComponent } from "./edit-product/edit-product.component";
 
 import { CustomersComponent } from "./customers/customers.component";
@@ -22,7 +24,9 @@ const routes: Routes = [
     { path: "edit-app/:id", component: EditAppComponent },
     { path: "products/:id", component: ProductsComponent },
     { path: "edit-product-category/:app_id/:id", component: EditProductCategoyComponent },
+    { path: "add-product-category/:app_id", component: AddProductCategoyComponent },
     { path: "edit-product/:app_id/:id", component: EditProductComponent },
+    { path: "add-product/:app_id/:cat_id", component: AddProductComponent },
     { path: "customers/:id", component: CustomersComponent },
     { path: "messages/:id", component: MessagesComponent },
     { path: "chat/:id/:user/:uri", component: ChatComponent },

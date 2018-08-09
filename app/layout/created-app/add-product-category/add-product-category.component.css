@@ -11,10 +11,10 @@
 }
 
 .app-icon {
-    border-radius: 12;
+    border-radius: 100;
     /* background: #ffffff; */
     background: url(~/images/apps-bg.jpg) no-repeat 0 0;
-    padding: 30px 25px;
+    padding: 30px;
 }
 
 .app-icon Image {
@@ -26,4 +26,22 @@
     font-size: 12;
     text-align: center;
     margin-top: 5;
+}
+
+.action-section {
+    background: url(~/images/apps-bg.jpg) no-repeat 0 0;
+    padding: 50px 25px;
+}
+.action-section .fa
+{
+    text-align: center;
+    display: block;
+    font-size: 25;
+    color:#000;
+}
+.action-text {
+    font-size: 14;
+    text-align: center;
+    margin-top: 5;
+    color: #ffffff;
 }

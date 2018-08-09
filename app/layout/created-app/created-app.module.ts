@@ -7,7 +7,9 @@ import { ManageAppComponent } from './manage-app/manage-app.component';
 import { EditAppComponent } from './edit-app/edit-app.component';
 import { ProductsComponent } from './products/products.component';
 import { EditProductCategoyComponent } from "./edit-product-category/edit-product-category.component";
+import { AddProductCategoyComponent } from "./add-product-category/add-product-category.component";
 import { EditProductComponent } from "./edit-product/edit-product.component";
+import { AddProductComponent } from "./add-product/add-product.component";
 
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
@@ -30,7 +32,9 @@ import { CoreModule } from "../../core/core.module";
         EditAppComponent,
         ProductsComponent,
         EditProductCategoyComponent,
+        AddProductCategoyComponent,
         EditProductComponent,
+        AddProductComponent,
         CustomersComponent,
         MessagesComponent,
         ChatComponent,

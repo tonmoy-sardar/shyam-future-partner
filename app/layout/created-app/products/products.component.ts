@@ -70,29 +70,36 @@ export class ProductsComponent implements OnInit {
         )
     }
 
-    updateAppInfo() {
-        if (this.form.valid) {
-            this.processing = true;
-            console.log("aaa");
-            console.log(this.form.value);
-
-
-            this.CreatedAppService.updateAppInfo(this.app_id, this.form.value).subscribe(
-                res => {
-                    console.log("Success");
-
-                    this.router.navigate(['/created-app/manage-app/' + this.app_id])
-
-                },
-                error => {
-                    console.log(error)
-                }
-            )
-
+    deleteProductCategory(id) {
+        this.processing = true;
+        let data ={
+            is_active:false
         }
-        else {
-            this.markFormGroupTouched(this.form)
+        this.CreatedAppService.deleteProductCategory(id, data).subscribe(
+            res => {
+                console.log("Success");
+                this.router.navigate(['/created-app/products/' + this.app_id])
+            },
+            error => {
+                console.log(error)
+            }
+        )
+    }
+
+    deleteProduct(id) {
+        this.processing = true;
+        let data ={
+            is_active:false
         }
+        this.CreatedAppService.deleteProduct(id, data).subscribe(
+            res => {
+                console.log("Success");
+                this.router.navigate(['/created-app/products/' + this.app_id])
+            },
+            error => {
+                console.log(error)
+            }
+        )
     }
 
     getDiscount(price, discounted_price) {

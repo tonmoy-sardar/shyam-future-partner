@@ -6,23 +6,27 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
-    selector: 'edit-product-category',
+    selector: 'add-product',
     moduleId: module.id,
-    templateUrl: `edit-product-category.component.html`,
-    styleUrls: [`edit-product-category.component.css`]
+    templateUrl: `add-product.component.html`,
+    styleUrls: [`add-product.component.css`]
 })
 
-export class EditProductCategoyComponent implements OnInit {
+export class AddProductComponent implements OnInit {
     form: FormGroup;
     processing = false;
 
     app_id: string;
-    product_category_id: string;
-    product_category_details: any;
-    product_category_data = {
-        category_name: '',
-        description:'',
-        app_master:''
+    cat_id: string;
+    product_details: any;
+    product_data = {
+        product_name: '',
+        price:'',
+        discounted_price:'',
+        packing_charges:'',
+        tags:'',
+        app_master:'',
+        product_category:''
     }
     visible_key: boolean;
     constructor(
@@ -34,43 +38,33 @@ export class EditProductCategoyComponent implements OnInit {
 
     ngOnInit() {
         this.app_id = this.route.snapshot.params["app_id"];
-        this.product_category_id = this.route.snapshot.params["id"];
-
-        this.getProductCategoryDetails(this.product_category_id);
-
+        this.cat_id = this.route.snapshot.params["cat_id"];
+        console.log(this.cat_id);
+        console.log(this.app_id);
+        
         this.form = this.formBuilder.group({
-            category_name: ['', Validators.required],
-            description:[''],
+            product_name: ['', Validators.required],
+            price: ['', Validators.required],
+            discounted_price: [''],
+            packing_charges: [''],
+            tags: ['']
         });
     }
 
-    getProductCategoryDetails(id) {
-        this.CreatedAppService.getProductCategoryDetails(id).subscribe(
-            res => {
-                this.product_category_details = res;
-                this.product_category_data.category_name = this.product_category_details.category_name;
-                this.product_category_data.description = this.product_category_details.description;
-                this.product_category_data.app_master =  this.app_id;
-                this.visible_key = true
-                console.log(res)
 
-            },
-            error => {
-                console.log(error)
-            }
-        )
-    }
-
-    updateProductCategory() {
+    createProduct() {
         if (this.form.valid) {
             this.processing = true;
-            console.log("aaa");
-            console.log(this.product_category_data);
+            
 
-            this.CreatedAppService.updateProductCategory(this.product_category_id, this.product_category_data).subscribe(
+            this.product_data.app_master = this.app_id;
+            this.product_data.product_category = this.cat_id;
+            
+            console.log(this.product_data);
+            this.CreatedAppService.createProduct(this.product_data).subscribe(
                 res => {
                     console.log("Success");
-                    this.processing = false;
+
                     this.router.navigate(['/created-app/products/' + this.app_id])
 
                 },

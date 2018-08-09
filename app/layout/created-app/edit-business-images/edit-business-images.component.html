@@ -1,15 +1,25 @@
-<StackLayout class="full-dashboard">
-    <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-        <CardView *ngFor="let image of gallery" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0"
-            width="250px" height="250px" alignSelf="flex-start">
-            <StackLayout orientation="vertical">
-                <StackLayout>
-                    <Image [src]="image.image"></Image>
+<ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
+                shadowOffsetHeight="0" width="250px" height="250px" alignSelf="flex-start">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="app-icon"  (tap)="pickBusinessImages(item.id)">
+                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                        <Image [src]="item.app_img" *ngIf="item.app_img != ''"></Image>
+                        <Image src="~/images/no-logo.png" *ngIf="item.app_img == ''"></Image>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </CardView>
-    </FlexboxLayout>
-    <Button class="btn" text="Update" [isEnabled]="!processing" (tap)="pickBusinessImages()" backgroundColor="#41bffe" color="#fff"
-        width="100%">
-    </Button>
-</StackLayout>
+            </CardView>
+            <CardView  class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
+                shadowOffsetHeight="0" width="250px" height="250px" alignSelf="flex-start">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="app-icon"  (tap)="pickNewBusinessImages()">
+                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                        <Label class="app-name" text="New"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </CardView>
+        </FlexboxLayout>
+    </StackLayout>
+</ScrollView>

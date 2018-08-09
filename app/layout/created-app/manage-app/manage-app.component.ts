@@ -64,14 +64,40 @@ export class ManageAppComponent implements OnInit {
         if (res.camera == true) {
           console.log(res.image)
           this.imageUrl = res.image
+          this.app_data.logo = 'data:image/png;base64,' + res.image;
+          var data = {
+              id: this.app_id,
+              logo: 'data:image/png;base64,' + res.image
+          }
+          this.updateAppLogo(data);
+
         }
         else if (res.gallery == true) {
           console.log(res.image)
           this.imageUrl = res.image
+          this.app_data.logo = 'data:image/png;base64,' + res.image;
+
+          var data = {
+              id: this.app_id,
+              logo: 'data:image/png;base64,' + res.image
+          }
+          this.updateAppLogo(data);
         }
       }
     })
   }
+
+  updateAppLogo(data) {
+    this.CreatedAppService.editAppLogo(data).subscribe(
+        res => {
+            this.getAppDetails(this.app_id);
+            console.log(res)
+        },
+        error => {
+            console.log(error)
+        }
+    )
+}
 
 
 

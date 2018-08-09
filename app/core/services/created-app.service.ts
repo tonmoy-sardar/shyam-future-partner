@@ -33,6 +33,10 @@ export class CreatedAppService {
     return this.http.post(Globals.apiEndpoint + 'create_app_products_category/', data)
   }
 
+  deleteProductCategory(id, data) {
+    return this.http.put(Globals.apiEndpoint + 'delete_app_products_category/' + id + '/', data)
+  }
+
   getProductDetails(id) {
     return this.http.get(Globals.apiEndpoint + 'edit_app_products/' + id + '/')
   }
@@ -43,6 +47,10 @@ export class CreatedAppService {
 
   createProduct(data) {
     return this.http.post(Globals.apiEndpoint + 'create_app_products/', data)
+  }
+
+  deleteProduct(id, data) {
+    return this.http.put(Globals.apiEndpoint + 'delete_app_products/' + id + '/', data)
   }
 
   getDesignationDropdown() {
@@ -67,8 +75,12 @@ export class CreatedAppService {
   }
 
 
+  editAppLogo(data){
+    return this.http.put(Globals.apiEndpoint + 'edit_applogo/' + data.id + '/', data)
+  }
+
   updateBusinessImages(data){
-    return this.http.put(Globals.apiEndpoint + 'update_business_images/' + data.id + '/', data)
+    return this.http.post(Globals.apiEndpoint + 'delete_create_business_images/', data)
   }
 
 }

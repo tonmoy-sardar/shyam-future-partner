@@ -37,6 +37,15 @@ export class EditOwnerInfoComponent implements OnInit {
         fullscreen: false,
         viewContainerRef: this.vcRef
     };
+    owner_data: any = {
+        owner_name: '',
+        owner_designation: '',
+        business_est_year: '',
+        store_address: '',
+        lat: '',
+        long: ''
+    }
+
     selectedIndex: number = null;
     hint = "Select Designation";
     designations: ValueList<string>;
@@ -169,7 +178,18 @@ export class EditOwnerInfoComponent implements OnInit {
     updateOwnerInfo() {
         if (this.form.valid) {
             this.processing = true;
-            this.CreatedAppService.editOwnerInfo(this.owner_details).subscribe(
+
+            this.owner_data = {
+                id:  this.app_id,
+                owner_name: this.owner_details.owner_name,
+                owner_designation: this.owner_details.owner_designation,
+                business_est_year: this.owner_details.business_est_year,
+                store_address: this.owner_details.store_address,
+                lat: this.owner_details.lat,
+                long: this.owner_details.long
+            }
+        
+            this.CreatedAppService.editOwnerInfo(this.owner_data).subscribe(
                 res => {
                     console.log(res);
                     this.processing = false;
