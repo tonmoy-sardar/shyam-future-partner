@@ -29,7 +29,7 @@ const routes: Routes = [
     { path: "add-product/:app_id/:cat_id", component: AddProductComponent },
     { path: "customers/:id", component: CustomersComponent },
     { path: "messages/:id", component: MessagesComponent },
-    { path: "chat/:id/:user/:uri", component: ChatComponent },
+    { path: "chat/:id/:user", component: ChatComponent },
     { path: "edit-owner-info/:id", component: EditOwnerInfoComponent },
     { path: "edit-business-images/:id", component: EditBusinessImagesComponent },
     { path: "report/:id", component: ReportComponent },

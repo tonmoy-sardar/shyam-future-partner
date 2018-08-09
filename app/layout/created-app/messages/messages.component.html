@@ -1,13 +1,13 @@
-<ListView [items]="chats" class="list-group" (itemTap)="goToChat($event)">
+<ListView [items]="chats" class="list-group">
     <ng-template let-chat="item" let-index="index">
-      <GridLayout rows="auto, auto" columns="auto, *, auto" class="list-group-item" [nsRouterLink]="['/created-app/chat', app_id, chat.sender, chat.uri]">
+      <GridLayout rows="auto, auto" columns="auto, *, auto" class="list-group-item" [nsRouterLink]="['/created-app/chat', app_id, chat.id]">
         <Image row="0" col="0" rowSpan="2" src="~/images/user.png" class="thumb"></Image>
         <Label row="0" col="1" text="A"></Label>
-        <Label row="1" col="1" [text]="chat.text" class="body"></Label>
-        <Label row="0" col="2" [text]="chat.when | date: 'shortTime'"
-          class="body time" [class.time-unread]="chat.unread > 0"></Label>
+        <Label row="1" col="1" [text]="chat.last_message" class="body"></Label>
+        <Label row="0" col="2" [text]="chat.last_messages_time | date: 'shortTime'"
+          class="body time time-unread"></Label>
         <StackLayout row="1" col="2" orientation="horizontal" class="m-x-auto">
-          <Label *ngIf="chat.unread > 0" [text]="chat.unread" class="body unread"></Label>
+          <Label [text]="chat.how_many_messages" class="body unread"></Label>
         </StackLayout>
       </GridLayout>
     </ng-template>
