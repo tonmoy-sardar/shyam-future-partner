@@ -69,6 +69,10 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'all_order_by_app_id/' + id + '/')
   }
 
+  getAppOrderDetails(id) {
+    return this.http.get(Globals.apiEndpoint + 'all_order_details/' + id + '/')
+  }
+
 
   editOwnerLogo(data){
     return this.http.put(Globals.apiEndpoint + 'edit_ownerlogo/' + data.id + '/', data)

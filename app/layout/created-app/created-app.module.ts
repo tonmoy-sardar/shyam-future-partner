@@ -17,6 +17,7 @@ import { ChatComponent } from "./chat/chat.component";
 import { EditOwnerInfoComponent } from "./edit-owner-info/edit-owner-info.component";
 import { EditBusinessImagesComponent } from "./edit-business-images/edit-business-images.component";
 import { ReportComponent } from "./report/report.component";
+import { OrderDetailsComponent } from "./order-details/order-details.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -40,7 +41,8 @@ import { CoreModule } from "../../core/core.module";
         ChatComponent,
         EditOwnerInfoComponent,
         EditBusinessImagesComponent,
-        ReportComponent
+        ReportComponent,
+        OrderDetailsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

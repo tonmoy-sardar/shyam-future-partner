@@ -17,6 +17,7 @@ import { ChatComponent } from "./chat/chat.component";
 import { EditOwnerInfoComponent } from "./edit-owner-info/edit-owner-info.component";
 import { EditBusinessImagesComponent } from "./edit-business-images/edit-business-images.component";
 import { ReportComponent } from "./report/report.component";
+import { OrderDetailsComponent } from "./order-details/order-details.component";
 
 const routes: Routes = [
     { path: "details/:id", component: CreatedAppComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
     { path: "edit-owner-info/:id", component: EditOwnerInfoComponent },
     { path: "edit-business-images/:id", component: EditBusinessImagesComponent },
     { path: "report/:id", component: ReportComponent },
+    { path: "order-details/:id", component: OrderDetailsComponent },
 ];
 
 

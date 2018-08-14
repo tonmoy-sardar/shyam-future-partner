@@ -1,3 +1,4 @@
+<action-bar></action-bar>
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
         <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
@@ -30,7 +31,7 @@
                 <Label class="fa fa-users" [text]="'fa-users' | fonticon"></Label>
                 <Label class="action-text" text="My Customer"></Label>
             </StackLayout>
-            <StackLayout class="action-section" col="0" row="2" borderTopWidth="1"  borderLeftWidth="1" borderBottomWidth="1" borderColor="#3aa6fe"  VerticalAlignment="middle">
+            <StackLayout class="action-section" col="0" row="2" borderTopWidth="1"  borderLeftWidth="1" borderBottomWidth="1" borderColor="#3aa6fe"  VerticalAlignment="middle" (tap)="shareApp()">
                 <Label class="fa fa-share-alt" [text]="'fa-share-alt' | fonticon"></Label>
                 <Label class="action-text" text="Market your App"></Label>
             </StackLayout>

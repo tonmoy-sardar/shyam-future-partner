@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { CreatedAppService } from "../../core/services/created-app.service";
+import * as SocialShare from "nativescript-social-share";
+import { ImageSource } from "image-source";
 
 import * as Globals from '../../core/globals';
 @Component({
@@ -29,6 +31,7 @@ export class CreatedAppComponent implements OnInit {
     
     console.log(this.route.snapshot.params["id"]);
     this.getAppDetails(this.app_id);
+    
   }
 
   getAppDetails(id) {
@@ -46,5 +49,15 @@ export class CreatedAppComponent implements OnInit {
       }
     )
   }
+
+  shareApp()
+  {
+    SocialShare.shareText("I love NativeScript!");
+  }
+  
+
+
+
+ 
   
 }

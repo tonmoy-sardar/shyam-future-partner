@@ -1,0 +1,8 @@
+.full-dashboard {
+    background: url(~/images/dashboard-bg.jpg) no-repeat 0 0;
+    background-size: cover;
+    padding: 30 0 30;
+}
+.thumb {
+    border-radius: 50%
+}

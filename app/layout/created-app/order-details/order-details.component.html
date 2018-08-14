@@ -1,0 +1,26 @@
+<ScrollView row="0">
+    <StackLayout padding="10" *ngIf="visible_key && order_details.order_details.length > 0">
+        
+        <CardView *ngFor="let item of order_details.order_details;let i = index" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
+            shadowOffsetHeight="0">
+            <GridLayout rows="*" columns="*,40,80,80" padding="10" verticalAlignment="center">
+                <Label [text]="item.product_details.product_name" textWrap="true" row="0" col="0" verticalAlignment="center" class="product_name"></Label>
+                <Label [text]="item.quantity" row="0" col="1" verticalAlignment="center" class="product_name" textWrap="true" ></Label>
+                <Label [text]="item.unit_price" row="0" col="2" verticalAlignment="center" class="product_name" textWrap="true" ></Label>
+                <Label [text]="item.packaging_cost" row="0" col="3" verticalAlignment="center" class="product_name" textWrap="true" ></Label>
+                
+            </GridLayout>
+        </CardView>
+        <StackLayout class="hr-light m-10"></StackLayout>
+        <StackLayout padding="10">
+            <GridLayout rows="*" columns="*,*" verticalAlignment="center">
+                <StackLayout verticalAlignment="center" col="0" row="0">
+                    <Label class="pull-left font-weight-bold" text="Total item price"></Label>
+                </StackLayout>
+                <StackLayout verticalAlignment="center" col="1" row="0">
+                    <Label class="pull-right font-weight-bold" [text]="order_details.price"></Label>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
