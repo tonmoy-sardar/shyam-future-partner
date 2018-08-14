@@ -1,4 +1,45 @@
+<action-bar></action-bar>
 <ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+            <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="app-icon" (tap)="pickLogo()">
+                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
+                        <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
+                    </StackLayout>
+                    <Label class="app-name" [text]="app_data.business_name"></Label>
+                </StackLayout>
+            </CardView>
+        </FlexboxLayout>
+        <GridLayout rows="auto, auto, auto, auto,auto,auto">
+            <GridLayout class="action-section" VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/edit-app', app_id]">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Edit App" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
+            <GridLayout class="action-section-odd" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/products', app_id]">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Edit Product" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="2" [nsRouterLink]="['/created-app/edit-owner-info', app_id]">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Edit Owner Info" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
+            <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/edit-business-images', app_id]">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Edit Business Images" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
+        </GridLayout>
+    </StackLayout>
+</ScrollView>
+
+
+<!-- <ScrollView row="0">
     <StackLayout class="full-dashboard">
         <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
             <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="280px"
@@ -37,25 +78,6 @@
             </StackLayout>
 
         </GridLayout>
-        <Image [src]="imageUrl"></Image>
-        <!-- <GridLayout rows=" *, auto">
-            <Image row="0" [src]="cameraImage" stretch="fill" margin="10" width="40" height="40" horizontalAlignment="center"></Image>
-            <Button text="Take Picture" (tap)='onTakePictureTap($event)' row="1" horizontalAlignment="center"></Button>
-        </GridLayout>
-        <GridLayout rows="*, auto, auto">
-            <StackLayout row="0">
-                <StackLayout borderWidth="1" borderColor="#ccc" *ngFor="let image of imageAssets; let i = index" style="margin-bottom: 5px;"
-                    class="list-group">
-                    <CardView class="whiteCard">
-                        <GridLayout columns="auto, *">
-                            <Image [width]="thumbSize" [height]="thumbSize" [src]="image" stretch="fill"></Image>
-                            <Label col="1" [text]="'image ' + i"></Label>
-                        </GridLayout>
-                    </CardView>
-                </StackLayout>
-            </StackLayout>
-            <Button row="1" text="Pick Single" (tap)="onSelectSingleTap()" horizontalAlignment="center"></Button>
-            <Button row="2" text="Pick Multiple" (tap)="onSelectMultipleTap()" horizontalAlignment="center"></Button>
-        </GridLayout> -->
+        
     </StackLayout>
-</ScrollView>
+</ScrollView> -->

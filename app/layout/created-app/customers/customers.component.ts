@@ -37,6 +37,7 @@ export class CustomersComponent implements OnInit {
             res => {
                 console.log(res)
                 this.customer_list = res;
+                this.visible_key = true;
             },
             error => {
                 console.log(error)

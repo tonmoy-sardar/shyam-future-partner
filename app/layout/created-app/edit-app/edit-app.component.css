@@ -2,3 +2,30 @@
     background: #f9ece3;
     padding: 10 5;
 }
+
+.full-content {
+    margin-left: 30;
+    margin-right: 30;
+    flex-grow: 2;
+    vertical-align: middle;
+}
+.card {
+    background-color: transparent;
+    color: #000;
+    width: 25%;
+    
+}
+
+.app-icon {
+    border-radius: 10;
+    background: #fff;
+    padding: 3;
+    margin: 5 5 0 5;
+}
+
+.app-icon Image {
+    width: 50;
+    height: 50;
+    border-radius: 50%;
+    background: #f9ece3;
+}

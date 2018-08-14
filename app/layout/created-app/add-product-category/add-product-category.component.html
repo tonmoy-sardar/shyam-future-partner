@@ -1,24 +1,31 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <StackLayout class="form" [formGroup]="form" novalidate>
-            <GridLayout rows="auto, auto">
-                <StackLayout class="input-filld" row="0">
-                    <TextField hint="Product Category" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="category_name" [(ngModel)]="product_category_data.category_name" [ngClass]="displayFieldCss('category_name')"></TextField>
-                    <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
-                        <Label text="Product Category is required"></Label>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout class="input-filld" row="1">
-                    <TextField hint="Description" class="input input-border cyan-border m-t-10" borderColor="#49ddff" returnKeyType="next" [isEnabled]="!processing" formControlName="description" [(ngModel)]="product_category_data.description" ></TextField>
-                    
-                </StackLayout>
+        <StackLayout class="full-content">
+            <StackLayout class="edit-container">
+                <StackLayout class="form" [formGroup]="form" novalidate>
+                    <GridLayout rows="auto, auto">
+                        <StackLayout class="input-filld" row="0">
+                            <TextField hint="Product Category" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
+                                [isEnabled]="!processing" formControlName="category_name" [(ngModel)]="product_category_data.category_name"
+                                [ngClass]="displayFieldCss('category_name')"></TextField>
+                            <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
+                                <Label text="Product Category is required"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout class="input-filld" row="1">
+                            <TextField hint="Description" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" [isEnabled]="!processing"
+                                formControlName="description" [(ngModel)]="product_category_data.description"></TextField>
 
-                
-                <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
-            </GridLayout>
+                        </StackLayout>
 
-            <Button class="btn" text="Submit" [isEnabled]="!processing" (tap)="createProductCategory()" backgroundColor="#41bffe" color="#fff" width="100%">
-            </Button>
+
+                        <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+                    </GridLayout>
+
+                    <Button class="btn btn-primary" text="Submit" [isEnabled]="!processing" (tap)="createProductCategory()" backgroundColor="#6c6969" color="#fff" width="50%">
+                    </Button>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </StackLayout>
 </ScrollView>

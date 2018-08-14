@@ -6,6 +6,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from "../core/services/login.service";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import { RouterExtensions } from "nativescript-angular/router";
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+import { LoadingIndicator } from "nativescript-loading-indicator"
+
 @Component({
   selector: "login",
   moduleId: module.id,
@@ -16,6 +20,33 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   processing = false;
 
+  private feedback: Feedback;
+
+  loader = new LoadingIndicator();
+  lodaing_options = {
+    message: 'Loading...',
+    progress: 0.65,
+    android: {
+      indeterminate: true,
+      cancelable: false,
+      cancelListener: function (dialog) { console.log("Loading cancelled") },
+      max: 100,
+      progressNumberFormat: "%1d/%2d",
+      progressPercentFormat: 0.53,
+      progressStyle: 1,
+      secondaryProgress: 1
+    },
+    ios: {
+      details: "Additional detail note!",
+      margin: 10,
+      dimBackground: true,
+      color: "#4B9ED6",
+      backgroundColor: "yellow",
+      userInteractionEnabled: false,
+      hideBezel: true,
+    }
+  }
+
   constructor(
     private page: Page,
     private router: RouterExtensions,
@@ -23,6 +54,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService
   ) {
     this.page.actionBarHidden = true;
+    this.feedback = new Feedback();
   }
 
   ngOnInit() {
@@ -43,11 +75,10 @@ export class LoginComponent implements OnInit {
     };
   }
 
-
-
   signIn() {
     if (this.form.valid) {
-      this.processing = true;
+      this.loader.show(this.lodaing_options);
+      //this.processing = true;
       this.loginService.login(this.form.value).subscribe(
         res => {
           console.log(res)
@@ -56,10 +87,19 @@ export class LoginComponent implements OnInit {
           setString('email', res.email)
           setString('contact_no', res.contact_no.toString())
           setString('user_id', res.user_id.toString())
+          this.loader.hide();
           this.router.navigate(['/'])          
         },
         error => {
+          this.loader.hide();
           console.log(error)
+          this.feedback.error({
+            title: error.error.non_field_errors[0],
+            backgroundColor: new Color("red"),
+            titleColor: new Color("black"),
+            position: FeedbackPosition.Bottom,
+            type: FeedbackType.Custom
+          });
         }
       )
     }
