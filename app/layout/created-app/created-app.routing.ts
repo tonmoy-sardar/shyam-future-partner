@@ -3,6 +3,7 @@ import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { CreatedAppComponent } from "./created-app.component";
+import { DetailsAppComponent } from "./details-app/details-app.component";
 import { ManageAppComponent } from "./manage-app/manage-app.component";
 import { EditAppComponent } from "./edit-app/edit-app.component";
 import { ProductsComponent } from "./products/products.component";
@@ -19,22 +20,30 @@ import { EditBusinessImagesComponent } from "./edit-business-images/edit-busines
 import { ReportComponent } from "./report/report.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
 
+
 const routes: Routes = [
-    { path: "details/:id", component: CreatedAppComponent },
-    { path: "manage-app/:id", component: ManageAppComponent },
-    { path: "edit-app/:id", component: EditAppComponent },
-    { path: "products/:id", component: ProductsComponent },
-    { path: "edit-product-category/:app_id/:id", component: EditProductCategoyComponent },
-    { path: "add-product-category/:app_id", component: AddProductCategoyComponent },
-    { path: "edit-product/:app_id/:id", component: EditProductComponent },
-    { path: "add-product/:app_id/:cat_id", component: AddProductComponent },
-    { path: "customers/:id", component: CustomersComponent },
-    { path: "messages/:id", component: MessagesComponent },
-    { path: "chat/:id/:user", component: ChatComponent },
-    { path: "edit-owner-info/:id", component: EditOwnerInfoComponent },
-    { path: "edit-business-images/:id", component: EditBusinessImagesComponent },
-    { path: "report/:id", component: ReportComponent },
-    { path: "order-details/:id", component: OrderDetailsComponent },
+    {
+        path: ':id',
+        component: CreatedAppComponent,
+        children: [
+            { path: "details", component: DetailsAppComponent },
+            { path: "manage-app", component: ManageAppComponent },
+            { path: "edit-app", component: EditAppComponent },
+            { path: "products", component: ProductsComponent },
+            { path: "edit-product-category/:product_id", component: EditProductCategoyComponent },
+            { path: "add-product-category", component: AddProductCategoyComponent },
+            { path: "edit-product/:product_id", component: EditProductComponent },
+            { path: "add-product/:cat_id", component: AddProductComponent },
+            { path: "customers", component: CustomersComponent },
+            { path: "messages", component: MessagesComponent },
+            { path: "chat/:user", component: ChatComponent },
+            { path: "edit-owner-info", component: EditOwnerInfoComponent },
+            { path: "edit-business-images", component: EditBusinessImagesComponent },
+            { path: "report", component: ReportComponent },
+            { path: "order-details/:order", component: OrderDetailsComponent },
+        ]
+    }
+
 ];
 
 

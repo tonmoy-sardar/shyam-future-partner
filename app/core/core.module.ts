@@ -28,6 +28,7 @@ import { SignUpModalComponent } from './component/signup-modal/signup-modal.comp
 import { UploadSingleImageModalComponent } from './component/upload-single-image-modal/upload-single-image-modal.component';
 import { UploadMultipleImageModalComponent } from './component/upload-multiple-image-modal/upload-multiple-image-modal.component';
 import { LocationModalComponent } from './component/location-modal/location-modal.component';
+import { AppActionBarComponent } from './component/app-action-bar/app-action-bar.component';
 
 @NgModule({
     imports: [
@@ -53,7 +54,8 @@ import { LocationModalComponent } from './component/location-modal/location-moda
         CarouselDirective,
         UploadSingleImageModalComponent,
         UploadMultipleImageModalComponent,
-        LocationModalComponent
+        LocationModalComponent,
+        AppActionBarComponent
     ],
     exports: [
         TNSFontIconModule,
@@ -66,7 +68,8 @@ import { LocationModalComponent } from './component/location-modal/location-moda
         ReactiveFormsModule,
         MenuBarComponent,
         CarouselDirective,
-        DropDownModule
+        DropDownModule,
+        AppActionBarComponent
     ],
     entryComponents: [
         LoginModalComponent,

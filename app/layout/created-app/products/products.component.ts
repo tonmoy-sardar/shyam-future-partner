@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { Location } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
+import { LoadingIndicator } from "nativescript-loading-indicator"
 
 @Component({
     selector: 'products',
@@ -24,19 +26,44 @@ export class ProductsComponent implements OnInit {
         business_description: ''
     }
     category_list: any = [];
-    
+
 
     visible_key: boolean;
+    loader = new LoadingIndicator();
+    lodaing_options = {
+        message: 'Loading...',
+        progress: 0.65,
+        android: {
+            indeterminate: true,
+            cancelable: false,
+            cancelListener: function (dialog) { console.log("Loading cancelled") },
+            max: 100,
+            progressNumberFormat: "%1d/%2d",
+            progressPercentFormat: 0.53,
+            progressStyle: 1,
+            secondaryProgress: 1
+        },
+        ios: {
+            details: "Additional detail note!",
+            margin: 10,
+            dimBackground: true,
+            color: "#4B9ED6",
+            backgroundColor: "yellow",
+            userInteractionEnabled: false,
+            hideBezel: true,
+        }
+    }
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
+        private location: Location,
     ) { }
 
     ngOnInit() {
-        this.app_id = this.route.snapshot.params["id"];
-        console.log(this.route.snapshot.params["id"]);
+        var full_location = this.location.path().split('/');
+        this.app_id = full_location[2].trim();
         this.getAppDetails(this.app_id);
 
         this.form = this.formBuilder.group({
@@ -46,6 +73,7 @@ export class ProductsComponent implements OnInit {
     }
 
     getAppDetails(id) {
+        this.loader.show(this.lodaing_options);
         this.CreatedAppService.getCreatedAppDetails(id).subscribe(
             res => {
                 this.app_details = res;
@@ -58,45 +86,52 @@ export class ProductsComponent implements OnInit {
                 for (var i = 0; i < this.category_list.length; i++) {
                     this.category_list[i]['items'] = JSON.parse(JSON.stringify(this.category_list[i].products));
                 }
-                
+
                 console.log(res)
                 this.visible_key = true
                 console.log(res)
-
+                this.loader.hide();
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         )
     }
 
     deleteProductCategory(id) {
-        this.processing = true;
-        let data ={
-            is_active:false
+        // this.processing = true;
+        let data = {
+            is_active: false
         }
+        this.loader.show(this.lodaing_options);
         this.CreatedAppService.deleteProductCategory(id, data).subscribe(
             res => {
                 console.log("Success");
-                this.router.navigate(['/created-app/products/' + this.app_id])
+                this.loader.hide();
+                this.router.navigate(['/created-app/' + this.app_id+'products'])
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         )
     }
 
     deleteProduct(id) {
-        this.processing = true;
-        let data ={
-            is_active:false
+        // this.processing = true;
+        let data = {
+            is_active: false
         }
+        this.loader.show(this.lodaing_options);
         this.CreatedAppService.deleteProduct(id, data).subscribe(
             res => {
                 console.log("Success");
-                this.router.navigate(['/created-app/products/' + this.app_id])
+                this.loader.hide();
+                this.router.navigate(['/created-app/' + this.app_id+'products'])
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         )

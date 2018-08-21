@@ -6,6 +6,8 @@ import { MessageService } from '../../../core/services/message.service';
 import { RouterExtensions } from "nativescript-angular/router";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 require("nativescript-websockets");
+import { LoadingIndicator } from "nativescript-loading-indicator";
+
 @Component({
     selector: 'chat',
     moduleId: module.id,
@@ -20,6 +22,32 @@ export class ChatComponent implements OnInit, OnDestroy {
     messages: Array<any>;
     user_id: string;
     @ViewChild("ScrollList") scrollList: ElementRef;
+
+    loader = new LoadingIndicator();
+    lodaing_options = {
+        message: 'Loading...',
+        progress: 0.65,
+        android: {
+            indeterminate: true,
+            cancelable: false,
+            cancelListener: function (dialog) { console.log("Loading cancelled") },
+            max: 100,
+            progressNumberFormat: "%1d/%2d",
+            progressPercentFormat: 0.53,
+            progressStyle: 1,
+            secondaryProgress: 1
+        },
+        ios: {
+            details: "Additional detail note!",
+            margin: 10,
+            dimBackground: true,
+            color: "#4B9ED6",
+            backgroundColor: "yellow",
+            userInteractionEnabled: false,
+            hideBezel: true,
+        }
+    }
+
     constructor(
         private route: ActivatedRoute,
         private location: Location,
@@ -33,7 +61,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.message = "";
     }
     ngOnInit() {
-        this.app_id = this.route.snapshot.params["id"];
+        var full_location = this.location.path().split('/');
+        this.app_id = full_location[2].trim();
         this.user_id = this.route.snapshot.params["user"];
         this.createChatSession();
         this.socket = new WebSocket("ws://132.148.147.239:8001/messages/?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer");
@@ -121,13 +150,16 @@ export class ChatComponent implements OnInit, OnDestroy {
             chat_user_type: ''
         }
         var param = "?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer"
+        this.loader.show(this.lodaing_options);
         this.messageService.createChatSessionView(param, data).subscribe(
             res => {
+                this.loader.hide();
                 console.log(res)
                 var thread = res['thread']
                 this.getMessageList(thread);
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         )
@@ -135,6 +167,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 
     getMessageList(thread) {
+        this.loader.show(this.lodaing_options);
         this.messageService.getMessageListByCustomer(thread).subscribe(
             (res: any[]) => {
                 console.log(res)
@@ -153,8 +186,10 @@ export class ChatComponent implements OnInit, OnDestroy {
                     console.log(this.messages)
                     this.scrollToBottom();
                 })
+                this.loader.hide();
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         )

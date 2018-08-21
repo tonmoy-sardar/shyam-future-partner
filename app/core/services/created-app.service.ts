@@ -87,4 +87,12 @@ export class CreatedAppService {
     return this.http.post(Globals.apiEndpoint + 'delete_create_business_images/', data)
   }
 
+  updateCustomerOrderPayment(data){
+    return this.http.put(Globals.apiEndpoint + 'order_payment/' + data.id + '/', data)
+  }
+
+  updateCustomerOrderDelivery(data){
+    return this.http.put(Globals.apiEndpoint + 'order_delivery/' + data.id + '/', data)
+  }
+
 }

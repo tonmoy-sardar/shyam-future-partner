@@ -1,0 +1,61 @@
+.full-dashboard {
+    background: #f9ece3;
+    padding: 10 5;
+}
+
+.card {
+    background-color: transparent;
+    color: #000;
+    width: 25%;
+    
+}
+
+.app-icon {
+    border-radius: 10;
+    background: #fff;
+    padding: 3;
+    margin: 5 5 0 5;
+}
+
+.app-icon Image {
+    width: 50;
+    height: 50;
+    border-radius: 50%;
+    background: #f9ece3;
+}
+
+.app-name {
+    font-size: 10;
+    text-align: center;
+    margin-top: 2;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-section {
+    background: #ffffff;
+    padding: 50px 25px;
+}
+.action-section .fa
+{
+    font-size: 25;
+    color:#000;
+}
+.action-text {
+    font-size: 14;
+    color: #000;
+}
+.action-section-odd {
+    background: #CCCCCC;
+    padding: 50px 25px;
+}
+.action-section-odd .fa
+{
+    font-size: 25;
+    color:#000;
+}
+.action-text {
+    font-size: 14;
+    color: #000;
+}

@@ -6,7 +6,7 @@
                     <GridLayout rows="auto, auto">
                         <StackLayout class="input-filld" row="0">
                             <TextField hint="Product Category" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                [isEnabled]="!processing" formControlName="category_name" [(ngModel)]="product_category_data.category_name"
+                                formControlName="category_name" [(ngModel)]="product_category_data.category_name"
                                 [ngClass]="displayFieldCss('category_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
                                 <Label text="Product Category is required"></Label>
@@ -17,12 +17,9 @@
                                 formControlName="description" [(ngModel)]="product_category_data.description"></TextField>
 
                         </StackLayout>
-
-
-                        <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
                     </GridLayout>
 
-                    <Button class="btn btn-primary" text="Submit" [isEnabled]="!processing" (tap)="createProductCategory()" backgroundColor="#6c6969" color="#fff" width="50%">
+                    <Button class="btn btn-primary" text="Submit" (tap)="createProductCategory()" backgroundColor="#6c6969" color="#fff" width="50%">
                     </Button>
                 </StackLayout>
             </StackLayout>

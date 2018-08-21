@@ -17,7 +17,7 @@
                     <GridLayout rows="auto, auto">
                         <StackLayout class="input-filld" row="0">
                             <TextField hint="Name Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="next"
-                                [isEnabled]="!processing" formControlName="business_name" [(ngModel)]="app_data.business_name"
+                               formControlName="business_name" [(ngModel)]="app_data.business_name"
                                 [ngClass]="displayFieldCss('business_name')" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
                             <StackLayout *ngIf="isFieldValid('business_name')" class="invalid-feedback">
                                 <Label text="Name Of Your Business is required"></Label>
@@ -26,16 +26,15 @@
 
                         <StackLayout class="input-filld" row="1">
                             <TextField hint="Description Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="done"
-                                [isEnabled]="!processing" formControlName="business_description" [(ngModel)]="app_data.business_description"
+                                formControlName="business_description" [(ngModel)]="app_data.business_description"
                                 [ngClass]="displayFieldCss('business_description')" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
                                 <Label text="Description Of Your Business is required"></Label>
                             </StackLayout>
-                        </StackLayout>
-                        <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+                        </StackLayout>                  
                     </GridLayout>
 
-                    <Button class="btn btn-primary" text="Update" [isEnabled]="!processing" (tap)="updateAppInfo()" backgroundColor="#6c6969" color="#fff" width="50%">
+                    <Button class="btn btn-primary" text="Update" (tap)="updateAppInfo()" backgroundColor="#6c6969" color="#fff" width="50%">
                     </Button>
                 </StackLayout>
             </StackLayout>

@@ -11,7 +11,7 @@
                     </StackLayout>
                 </StackLayout>
             </CardView>
-            <CardView  class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
+            <CardView  class="card" *ngIf="gallery_images.length<3" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
                 shadowOffsetHeight="0" width="250px" height="250px" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon"  (tap)="pickNewBusinessImages()">

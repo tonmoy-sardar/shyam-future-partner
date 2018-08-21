@@ -60,18 +60,19 @@ export class DashboardComponent implements OnInit {
     }
 
     getDashboardAppList() {
-        this.processing = true;
+        this.loader.show(this.lodaing_options);
         this.exploreService.getAppAndUserDetailsByUserID(this.user_id).subscribe(
             res => {
-                this.processing = false;
+                // this.processing = false;
                 console.log(res);
                 this.user_app_list = res['user_details'][0].app_details;
                 console.log(this.user_app_list);
-
+                this.loader.hide();
             },
             error => {
-                this.processing = false;
+                // this.processing = false;
                 console.log(error)
+                this.loader.hide();
             }
         )
     }

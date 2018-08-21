@@ -3,7 +3,7 @@
     <ScrollView row="0">
         <StackLayout class="full-dashboard">
             <FlexboxLayout flexWrap="wrap" alignItems="flex-start">
-                <CardView *ngFor="let item of user_app_list" class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start" [nsRouterLink]="['/created-app/details', item.id]">
+                <CardView *ngFor="let item of user_app_list" class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start" [nsRouterLink]="['/created-app/', item.id, 'details']">
                     <StackLayout orientation="vertical">
                         <StackLayout class="app-icon">
                             <Image class="dash-image" [src]="base_url + item.logo" *ngIf="item.logo != ''"></Image>

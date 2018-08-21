@@ -10,6 +10,8 @@ import { UploadSingleImageModalComponent } from "../../../core/component/upload-
 import { SelectedIndexChangedEventData, ValueList } from "nativescript-drop-down";
 import { LocationModalComponent } from '../../../core/component/location-modal/location-modal.component';
 import * as Globals from '../../../core/globals';
+import { LoadingIndicator } from "nativescript-loading-indicator";
+import { Location } from '@angular/common';
 @Component({
     selector: 'edit-owner-info',
     moduleId: module.id,
@@ -19,7 +21,6 @@ import * as Globals from '../../../core/globals';
 
 export class EditOwnerInfoComponent implements OnInit {
     form: FormGroup;
-    processing = false;
     app_id: string;
     visible_key: boolean;
     app_details: any;
@@ -50,7 +51,30 @@ export class EditOwnerInfoComponent implements OnInit {
     hint = "Select Designation";
     designations: ValueList<string>;
 
-
+    loader = new LoadingIndicator();
+    lodaing_options = {
+        message: 'Loading...',
+        progress: 0.65,
+        android: {
+            indeterminate: true,
+            cancelable: false,
+            cancelListener: function (dialog) { console.log("Loading cancelled") },
+            max: 100,
+            progressNumberFormat: "%1d/%2d",
+            progressPercentFormat: 0.53,
+            progressStyle: 1,
+            secondaryProgress: 1
+        },
+        ios: {
+            details: "Additional detail note!",
+            margin: 10,
+            dimBackground: true,
+            color: "#4B9ED6",
+            backgroundColor: "yellow",
+            userInteractionEnabled: false,
+            hideBezel: true,
+        }
+    }
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -58,13 +82,14 @@ export class EditOwnerInfoComponent implements OnInit {
         private vcRef: ViewContainerRef,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
+        private location: Location,
     ) {
 
     }
 
     ngOnInit() {
-        this.app_id = this.route.snapshot.params["id"];
-        console.log(this.route.snapshot.params["id"]);
+        var full_location = this.location.path().split('/');
+        this.app_id = full_location[2].trim();
         this.form = this.formBuilder.group({
             owner_name: ['', Validators.required],
             owner_designation: [''],
@@ -85,6 +110,7 @@ export class EditOwnerInfoComponent implements OnInit {
     }
 
     getDesignationDropdown() {
+        
         this.CreatedAppService.getDesignationDropdown().subscribe(
             (data: any[]) => {
                 console.log(data);
@@ -104,6 +130,7 @@ export class EditOwnerInfoComponent implements OnInit {
     };
 
     getAppOwnerDetails(id) {
+        this.loader.show(this.lodaing_options);
         this.CreatedAppService.getOwnerInfo(id).subscribe(
             res => {
                 this.owner_details = res;
@@ -112,9 +139,11 @@ export class EditOwnerInfoComponent implements OnInit {
                 console.log(this.owner_details.owner_designation)
                 this.visible_key = true
                 console.log(res)
+                this.loader.hide();
             },
             error => {
                 console.log(error)
+                this.loader.hide();
             }
         )
     }
@@ -163,12 +192,15 @@ export class EditOwnerInfoComponent implements OnInit {
     }
 
     updateOwnerLogo(data) {
+        this.loader.show(this.lodaing_options);
         this.CreatedAppService.editOwnerLogo(data).subscribe(
             res => {
+                this.loader.hide();
                 this.getAppOwnerDetails(this.app_id);
                 console.log(res)
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         )
@@ -177,10 +209,9 @@ export class EditOwnerInfoComponent implements OnInit {
 
     updateOwnerInfo() {
         if (this.form.valid) {
-            this.processing = true;
 
             this.owner_data = {
-                id:  this.app_id,
+                id: this.app_id,
                 owner_name: this.owner_details.owner_name,
                 owner_designation: this.owner_details.owner_designation,
                 business_est_year: this.owner_details.business_est_year,
@@ -188,14 +219,16 @@ export class EditOwnerInfoComponent implements OnInit {
                 lat: this.owner_details.lat,
                 long: this.owner_details.long
             }
-        
+            this.loader.show(this.lodaing_options);
             this.CreatedAppService.editOwnerInfo(this.owner_data).subscribe(
                 res => {
+                    this.loader.hide();
                     console.log(res);
-                    this.processing = false;
-                    this.getAppOwnerDetails(res['id'])
+                    this.router.navigate(['/created-app/' + this.app_id+'/manage-app'])
+                    // this.getAppOwnerDetails(res['id'])
                 },
                 error => {
+                    this.loader.hide();
                     console.log(error)
                 }
             )

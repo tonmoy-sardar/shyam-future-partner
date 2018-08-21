@@ -3,6 +3,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 import { CreatedAppRoutingModule } from './created-app.routing';
 import { CreatedAppComponent } from './created-app.component';
+import { DetailsAppComponent } from './details-app/details-app.component';
 import { ManageAppComponent } from './manage-app/manage-app.component';
 import { EditAppComponent } from './edit-app/edit-app.component';
 import { ProductsComponent } from './products/products.component';
@@ -29,6 +30,7 @@ import { CoreModule } from "../../core/core.module";
     ],
     declarations: [
         CreatedAppComponent,
+        DetailsAppComponent,
         ManageAppComponent,
         EditAppComponent,
         ProductsComponent,

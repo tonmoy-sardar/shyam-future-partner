@@ -1,4 +1,3 @@
-<action-bar></action-bar>
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
         <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
@@ -14,22 +13,22 @@
             </CardView>
         </FlexboxLayout>
         <GridLayout rows="auto, auto, auto, auto,auto,auto">
-            <GridLayout class="action-section" VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/edit-app', app_id]">
+            <GridLayout class="action-section" VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'edit-app']">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit App" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/products', app_id]">
+            <GridLayout class="action-section-odd" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Product" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="2" [nsRouterLink]="['/created-app/edit-owner-info', app_id]">
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="2" [nsRouterLink]="['/created-app/', app_id, 'edit-owner-info']">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Owner Info" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/edit-business-images', app_id]">
+            <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/', app_id, 'edit-business-images']">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Business Images" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
@@ -37,47 +36,3 @@
         </GridLayout>
     </StackLayout>
 </ScrollView>
-
-
-<!-- <ScrollView row="0">
-    <StackLayout class="full-dashboard">
-        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-            <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" width="280px"
-                height="280px" alignSelf="flex-start">
-                <StackLayout orientation="vertical">
-                    <StackLayout class="app-icon" (tap)="pickLogo()">
-                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
-                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
-                        <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
-                    </StackLayout>
-                    <Label class="app-name" [text]="app_data.business_name"></Label>
-
-                </StackLayout>
-            </CardView>
-        </FlexboxLayout>
-        <GridLayout columns="*,*" rows="*,*" backgroundColor="lightgray" VerticalAlignment="middle" marginTop="10">
-            <StackLayout class="action-section" col="0" row="0" borderTopWidth="1" borderLeftWidth="1" borderColor="#3aa6fe" VerticalAlignment="middle"
-                [nsRouterLink]="['/created-app/edit-app', app_id]">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
-                <Label class="action-text" text="Edit App"></Label>
-            </StackLayout>
-            <StackLayout class="action-section" col="1" row="0" borderTopWidth="1" borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"
-                VerticalAlignment="middle" [nsRouterLink]="['/created-app/products', app_id]">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
-                <Label class="action-text" text="Edit Product"></Label>
-            </StackLayout>
-            <StackLayout class="action-section" col="0" row="1" borderTopWidth="1" borderLeftWidth="1" borderColor="#3aa6fe" VerticalAlignment="middle"
-                [nsRouterLink]="['/created-app/edit-owner-info', app_id]">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
-                <Label class="action-text" text="Edit Owner Info"></Label>
-            </StackLayout>
-            <StackLayout class="action-section" col="1" row="1" borderTopWidth="1" borderLeftWidth="1" borderRightWidth="1" borderColor="#3aa6fe"
-                VerticalAlignment="middle" [nsRouterLink]="['/created-app/edit-business-images', app_id]">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon"></Label>
-                <Label class="action-text" text="Edit Business Images"></Label>
-            </StackLayout>
-
-        </GridLayout>
-        
-    </StackLayout>
-</ScrollView> -->
