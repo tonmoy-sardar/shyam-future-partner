@@ -1,12 +1,13 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+        <FlexboxLayout marginBottom="10" flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
             <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
-                    <StackLayout class="app-icon" (tap)="pickLogo()">
-                        <Label VerticalAlignment="center" class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                    <StackLayout orientation="horizontal" class="app-icon" (tap)="pickLogo()">
+
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
                         <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
+                        <Label color="#cb202d" class="upload-image pull-right" VerticalAlignment="right" class="fa change_logo" [text]="'fa-camera' | fonticon" width="20" height="20"></Label>
                     </StackLayout>
                     <Label class="app-name" [text]="app_data.business_name"></Label>
                 </StackLayout>
@@ -14,29 +15,29 @@
         </FlexboxLayout>
         <GridLayout rows="auto, auto, auto, auto,auto,auto">
             <GridLayout class="action-section" VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'edit-app']">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="fa fa-edit icon-st" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit App" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" *ngIf="serviceType ==1" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+            <GridLayout class="action-section" *ngIf="serviceType ==1" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
+                <Label class="fa fa-edit icon-st" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Product" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" *ngIf="serviceType ==2" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+            <GridLayout class="action-section" *ngIf="serviceType ==2" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
+                <Label class="fa fa-edit icon-st" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Service" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
             <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="2" [nsRouterLink]="['/created-app/', app_id, 'edit-owner-info']">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="fa fa-edit icon-st" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Owner Info" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/', app_id, 'edit-business-images']">
-                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/', app_id, 'edit-business-images']">
+                <Label class="fa fa-edit icon-st" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Business Images" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
         </GridLayout>
     </StackLayout>

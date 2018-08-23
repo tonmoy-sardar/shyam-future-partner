@@ -1,7 +1,7 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-            <CardView  class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+        <FlexboxLayout marginBottom="10" flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+            <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon">
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
@@ -12,30 +12,30 @@
             </CardView>
         </FlexboxLayout>
         <GridLayout rows="auto, auto, auto, auto,auto">
-            <GridLayout class="action-section"  VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'manage-app']">
-                <Label class="fa fa-building-o" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+            <GridLayout class="action-section" VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'manage-app']">
+                <Label VerticalAlignment="center" class="fa fa-building-o icon-st" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Manage App" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'report']">
-                <Label class="fa fa-newspaper-o" [text]="'fa-newspaper-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
-                <Label class="action-text" text="Your Orders" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            <GridLayout class="action-section" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'report']">
+                <Label class="fa fa-newspaper-o icon-st" [text]="'fa-newspaper-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Order Details" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
             <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="2" [nsRouterLink]="['/created-app/', app_id, 'messages']">
-                <Label class="fa fa-commenting-o" [text]="'fa-commenting-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="fa fa-commenting-o icon-st" [text]="'fa-commenting-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Messages" row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/', app_id, 'customers']">
-                <Label class="fa fa-users" [text]="'fa-users' | fonticon"  row="0" col="0" VerticalAlignment="center"></Label>
-                <Label class="action-text" text="My Customer"  row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="3" [nsRouterLink]="['/created-app/', app_id, 'customers']">
+                <Label class="fa fa-users icon-st" [text]="'fa-users' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="My Customer" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
             <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="4" (tap)="shareApp()">
-                <Label class="fa fa-share-alt" [text]="'fa-share-alt' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
-                <Label class="action-text" text="Market your App"  row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+                <Label class="fa fa-share-alt icon-st" [text]="'fa-share-alt' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Market your App" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
             <!-- <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="5">
                 <Label class="fa fa-building-o" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
@@ -43,5 +43,7 @@
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout> -->
         </GridLayout>
+
+
     </StackLayout>
 </ScrollView>

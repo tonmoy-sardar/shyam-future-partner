@@ -46,11 +46,103 @@ refer to http://docs.nativescript.org/ui/theme.
 }
 
 ActionBar {
-    background-color: #284058;
+    background-color: #cb202d;
     color: #ffffff;
 }
 
 .full-dashboard {
     background-color: #dedede;
     padding: 10 5;
+}
+
+.card {
+    background-color: transparent;
+    color: #000;
+    width: 25%;
+}
+
+.app-icon {
+    border-radius: 5;
+    background: #fff;
+    padding: 5;
+    margin: 5 5 0 5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-icon Image {
+    width: 50;
+    height: 50;
+    border-radius: 50%;
+    background: #f9ece3;
+}
+
+.app-name {
+    font-size: 8;
+    text-align: center;
+    margin-top: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-text {
+    font-size: 14;
+    color: #000;
+}
+
+.action-section .icon-st {
+    background-color: #cb202d;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 10;
+    display: inline-block;
+    height: 30;
+    width: 30;
+    text-align: center;
+    line-height: 25;
+    padding-top: 8;
+}
+
+.action-section .icon-next {
+    background-color: #6a6a6a;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 10;
+    display: inline-block;
+    height: 30;
+    width: 30;
+    text-align: center;
+    line-height: 25;
+    padding-top: 9;
+}
+
+.action-section .action-text {
+    font-size: 12;
+}
+
+.app-name {
+    font-size: 10;
+    text-align: center;
+    margin-top: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-section {
+    background: #ffffff;
+    padding: 25px;
+    border-bottom: 1 solid #dfdfdf;
+    margin-bottom: 10;
+    border-radius: 5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upload-image {
+    background-color: #cb202d;
+    color: #fff;
+}
+
+.pull-right {
+    float: left;
 }
