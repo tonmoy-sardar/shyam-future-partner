@@ -1,6 +1,4 @@
-.action-image {
-    
-}
+.action-image {}
 
 .action-label {
     color: #3C5AFD;
@@ -9,11 +7,11 @@
 }
 
 .logout-label {
-    color: rgb(57, 58, 63);
+    color: #ffffff;
     font-size: 18;
 }
 
 .cart-label {
-    color: rgb(57, 58, 63);
+    color: #ffffff;
     font-size: 18;
 }

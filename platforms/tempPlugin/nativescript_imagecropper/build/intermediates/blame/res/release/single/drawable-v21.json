@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\git-project\\shyam-future-partner\\platforms\\tempPlugin\\nativescript_imagecropper\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\shuvendu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.3.0.aar\\54d51227e098acc4dc889a6dbc03dca0\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "C:\\git-project\\shyam-future-partner\\platforms\\tempPlugin\\nativescript_imagecropper\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\shuvendu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.3.0.aar\\54d51227e098acc4dc889a6dbc03dca0\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "C:\\git-project\\shyam-future-partner\\platforms\\tempPlugin\\nativescript_imagecropper\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\shuvendu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.3.0.aar\\54d51227e098acc4dc889a6dbc03dca0\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    }
+]

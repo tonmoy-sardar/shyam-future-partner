@@ -4,7 +4,7 @@
             <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickLogo()">
-                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                        <Label VerticalAlignment="center" class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
                         <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
                     </StackLayout>
