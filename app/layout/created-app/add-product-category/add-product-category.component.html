@@ -5,11 +5,11 @@
                 <StackLayout class="form" [formGroup]="form" novalidate>
                     <GridLayout rows="auto, auto">
                         <StackLayout class="input-filld" row="0">
-                            <TextField hint="Product Category" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
+                            <TextField hint="Category" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
                                 formControlName="category_name" [(ngModel)]="product_category_data.category_name"
                                 [ngClass]="displayFieldCss('category_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
-                                <Label text="Product Category is required"></Label>
+                                <Label text="Category is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="1">

@@ -18,9 +18,14 @@
                 <Label class="action-text" text="Edit App" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <GridLayout class="action-section-odd" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
+            <GridLayout class="action-section-odd" *ngIf="serviceType ==1" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
                 <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Edit Product" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
+            <GridLayout class="action-section-odd" *ngIf="serviceType ==2" VerticalAlignment="center" row="1" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'products']">
+                <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Edit Service" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
             <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="2" [nsRouterLink]="['/created-app/', app_id, 'edit-owner-info']">

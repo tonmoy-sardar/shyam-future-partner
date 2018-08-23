@@ -14,7 +14,7 @@
         <StackLayout class="full-content">
             <StackLayout class="edit-container">
                 <StackLayout class="form" [formGroup]="form" novalidate>
-                    <GridLayout rows="auto, auto">
+                    <GridLayout rows="auto, auto,auto">
                         <StackLayout class="input-filld" row="0">
                             <TextField hint="Name Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="next"
                                formControlName="business_name" [(ngModel)]="app_data.business_name"
@@ -31,7 +31,13 @@
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
                                 <Label text="Description Of Your Business is required"></Label>
                             </StackLayout>
-                        </StackLayout>                  
+                        </StackLayout>  
+                        <StackLayout class="input-filld" row="2">
+                            <TextField hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="done"
+                                formControlName="app_website_url" [(ngModel)]="app_data.app_website_url"
+                                borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
+                           
+                        </StackLayout>               
                     </GridLayout>
 
                     <Button class="btn btn-primary" text="Update" (tap)="updateAppInfo()" backgroundColor="#6c6969" color="#fff" width="50%">
