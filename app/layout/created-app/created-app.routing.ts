@@ -11,6 +11,8 @@ import { EditProductCategoyComponent } from "./edit-product-category/edit-produc
 import { AddProductCategoyComponent } from "./add-product-category/add-product-category.component";
 import { AddProductComponent } from "./add-product/add-product.component";
 import { EditProductComponent } from "./edit-product/edit-product.component";
+import { AddServiceComponent } from "./add-service/add-service.component";
+import { EditServiceComponent } from "./edit-service/edit-service.component";
 
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
@@ -34,6 +36,8 @@ const routes: Routes = [
             { path: "add-product-category", component: AddProductCategoyComponent },
             { path: "edit-product/:product_id", component: EditProductComponent },
             { path: "add-product/:cat_id", component: AddProductComponent },
+            { path: "edit-service/:product_id", component: EditServiceComponent },
+            { path: "add-service/:cat_id", component: AddServiceComponent },
             { path: "customers", component: CustomersComponent },
             { path: "messages", component: MessagesComponent },
             { path: "chat/:user", component: ChatComponent },

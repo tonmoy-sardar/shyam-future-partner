@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit {
         business_description: ''
     }
     category_list: any = [];
-
+    serviceType;
 
     visible_key: boolean;
     loader = new LoadingIndicator();
@@ -77,6 +77,12 @@ export class ProductsComponent implements OnInit {
         this.CreatedAppService.getCreatedAppDetails(id).subscribe(
             res => {
                 this.app_details = res;
+                if (this.app_details.is_product_service) {
+                    this.serviceType = this.app_details.is_product_service;
+                }
+                else {
+                    this.serviceType = 1
+                }
                 this.app_data.logo = this.app_details.logo;
                 this.app_data.business_name = this.app_details.business_name;
                 this.app_data.business_description = this.app_details.business_description;
@@ -109,7 +115,7 @@ export class ProductsComponent implements OnInit {
             res => {
                 console.log("Success");
                 this.loader.hide();
-                this.router.navigate(['/created-app/' + this.app_id+'products'])
+                this.router.navigate(['/created-app/' + this.app_id + 'products'])
             },
             error => {
                 this.loader.hide();
@@ -128,7 +134,7 @@ export class ProductsComponent implements OnInit {
             res => {
                 console.log("Success");
                 this.loader.hide();
-                this.router.navigate(['/created-app/' + this.app_id+'products'])
+                this.router.navigate(['/created-app/' + this.app_id + 'products'])
             },
             error => {
                 this.loader.hide();

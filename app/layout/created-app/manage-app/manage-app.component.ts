@@ -22,7 +22,7 @@ export class ManageAppComponent implements OnInit {
     business_name: ''
   }
   visible_key: boolean;
-
+  serviceType;
   options = {
     context: {},
     fullscreen: false,
@@ -75,6 +75,12 @@ export class ManageAppComponent implements OnInit {
     this.CreatedAppService.getCreatedAppDetails(id).subscribe(
       res => {
         this.app_details = res;
+        if (this.app_details.is_product_service) {
+          this.serviceType = this.app_details.is_product_service;
+        }
+        else {
+          this.serviceType = 1
+        }
         this.app_data.logo = this.app_details.logo;
         this.app_data.business_name = this.app_details.business_name;
         this.visible_key = true

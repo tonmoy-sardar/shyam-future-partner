@@ -11,6 +11,8 @@ import { EditProductCategoyComponent } from "./edit-product-category/edit-produc
 import { AddProductCategoyComponent } from "./add-product-category/add-product-category.component";
 import { EditProductComponent } from "./edit-product/edit-product.component";
 import { AddProductComponent } from "./add-product/add-product.component";
+import { EditServiceComponent } from "./edit-service/edit-service.component";
+import { AddServiceComponent } from "./add-service/add-service.component";
 
 import { CustomersComponent } from "./customers/customers.component";
 import { MessagesComponent } from "./messages/messages.component";
@@ -38,6 +40,8 @@ import { CoreModule } from "../../core/core.module";
         AddProductCategoyComponent,
         EditProductComponent,
         AddProductComponent,
+        EditServiceComponent,
+        AddServiceComponent,
         CustomersComponent,
         MessagesComponent,
         ChatComponent,
