@@ -20,15 +20,6 @@
     vertical-align: middle;
 }
 
-.apps-container {
-    background-color: #dedede;
-    border-radius: 5;
-    -webkit-box-shadow: 0 0 18 3 rgba(0, 0, 0, 0.61);
-    -moz-box-shadow: 0 0 18 3 rgba(0, 0, 0, 0.61);
-    box-shadow: 0 0 18 3 rgba(0, 0, 0, 0.61);
-    padding: 25;
-}
-
 .head-line-store {
     color: #284058;
     text-align: center;

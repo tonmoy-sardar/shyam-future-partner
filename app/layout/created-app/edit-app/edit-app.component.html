@@ -1,13 +1,13 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+        <FlexboxLayout marginBottom="10" flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
             <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon">
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
                         <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
                     </StackLayout>
-                    <Label class="app-name" [text]="app_data.business_name"></Label>
+                    <Label fontSize="12" VerticalAlignment="center" textAlignment="center" [text]="app_data.business_name" textWrap="true"></Label>
                 </StackLayout>
             </CardView>
         </FlexboxLayout>
@@ -16,28 +16,26 @@
                 <StackLayout class="form" [formGroup]="form" novalidate>
                     <GridLayout rows="auto, auto,auto">
                         <StackLayout class="input-filld" row="0">
-                            <TextField hint="Name Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="next"
-                               formControlName="business_name" [(ngModel)]="app_data.business_name"
-                                [ngClass]="displayFieldCss('business_name')" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
+                            <TextField height="40" padding="10" fontSize="12" hint="Name Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="business_name" [(ngModel)]="app_data.business_name" [ngClass]="displayFieldCss('business_name')"
+                                borderRadius="2" borderColor="#6c6969"></TextField>
                             <StackLayout *ngIf="isFieldValid('business_name')" class="invalid-feedback">
-                                <Label text="Name Of Your Business is required"></Label>
+                                <Label fontSize="8" text="Name Of Your Business is required pull-right"></Label>
                             </StackLayout>
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="1">
-                            <TextField hint="Description Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="done"
-                                formControlName="business_description" [(ngModel)]="app_data.business_description"
-                                [ngClass]="displayFieldCss('business_description')" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
+                            <TextField height="40" padding="10" fontSize="12" hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="app_website_url" [(ngModel)]="app_data.app_website_url" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
+
+                        </StackLayout>
+
+                        <StackLayout class="input-filld" row="2">
+                            <TextView lineHeight="12" height="200" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="business_description" [(ngModel)]="app_data.business_description"
+                                [ngClass]="displayFieldCss('business_description')" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextView>
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
                                 <Label text="Description Of Your Business is required"></Label>
                             </StackLayout>
-                        </StackLayout>  
-                        <StackLayout class="input-filld" row="2">
-                            <TextField hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="done"
-                                formControlName="app_website_url" [(ngModel)]="app_data.app_website_url"
-                                borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
-                           
-                        </StackLayout>               
+                        </StackLayout>
+
                     </GridLayout>
 
                     <Button class="btn btn-primary" text="Update" (tap)="updateAppInfo()" backgroundColor="#6c6969" color="#fff" width="50%">

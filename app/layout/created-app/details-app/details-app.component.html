@@ -7,7 +7,7 @@
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
                         <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
                     </StackLayout>
-                    <Label class="app-name" [text]="app_data.business_name"></Label>
+                    <Label fontSize="12" VerticalAlignment="center" textAlignment="center" [text]="app_data.business_name"></Label>
                 </StackLayout>
             </CardView>
         </FlexboxLayout>

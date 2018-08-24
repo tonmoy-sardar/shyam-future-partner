@@ -3,13 +3,13 @@
         <FlexboxLayout marginBottom="10" flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
             <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
-                    <StackLayout orientation="horizontal" class="app-icon" (tap)="pickLogo()">
+                    <StackLayout class="app-icon" (tap)="pickLogo()">
 
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
                         <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
-                        <Label color="#cb202d" class="upload-image pull-right" VerticalAlignment="right" class="fa change_logo" [text]="'fa-camera' | fonticon" width="20" height="20"></Label>
+                        <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa change_logo" [text]="'fa-camera' | fonticon" width="20" height="20"></Label>
                     </StackLayout>
-                    <Label class="app-name" [text]="app_data.business_name"></Label>
+                    <Label fontSize="12" VerticalAlignment="center" textAlignment="center" [text]="app_data.business_name"></Label>
                 </StackLayout>
             </CardView>
         </FlexboxLayout>

@@ -1,7 +1,7 @@
 <ActionBar title="">
     <GridLayout rows="*" columns="50,50,*,40" verticalAlignment="center">
         <!-- <NavigationButton icon="~/images/back.png" (tap)="goBack()"  row="0" col="0"></NavigationButton> -->
-        <Image src="~/images/back.png" height="50" width="20" row="0" col="0" verticalAlignment="center" (tap)="goBack()"></Image>
+        <Image src="~/images/back.png" class="back-prev" row="0" col="0" verticalAlignment="center" (tap)="goBack()"></Image>
         <Image [src]="app_details?.logo" class="action-image" marginRight="10" row="0" col="1" verticalAlignment="center" *ngIf="app_details?.logo != null"></Image>
         <Image src="~/images/no-image-logo.jpg" class="action-image" marginRight="10" row="0" col="1" *ngIf="app_details?.logo == null"></Image>
         <Label [text]="app_details?.business_name" class="action-label" fontSize="12" row="0" col="2" verticalAlignment="center"></Label>
