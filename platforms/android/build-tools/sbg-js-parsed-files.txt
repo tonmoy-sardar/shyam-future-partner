@@ -1,9 +1,0 @@
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\1.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\2.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\3.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\4.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\5.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\bundle.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\starter.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\tns-java-classes.js
-C:\git-project\shyam-future-partner\platforms\android\app\src\main\assets\app\vendor.js
