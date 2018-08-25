@@ -5,16 +5,15 @@
                 <StackLayout class="form" [formGroup]="form" novalidate>
                     <GridLayout rows="auto">
                         <StackLayout class="input-filld" row="0">
-                            <TextField hint="Service Name" class="input input-border cyan-border m-t-10"  borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
+                            <TextField hint="Service Name" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('product_name')" class="invalid-feedback">
                                 <Label text="Service Name is required"></Label>
                             </StackLayout>
                         </StackLayout>
-                        
+
                     </GridLayout>
 
-                    <Button class="btn btn-primary" text="Submit" (tap)="createProduct()" backgroundColor="#6c6969" color="#fff" width="50%">
+                    <Button class="btn btn-primary simple-btn" text="Submit" (tap)="createProduct()">
                     </Button>
                 </StackLayout>
             </StackLayout>

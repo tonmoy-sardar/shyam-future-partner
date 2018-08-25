@@ -5,36 +5,31 @@
                 <StackLayout class="form" [formGroup]="form" novalidate>
                     <GridLayout rows="auto, auto, auto, auto, auto">
                         <StackLayout class="input-filld" row="0">
-                            <TextField hint="Product Name" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" 
-                                formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
+                            <TextField hint="Product Name" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('product_name')" class="invalid-feedback">
                                 <Label text="Product Name is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="1">
-                            <TextField hint="Price" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                formControlName="price" [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')"></TextField>
+                            <TextField hint="Price" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="price" [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')"></TextField>
                             <StackLayout *ngIf="isFieldValid('price')" class="invalid-feedback">
                                 <Label text="Price is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="2">
-                            <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                 formControlName="discounted_price" [(ngModel)]="product_data.discounted_price"></TextField>
+                            <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="discounted_price" [(ngModel)]="product_data.discounted_price"></TextField>
                         </StackLayout>
                         <StackLayout class="input-filld" row="3">
-                            <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                 formControlName="packing_charges" [(ngModel)]="product_data.packing_charges"></TextField>
+                            <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="packing_charges" [(ngModel)]="product_data.packing_charges"></TextField>
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="4">
-                            <TextField hint="Tags" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" 
-                                formControlName="tags" [(ngModel)]="product_data.tags"></TextField>
+                            <TextField hint="Tags" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="tags" [(ngModel)]="product_data.tags"></TextField>
                         </StackLayout>
 
                     </GridLayout>
 
-                    <Button class="btn btn-primary" text="Update" (tap)="updateProduct()" backgroundColor="#6c6969" color="#fff" width="50%">
+                    <Button class="btn btn-primary simple-btn" text="Update" (tap)="updateProduct()">
                     </Button>
                 </StackLayout>
             </StackLayout>

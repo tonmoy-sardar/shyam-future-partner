@@ -50,6 +50,11 @@ ActionBar {
     color: #ffffff;
 }
 
+.change_logo {
+    color: #cb202d;
+    text-align: center;
+}
+
 .full-dashboard {
     background-color: #dedede;
     padding: 10 5;
@@ -174,4 +179,13 @@ ActionBar {
     background: #021733;
     text-align: left;
     float: left;
+}
+
+.add-product-list {
+    background: #ffffff;
+    padding: 25px;
+    border-bottom: 1 solid #dfdfdf;
+    margin-bottom: 10;
+    border-radius: 5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
