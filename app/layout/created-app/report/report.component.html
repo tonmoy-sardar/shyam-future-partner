@@ -2,7 +2,7 @@
     <StackLayout class="full-dashboard">
         <StackLayout padding="10" *ngIf="visible_key">
             <StackLayout *ngIf="order_list.length>0">
-                <StackLayout borderWidth="1" borderColor="#ccc" *ngFor="let order of order_list" style="margin-bottom: 5px;" class="list-group">
+                <StackLayout marginBottom="10" *ngFor="let order of order_list" class="list-group action-section">
                     <CardView class="whiteCard">
                         <GridLayout rows="auto, auto" columns="*, *, *, 40" class="list-group-item" padding="10" verticalAlignment="center">
                             <Label row="0" col="0" [text]="order.customer_details.name" verticalAlignment="center"></Label>
@@ -13,9 +13,9 @@
                             <Label row="0" col="2" [text]="order.created_at | date:'yy-mm-dd'" class="body" verticalAlignment="center"></Label>
                             <Label row="1" col="2" *ngIf="!order.delivery_status" text="Not Delivered"></Label>
                             <Label row="1" col="2" *ngIf="order.delivery_status" text="Delivered"></Label>
-                            <Label row="0" col="3" class="fa fa-eye" [text]="'fa-eye' | fonticon" verticalAlignment="center" [nsRouterLink]="['/created-app/', app_id, 'order-details', order.id]"></Label>
-                            
-                            
+                            <Label row="0" col="3" class="fa fa-eye icon-st m-t-20" [text]="'fa-eye' | fonticon" verticalAlignment="center" [nsRouterLink]="['/created-app/', app_id, 'order-details', order.id]"></Label>
+
+
                         </GridLayout>
                     </CardView>
                 </StackLayout>

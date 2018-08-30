@@ -2,8 +2,8 @@
 
     <StackLayout class="full-dashboard">
         <StackLayout padding="10">
-            <CardView class="whiteCard">
-                <StackLayout style="margin-bottom: 5px;">
+            <CardView class="action-section">
+                <StackLayout>
                     <GridLayout rows="auto, auto" columns="*, *, *, 40" class="list-group-item" padding="10" verticalAlignment="center">
                         <Label row="0" col="0" [text]="order_details.customer_details.name" verticalAlignment="center"></Label>
                         <Label row="1" col="0" [text]="order_details.customer_details.contact_no" class="body" verticalAlignment="center"></Label>
@@ -12,12 +12,11 @@
                         <Label row="1" col="1" *ngIf="order_details.is_paid" text="Paid"></Label>
                         <Label row="0" col="2" [text]="order_details.created_at | date:'yy-mm-dd'" class="body" verticalAlignment="center"></Label>
                         <Label row="1" col="2" *ngIf="!order_details.delivery_status" text="Not Delivered"></Label>
-                        <Label row="1" col="2" *ngIf="order_details.delivery_status" text="Delivered"></Label>
-                        asdas
+                        <Label row="1" col="2" *ngIf="order_details.delivery_status" text="Delivered"></Label> asdas
                     </GridLayout>
                 </StackLayout>
             </CardView>
-            <CardView class="whiteCard">
+            <CardView class=" action-section">
                 <StackLayout *ngFor="let item of order_details.order_details;let i = index">
                     <GridLayout rows="*" columns="*,*" padding="10" verticalAlignment="center">
                         <StackLayout row="0" col="0" verticalAlignment="center" orientation="vertical" horizontalAlignment="left">
@@ -25,11 +24,10 @@
                             <StackLayout orientation="horizontal">
                                 <Label [text]="item.product_details.discounted_price" class="discounted_price" textWrap="true" *ngIf="item.product_details.discounted_price > 0"></Label>
                                 <Label [text]="item.product_details.price" class="original_price" textWrap="true" [ngClass]="[item.product_details.discounted_price > 0 ? 'isDiscount' : '']"></Label>
-                                <Label [text]="getDiscount(item.product_details.price,item.product_details.discounted_price)" class="discount" textWrap="true"
-                                    *ngIf="item.product_details.discounted_price > 0"></Label>
+                                <Label [text]="getDiscount(item.product_details.price,item.product_details.discounted_price)" class="discount" textWrap="true" *ngIf="item.product_details.discounted_price > 0"></Label>
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout horizontalAlignment="right" verticalAlignment="center" col="1" row="0" backgroundColor="#fff">
+                        <StackLayout horizontalAlignment="right" verticalAlignment="center" col="1" row="0">
                             <GridLayout rows="*,*,*" verticalAlignment="center">
                                 <Label [text]="'Quantity - ' + item.quantity" row="0" verticalAlignment="center" textAlignment="center"></Label>
                                 <Label [text]="'Total cost - ' + item.total_cost" row="1" verticalAlignment="center" textAlignment="center"></Label>
@@ -39,12 +37,10 @@
                     </GridLayout>
                 </StackLayout>
             </CardView>
-            <CardView class="whiteCard">
-                <FlexboxLayout class="button-center">
-                    <Button class="btn btn-primary" *ngIf="!order_details.delivery_status" backgroundColor="#6c6969" color="#fff" width="50%" text="Make Delivered" (tap)="updateCustomerOrderDelivery()"></Button>
-                    <Button class="btn btn-primary" *ngIf="!order_details.is_paid" backgroundColor="#6c6969" color="#fff" width="50%" text="Make Paid" (tap)="updateCustomerOrderPayment()"></Button>
-                </FlexboxLayout>
-            </CardView>
+
+            <Button class="btn btn-primary simple-btn" *ngIf="!order_details.delivery_status" text="Make Delivered" (tap)="updateCustomerOrderDelivery()"></Button>
+            <Button class="btn btn-primary simple-btn" *ngIf="!order_details.is_paid" text="Make Paid" (tap)="updateCustomerOrderPayment()"></Button>
+
         </StackLayout>
     </StackLayout>
     <!-- <StackLayout padding="10" *ngIf="visible_key && order_details.order_details.length > 0">

@@ -1,21 +1,20 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
         <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
-                shadowOffsetHeight="0" width="250px" height="250px" alignSelf="flex-start">
+            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
-                    <StackLayout class="app-icon"  (tap)="pickBusinessImages(item.id)">
-                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                    <StackLayout class="app-icon" (tap)="pickBusinessImages(item.id)">
+
                         <Image [src]="item.app_img" *ngIf="item.app_img != ''"></Image>
                         <Image src="~/images/no-logo.png" *ngIf="item.app_img == ''"></Image>
+                        <Label fontSize="15" class="fa change_logo" [text]="'fa-edit' | fonticon"></Label>
                     </StackLayout>
                 </StackLayout>
             </CardView>
-            <CardView  class="card" *ngIf="gallery_images.length<3" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
-                shadowOffsetHeight="0" width="250px" height="250px" alignSelf="flex-start">
+            <CardView class="card" *ngIf="gallery_images.length<3" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
-                    <StackLayout class="app-icon"  (tap)="pickNewBusinessImages()">
-                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" width="20" height="20"></Label>
+                    <StackLayout class="app-icon" (tap)="pickNewBusinessImages()">
+                        <Label class="fa change_logo" [text]="'fa-edit' | fonticon" fontSize="15"></Label>
                         <Label class="app-name" text="New"></Label>
                     </StackLayout>
                 </StackLayout>
