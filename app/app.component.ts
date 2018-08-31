@@ -3,6 +3,9 @@ import { Component } from "@angular/core";
 var orientation = require('nativescript-orientation');
 import * as application from "tns-core-modules/application";
 import { RouterExtensions } from "nativescript-angular/router";
+// import * as PushNotifications from "nativescript-push-notifications";
+
+
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
@@ -20,6 +23,9 @@ export class AppComponent {
                 args.cancel = false;
             }
         });
+
+        // push notification
+        
     }
 
 }

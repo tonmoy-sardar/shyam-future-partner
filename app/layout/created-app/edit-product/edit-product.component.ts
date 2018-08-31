@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,6 +6,10 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
+var ImageSourceModule = require("image-source");
+
 @Component({
     selector: 'edit-product',
     moduleId: module.id,
@@ -53,12 +57,20 @@ export class EditProductComponent implements OnInit {
             hideBezel: true,
         }
     }
+    options = {
+        context: {},
+        fullscreen: false,
+        viewContainerRef: this.vcRef
+    };
+    product_image: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
+        private modal: ModalDialogService,
+        private vcRef: ViewContainerRef,
     ) { }
 
     ngOnInit() {
@@ -77,6 +89,27 @@ export class EditProductComponent implements OnInit {
         });
     }
 
+    pickImage() {
+        this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
+            console.log(res);
+            if (res != undefined) {
+                this.product_image = ''
+                if (res.camera == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image;
+                    this.product_image = _pic
+                    this.product_data['product_image'] = this.product_image;
+                }
+                else if (res.gallery == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image
+                    this.product_image = _pic
+                    this.product_data['product_image'] = this.product_image;
+                }
+            }
+        })
+    }
+
     getProductDetails(id) {
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.getProductDetails(id).subscribe(
@@ -90,7 +123,9 @@ export class EditProductComponent implements OnInit {
                 this.product_data.tags = this.product_details.tags;
                 this.product_data.app_master = this.product_details.app_master;
                 this.product_data.product_category = this.product_details.product_category;
-
+                if (this.product_details.product_image != null) {
+                    this.product_image = this.product_details.product_image
+                }
 
                 this.visible_key = true
                 console.log(res)
@@ -113,7 +148,7 @@ export class EditProductComponent implements OnInit {
                 res => {
                     console.log("Success");
                     this.loader.hide();
-                    this.router.navigate(['/created-app/' + this.app_id+'/products'])
+                    this.router.navigate(['/created-app/' + this.app_id + '/products'])
 
                 },
                 error => {
