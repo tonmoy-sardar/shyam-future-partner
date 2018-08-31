@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,6 +6,9 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
+
 @Component({
     selector: 'add-product',
     moduleId: module.id,
@@ -26,7 +29,8 @@ export class AddProductComponent implements OnInit {
         packing_charges: '',
         tags: '',
         app_master: '',
-        product_category: ''
+        product_category: '',
+        product_image: ''
     }
     visible_key: boolean;
 
@@ -54,6 +58,11 @@ export class AddProductComponent implements OnInit {
             hideBezel: true,
         }
     }
+    options = {
+        context: {},
+        fullscreen: false,
+        viewContainerRef: this.vcRef
+    };
 
     constructor(
         private route: ActivatedRoute,
@@ -61,6 +70,8 @@ export class AddProductComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
+        private modal: ModalDialogService,
+        private vcRef: ViewContainerRef,
     ) { }
 
     ngOnInit() {
@@ -81,7 +92,7 @@ export class AddProductComponent implements OnInit {
 
 
     createProduct() {
-        
+
         if (this.form.valid) {
             this.product_data.app_master = this.app_id;
             this.product_data.product_category = this.cat_id;
@@ -93,7 +104,7 @@ export class AddProductComponent implements OnInit {
                     this.loader.hide();
                     console.log("Success");
 
-                    this.router.navigate(['/created-app/' + this.app_id+'/products'])
+                    this.router.navigate(['/created-app/' + this.app_id + '/products'])
 
                 },
                 error => {
@@ -106,6 +117,24 @@ export class AddProductComponent implements OnInit {
         else {
             this.markFormGroupTouched(this.form)
         }
+    }
+
+    pickImage() {
+        this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
+            console.log(res);
+            if (res != undefined) {
+                if (res.camera == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image;
+                    this.product_data.product_image = _pic
+                }
+                else if (res.gallery == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image
+                    this.product_data.product_image = _pic
+                }
+            }
+        })
     }
 
     markFormGroupTouched(formGroup: FormGroup) {
