@@ -3,8 +3,7 @@ import { Component } from "@angular/core";
 var orientation = require('nativescript-orientation');
 import * as application from "tns-core-modules/application";
 import { RouterExtensions } from "nativescript-angular/router";
-// import * as PushNotifications from "nativescript-push-notifications";
-
+// import * as pushPlugin from "nativescript-push-notifications";
 
 @Component({
     selector: "ns-app",
@@ -12,6 +11,25 @@ import { RouterExtensions } from "nativescript-angular/router";
 })
 
 export class AppComponent {
+
+    // private pushSettings = {
+    //     // Android settings
+    //     senderID: "276561489898", // Android: Required setting with the sender/project number
+    //     notificationCallbackAndroid: (stringifiedData: String, fcmNotification: any) => {
+    //         const notificationBody = fcmNotification && fcmNotification.getBody();
+    //         this.updateMessage("Message received!\n" + notificationBody + "\n" + stringifiedData);
+    //     },
+
+    //     // iOS settings
+    //     badge: true, // Enable setting badge through Push Notification
+    //     sound: true, // Enable playing a sound
+    //     alert: true, // Enable creating a alert
+    //     notificationCallbackIOS: (message: any) => {
+    //         this.updateMessage("Message received!\n" + JSON.stringify(message));
+    //     }
+    // };
+    private _counter: number;
+    private _message: string;
 
     constructor(private router: RouterExtensions) {
         orientation.setOrientation("portrait");
@@ -25,7 +43,67 @@ export class AppComponent {
         });
 
         // push notification
-        
+        // this.message = "";
+        // this.updateMessage("App started.");
+
+        // let self = this;
+        // this.onRegisterButtonTap();
     }
+
+    // get message(): string {
+    //     return this._message;
+    // }
+
+    // set message(value: string) {
+    //     if (this._message !== value) {
+    //         this._message = value;
+    //         // this.notifyPropertyChange("message", value);
+    //     }
+    // }
+
+    // onCheckButtonTap() {
+    //     let self = this;
+    //     pushPlugin.areNotificationsEnabled((areEnabled: Boolean) => {
+    //         self.updateMessage("Are Notifications enabled: " + !!areEnabled);
+    //     });
+    // }
+
+    // onRegisterButtonTap() {
+    //     let self = this;
+    //     pushPlugin.register(this.pushSettings, (token: String) => {
+    //         self.updateMessage("Device registered. Access token: " + token);
+    //         // token displayed in console for easier copying and debugging durng development
+    //         console.log("Device registered. Access token: " + token);
+
+    //         if (pushPlugin.registerUserNotificationSettings) {
+    //             pushPlugin.registerUserNotificationSettings(() => {
+    //                 self.updateMessage("Successfully registered for interactive push.");
+    //             }, (err) => {
+    //                 self.updateMessage("Error registering for interactive push: " + JSON.stringify(err));
+    //             });
+    //         }
+    //     }, (errorMessage: String) => {
+    //         self.updateMessage(JSON.stringify(errorMessage));
+    //     });
+    // }
+
+    // onUnregisterButtonTap() {
+    //     let self = this;
+    //     pushPlugin.unregister(
+    //         (successMessage: String) => {
+    //             self.updateMessage(successMessage);
+    //         },
+    //         (errorMessage: String) => {
+    //             self.updateMessage(JSON.stringify(errorMessage));
+    //         },
+    //         this.pushSettings
+    //     );
+    // }
+
+    // private updateMessage(text: String) {
+    //     this.message += text + "\n";
+    // }
+
+
 
 }
