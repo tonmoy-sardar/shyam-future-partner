@@ -9,6 +9,8 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
 import { LoadingIndicator } from "nativescript-loading-indicator"
+import { registerElement } from 'nativescript-angular/element-registry';
+registerElement("Gradient", () => require("nativescript-gradient").Gradient);
 
 @Component({
   selector: "login",

@@ -1,6 +1,6 @@
 .login-page {
     align-items: center;
-    flex-direction: column;
+    /* flex-direction: column; */
     background: #fff;
     /* background-image: url('~/images/pre-bg.jpg');
     background-repeat: no-repeat;

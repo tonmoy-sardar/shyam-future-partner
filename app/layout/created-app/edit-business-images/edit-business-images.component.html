@@ -6,7 +6,7 @@
                     <StackLayout class="app-icon" (tap)="pickBusinessImages(item.id)">
 
                         <Image [src]="item.app_img" *ngIf="item.app_img != ''"></Image>
-                        <Image src="~/images/no-logo.png" *ngIf="item.app_img == ''"></Image>
+                        <Image src="~/images/no-image-logo.jpg" *ngIf="item.app_img == ''"></Image>
                         <Label fontSize="15" class="fa change_logo" [text]="'fa-edit' | fonticon"></Label>
                     </StackLayout>
                 </StackLayout>
