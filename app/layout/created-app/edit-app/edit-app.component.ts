@@ -19,7 +19,7 @@ export class EditAppComponent implements OnInit {
 
     app_id: string;
     app_details: any;
-    app_data = {
+    app_data: any = {
         logo: '',
         business_name: '',
         business_description: '',
@@ -82,7 +82,7 @@ export class EditAppComponent implements OnInit {
                 this.app_data.business_description = this.app_details.business_description;
                 this.app_data.app_website_url = this.app_details.app_website_url;
                 this.visible_key = true
-                console.log(res)
+                
                 this.loader.hide();
 
             },

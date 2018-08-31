@@ -1,11 +1,11 @@
 <ScrollView row="0">
-    <StackLayout class="full-dashboard">
-        <FlexboxLayout marginBottom="30" flexWrap="wrap" justifyContent="space-around" alignItems="left">
+    <StackLayout class="full-dashboard" *ngIf="visible_key">
+        <FlexboxLayout marginBottom="30" flexWrap="wrap" justifyContent="space-around">
             <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon">
                         <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
-                        <Image src="~/images/no-logo.png" *ngIf="app_data.logo == ''"></Image>
+                        <Image src="~/images/no-image-logo.jpg" *ngIf="app_data.logo == ''"></Image>
                     </StackLayout>
                     <Label fontSize="15" VerticalAlignment="center" textAlignment="center" [text]="app_data.business_name" textWrap="true"></Label>
                 </StackLayout>

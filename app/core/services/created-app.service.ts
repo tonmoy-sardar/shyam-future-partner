@@ -13,8 +13,13 @@ export class CreatedAppService {
 
   constructor(private http: HttpClient) { }
 
+
   getCreatedAppDetails(id) {
     return this.http.get(Globals.apiEndpoint + 'app_all_details/' + id + '/')
+  }
+
+  getCategoryList(): Observable<any> {
+    return this.http.get(Globals.apiEndpoint + 'all_categories/')
   }
 
   updateAppInfo(app_id, data): Observable<any> {

@@ -10,6 +10,7 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+            { path: 'app-create', loadChildren: './app-create/app-create.module#AppCreateModule' },
             { path: 'created-app', loadChildren: './created-app/created-app.module#CreatedAppModule' }
         ]
     }
