@@ -99,7 +99,12 @@ export class AddProductComponent implements OnInit {
         if (this.form.valid) {
             this.product_data.app_master = this.app_id;
             this.product_data.product_category = this.cat_id;
-
+            if (this.product_data.discounted_price == '') {
+                this.product_data.discounted_price = '0.00'
+            }
+            if (this.product_data.packing_charges == '') {
+                this.product_data.packing_charges = '0.00'
+            }
             console.log(this.product_data);
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.createProduct(this.product_data).subscribe(

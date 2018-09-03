@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,6 +6,8 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
 
 @Component({
     selector: 'add-service',
@@ -22,9 +24,9 @@ export class AddServiceComponent implements OnInit {
     product_details: any;
     product_data = {
         product_name: '',
-        price: '',
-        discounted_price: '',
-        packing_charges: '',
+        price: '0.00',
+        discounted_price: '0.00',
+        packing_charges: '0.00',
         tags: '',
         app_master: '',
         product_category: ''
@@ -55,19 +57,26 @@ export class AddServiceComponent implements OnInit {
             hideBezel: true,
         }
     }
-
+    options = {
+        context: {},
+        fullscreen: false,
+        viewContainerRef: this.vcRef
+    };
+    product_image: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
+        private modal: ModalDialogService,
+        private vcRef: ViewContainerRef,
     ) { }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        this.cat_id = this.route.snapshot.params["cat_id"];
+        this.cat_id = full_location[4].trim();
         console.log(this.cat_id);
         console.log(this.app_id);
 
@@ -80,9 +89,29 @@ export class AddServiceComponent implements OnInit {
         });
     }
 
+    pickImage() {
+        this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
+            console.log(res);
+            if (res != undefined) {
+                if (res.camera == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image;
+                    this.product_image = _pic
+                    this.product_data['product_image'] = this.product_image
+                }
+                else if (res.gallery == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image
+                    this.product_image = _pic
+                    this.product_data['product_image'] = this.product_image
+                }
+            }
+        })
+    }
+
 
     createProduct() {
-        
+
         if (this.form.valid) {
             this.product_data.app_master = this.app_id;
             this.product_data.product_category = this.cat_id;
@@ -94,7 +123,7 @@ export class AddServiceComponent implements OnInit {
                     this.loader.hide();
                     console.log("Success");
 
-                    this.router.navigate(['/created-app/' + this.app_id+'/products'])
+                    this.router.navigate(['/created-app/' + this.app_id + '/products'])
 
                 },
                 error => {

@@ -146,7 +146,12 @@ export class EditProductComponent implements OnInit {
     updateProduct() {
         if (this.form.valid) {
             console.log(this.product_data);
-
+            if (this.product_data.discounted_price == '') {
+                this.product_data.discounted_price = '0.00'
+            }
+            if (this.product_data.packing_charges == '') {
+                this.product_data.packing_charges = '0.00'
+            }
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.updateProduct(this.product_id, this.product_data).subscribe(
                 res => {

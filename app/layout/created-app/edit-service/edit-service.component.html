@@ -3,15 +3,21 @@
         <StackLayout class="full-content">
             <StackLayout class="edit-container">
                 <StackLayout class="form" [formGroup]="form" novalidate>
-                    <GridLayout rows="auto, auto, auto, auto, auto">
-                        <StackLayout class="input-filld" row="0">
-                            <TextField hint="Service Name" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
+                    <GridLayout rows="auto, auto">
+                        <StackLayout class="product_image" (tap)="pickImage()" row="0">
+                            <Image [src]="product_image" *ngIf="product_image != ''"></Image>
+                            <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa" [text]="'fa-camera' | fonticon"
+                                width="30" height="30" *ngIf="product_image == ''"></Label>
+                        </StackLayout>
+                        <StackLayout class="input-filld" row="1">
+                            <TextField hint="Service Name" class="input input-border cyan-border m-t-10" borderRadius="2"
+                                borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="product_name"
+                                [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('product_name')" class="invalid-feedback">
                                 <Label text="Service Name is required"></Label>
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
-
                     <Button class="btn btn-primary simple-btn" text="Update" (tap)="updateProduct()">
                     </Button>
                 </StackLayout>
