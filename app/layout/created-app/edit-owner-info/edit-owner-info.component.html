@@ -22,8 +22,8 @@
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="1">
-                            <DropDown #dd class="input input-border cyan-border m-t-10" formControlName="owner_designation" [items]="designations" selectedIndex="{{ selectedIndex }}" [(ngModel)]="owner_details.owner_designation" [hint]="hint" (selectedIndexChanged)="onchange($event)"
-                                borderRadius="2" height="40" padding="10" fontSize="12"></DropDown>
+                            <DropDown #dd class="dropdown m-t-10" formControlName="owner_designation" [items]="designations" selectedIndex="{{ selectedIndex }}" [(ngModel)]="owner_details.owner_designation" [hint]="hint" (selectedIndexChanged)="onchange($event)"
+                            borderRadius="2" height="40" fontSize="12" borderWidth="1" borderColor="#dfdfdf"></DropDown>
                         </StackLayout>
                         <StackLayout class="input-filld" row="2">
                             <TextField hint="Establishment Year" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="business_est_year" [(ngModel)]="owner_details.business_est_year" borderRadius="2" height="40" padding="10" fontSize="12"></TextField>

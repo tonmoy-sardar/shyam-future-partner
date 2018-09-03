@@ -53,6 +53,7 @@ export class ProductsComponent implements OnInit {
             hideBezel: true,
         }
     }
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -64,12 +65,56 @@ export class ProductsComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
+        if (full_location.length > 4) {
+            this.key = full_location[4].trim();
+        }
         this.getAppDetails(this.app_id);
 
         this.form = this.formBuilder.group({
             business_name: ['', Validators.required],
             business_description: ['', Validators.required]
         });
+    }
+
+    next(){
+        
+    }
+
+    addProdCat() {
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/add-product-category/' + 'new'])
+        }
+        else {
+            this.router.navigate(['/created-app/' + this.app_id + '/add-product-category'])
+        }
+
+    }
+
+    editProdCat(id) {
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/edit-product-category/' + id + 'new'])
+        }
+        else {
+            this.router.navigate(['/created-app/' + this.app_id + '/edit-product-category/' + id])
+        }
+    }
+
+    addProd(id) {
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/add-product/' + id + '/new'])
+        }
+        else {
+            this.router.navigate(['/created-app/' + this.app_id + '/add-product/' + id])
+        }
+    }
+
+    editProd(id) {
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/edit-product/' + id + '/new'])
+        }
+        else {
+            this.router.navigate(['/created-app/' + this.app_id + '/edit-product/' + id])
+        }
     }
 
     getAppDetails(id) {

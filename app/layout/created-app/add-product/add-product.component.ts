@@ -29,8 +29,7 @@ export class AddProductComponent implements OnInit {
         packing_charges: '',
         tags: '',
         app_master: '',
-        product_category: '',
-        product_image: ''
+        product_category: ''
     }
     visible_key: boolean;
 
@@ -63,7 +62,8 @@ export class AddProductComponent implements OnInit {
         fullscreen: false,
         viewContainerRef: this.vcRef
     };
-
+    product_image: string = '';
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -77,7 +77,10 @@ export class AddProductComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        this.cat_id = this.route.snapshot.params["cat_id"];
+        this.cat_id = full_location[4].trim();
+        if (full_location.length > 5) {
+            this.key = full_location[5].trim();
+        }
         console.log(this.cat_id);
         console.log(this.app_id);
 
@@ -104,7 +107,12 @@ export class AddProductComponent implements OnInit {
                     this.loader.hide();
                     console.log("Success");
 
-                    this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    if (this.key != '') {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
+                    }
+                    else {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    }
 
                 },
                 error => {
@@ -126,12 +134,14 @@ export class AddProductComponent implements OnInit {
                 if (res.camera == true) {
                     console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image;
-                    this.product_data.product_image = _pic
+                    this.product_image = _pic
+                    this.product_data['product_image'] = this.product_image
                 }
                 else if (res.gallery == true) {
                     console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image
-                    this.product_data.product_image = _pic
+                    this.product_image = _pic
+                    this.product_data['product_image'] = this.product_image
                 }
             }
         })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { registerElement } from 'nativescript-angular/element-registry';
 import { CardView } from 'nativescript-cardview';
 import { LoadingIndicator } from "nativescript-loading-indicator"
@@ -11,7 +11,8 @@ import { getString, setString, getBoolean, setBoolean, clear } from "application
 import * as Globals from '../../../core/globals';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterExtensions } from "nativescript-angular/router";
-
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
 
 @Component({
     selector: "business-info",
@@ -52,12 +53,19 @@ export class BusinessInfoComponent implements OnInit {
             hideBezel: true,
         }
     }
-
+    options = {
+        context: {},
+        fullscreen: false,
+        viewContainerRef: this.vcRef
+    };
+    logo: string = '';
     constructor(
         private exploreService: ExploreService,
         private createdAppService: CreatedAppService,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
+        private modal: ModalDialogService,
+        private vcRef: ViewContainerRef,
     ) {
         this.secureStorage = new SecureStorage();
     }
@@ -74,6 +82,24 @@ export class BusinessInfoComponent implements OnInit {
 
     }
 
+    pickImage() {
+        this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
+            console.log(res);
+            if (res != undefined) {
+                if (res.camera == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image;
+                    this.logo = _pic
+                }
+                else if (res.gallery == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image
+                    this.logo = _pic
+                }
+            }
+        })
+    }
+
 
     populateData() {
         this.secureStorage.get({
@@ -86,26 +112,26 @@ export class BusinessInfoComponent implements OnInit {
                     this.create_app_data = data;
                 }
                 else {
-                   
+
                 }
             }
         );
     }
-    submitCreateAppBusinessInfo()
-    {
+    submitCreateAppBusinessInfo() {
         if (this.form.valid) {
-           
+
             var data = {
                 app_category: this.create_app_data.app_category,
-                business_name:this.form.value.business_name,
+                business_name: this.form.value.business_name,
                 business_description: this.form.value.business_name,
                 app_website_url: this.form.value.app_website_url,
+                logo: this.logo
             }
             this.setCreateAppData(data)
             this.router.navigate(['/app-create/owner-info'])
         }
         else {
-            this.markFormGroupTouched(this.form)  
+            this.markFormGroupTouched(this.form)
         }
     }
 
@@ -138,7 +164,7 @@ export class BusinessInfoComponent implements OnInit {
         };
     }
 
-    
 
-    
+
+
 }
