@@ -52,6 +52,7 @@ export class EditBusinessImagesComponent implements OnInit {
             hideBezel: true,
         }
     }
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
@@ -65,6 +66,9 @@ export class EditBusinessImagesComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
+        if (full_location.length > 4) {
+            this.key = full_location[4].trim();
+        }
         this.getAppDetails(this.app_id);
     }
 
@@ -176,6 +180,12 @@ export class EditBusinessImagesComponent implements OnInit {
                 this.loader.hide();
             }
         )
+    }
+
+    next(){
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/products/' + 'new'])
+        }
     }
 
 

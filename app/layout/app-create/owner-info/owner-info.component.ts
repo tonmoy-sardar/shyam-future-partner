@@ -199,7 +199,7 @@ export class OwnerInfoComponent implements OnInit {
                     var d = {};
                     this.setCreateAppData(d)
                     this.loader.hide()
-                    this.router.navigate(['/created-app/' + res['id'] + '/products/' + 'new'])
+                    this.router.navigate(['/created-app/' + res['id'] + '/edit-business-images/' + 'new'])
                 },
                 error => {
                     console.log(error)

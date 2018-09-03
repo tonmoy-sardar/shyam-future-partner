@@ -76,8 +76,8 @@ export class ProductsComponent implements OnInit {
         });
     }
 
-    next(){
-        
+    next() {
+        this.router.navigate(['/created-app/' + this.app_id + '/payment-success'])
     }
 
     addProdCat() {
