@@ -22,6 +22,8 @@ import { EditBusinessImagesComponent } from "./edit-business-images/edit-busines
 import { ReportComponent } from "./report/report.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { EditSocialMediaComponent } from "./edit-social-media/edit-social-media.component";
+import { PaymentComponent } from "./payment/payment.component";
+import { PaymentSuccessComponent } from "./payment-success/payment-success.component";
 
 const routes: Routes = [
     {
@@ -32,20 +34,28 @@ const routes: Routes = [
             { path: "manage-app", component: ManageAppComponent },
             { path: "edit-app", component: EditAppComponent },
             { path: "products", component: ProductsComponent },
-            { path: "edit-product-category/:product_id", component: EditProductCategoyComponent },
+            { path: "products/:key", component: ProductsComponent },
+            { path: "edit-product-category/:id", component: EditProductCategoyComponent },
+            { path: "edit-product-category/:id/:key", component: EditProductCategoyComponent },
             { path: "add-product-category", component: AddProductCategoyComponent },
-            { path: "edit-product/:product_id", component: EditProductComponent },
-            { path: "add-product/:cat_id", component: AddProductComponent },
-            { path: "edit-service/:product_id", component: EditServiceComponent },
-            { path: "add-service/:cat_id", component: AddServiceComponent },
+            { path: "add-product-category/:key", component: AddProductCategoyComponent },
+            { path: "edit-product/:id", component: EditProductComponent },
+            { path: "edit-product/:id/:key", component: EditProductComponent },
+            { path: "add-product/:id", component: AddProductComponent },
+            { path: "add-product/:id/:key", component: AddProductComponent },
+            { path: "edit-service/:id", component: EditServiceComponent },
+            { path: "add-service/:id", component: AddServiceComponent },
             { path: "customers", component: CustomersComponent },
             { path: "messages", component: MessagesComponent },
             { path: "chat/:user", component: ChatComponent },
             { path: "edit-owner-info", component: EditOwnerInfoComponent },
             { path: "edit-business-images", component: EditBusinessImagesComponent },
+            { path: "edit-business-images/:key", component: EditBusinessImagesComponent },
             { path: "report", component: ReportComponent },
             { path: "order-details/:order", component: OrderDetailsComponent },
             { path: "edit-social-media", component: EditSocialMediaComponent },
+            { path: "payment", component: PaymentComponent },
+            { path: "payment-success", component: PaymentSuccessComponent },
         ]
     }
 

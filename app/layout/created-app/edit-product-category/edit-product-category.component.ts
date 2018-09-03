@@ -51,6 +51,7 @@ export class EditProductCategoyComponent implements OnInit {
             hideBezel: true,
         }
     }
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -62,8 +63,10 @@ export class EditProductCategoyComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        this.product_category_id = this.route.snapshot.params["cat_id"];
-
+        this.product_category_id = full_location[4].trim();
+        if (full_location.length > 5) {
+            this.key = full_location[5].trim();
+        }
         this.getProductCategoryDetails(this.product_category_id);
 
         this.form = this.formBuilder.group({
@@ -102,7 +105,12 @@ export class EditProductCategoyComponent implements OnInit {
                     console.log("Success");
                     this.loader.hide();
                     // this.processing = false;
-                    this.router.navigate(['/created-app/' + this.app_id+'/products'])
+                    if (this.key != '') {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
+                    }
+                    else {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    }
 
                 },
                 error => {

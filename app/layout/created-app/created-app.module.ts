@@ -22,6 +22,8 @@ import { EditBusinessImagesComponent } from "./edit-business-images/edit-busines
 import { ReportComponent } from "./report/report.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { EditSocialMediaComponent } from "./edit-social-media/edit-social-media.component";
+import { PaymentComponent } from "./payment/payment.component";
+import { PaymentSuccessComponent } from "./payment-success/payment-success.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -50,7 +52,9 @@ import { CoreModule } from "../../core/core.module";
         EditBusinessImagesComponent,
         ReportComponent,
         OrderDetailsComponent,
-        EditSocialMediaComponent
+        EditSocialMediaComponent,
+        PaymentComponent,
+        PaymentSuccessComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -63,6 +63,7 @@ export class EditProductComponent implements OnInit {
         viewContainerRef: this.vcRef
     };
     product_image: string = '';
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -76,7 +77,10 @@ export class EditProductComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        this.product_id = this.route.snapshot.params["product_id"];
+        this.product_id = full_location[4].trim();
+        if (full_location.length > 5) {
+            this.key = full_location[5].trim();
+        }
         console.log(this.product_id);
         console.log(this.app_id);
         this.getProductDetails(this.product_id);
@@ -148,7 +152,12 @@ export class EditProductComponent implements OnInit {
                 res => {
                     console.log("Success");
                     this.loader.hide();
-                    this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    if (this.key != '') {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
+                    }
+                    else {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    }
 
                 },
                 error => {

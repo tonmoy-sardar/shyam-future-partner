@@ -20,8 +20,8 @@ export class AddProductCategoyComponent implements OnInit {
     app_id: string;
     product_category_data = {
         category_name: '',
-        description:'',
-        app_master:''
+        description: '',
+        app_master: ''
     }
     visible_key: boolean;
 
@@ -49,6 +49,7 @@ export class AddProductCategoyComponent implements OnInit {
             hideBezel: true,
         }
     }
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -60,14 +61,16 @@ export class AddProductCategoyComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-
+        if (full_location.length > 4) {
+            this.key = full_location[4].trim();
+        }
         this.form = this.formBuilder.group({
             category_name: ['', Validators.required],
-            description:['']
+            description: ['']
         });
     }
 
-    
+
 
     createProductCategory() {
         if (this.form.valid) {
@@ -81,7 +84,13 @@ export class AddProductCategoyComponent implements OnInit {
                     console.log("Success");
                     // this.processing = false;
                     this.loader.hide();
-                    this.router.navigate(['/created-app/' + this.app_id +'/products'])
+                    if (this.key != '') {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
+                    }
+                    else {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    }
+
 
                 },
                 error => {

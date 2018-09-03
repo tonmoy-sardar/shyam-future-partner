@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterExtensions } from "nativescript-angular/router";
 import { SelectedIndexChangedEventData, ValueList } from "nativescript-drop-down";
 import { LocationModalComponent } from '../../../core/component/location-modal/location-modal.component';
+import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
 
 @Component({
     selector: "owner-info",
@@ -74,6 +75,9 @@ export class OwnerInfoComponent implements OnInit {
         }
     }
 
+    owner_pic: string = '';
+    public selectedIndex_d = 1;
+    public items: Array<string>;
     constructor(
         private exploreService: ExploreService,
         private createdAppService: CreatedAppService,
@@ -83,6 +87,7 @@ export class OwnerInfoComponent implements OnInit {
         private vcRef: ViewContainerRef,
     ) {
         this.secureStorage = new SecureStorage();
+
     }
 
     ngOnInit() {
@@ -95,10 +100,29 @@ export class OwnerInfoComponent implements OnInit {
             lat: [''],
             long: ['']
         });
-        //this.getCategoryList();
+
+        this.loader.show(this.lodaing_options);
         this.getDesignationDropdown();
         this.populateData();
 
+    }
+
+    pickImage() {
+        this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
+            console.log(res);
+            if (res != undefined) {
+                if (res.camera == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image;
+                    this.owner_pic = _pic
+                }
+                else if (res.gallery == true) {
+                    console.log(res.image)
+                    var _pic = 'data:image/png;base64,' + res.image
+                    this.owner_pic = _pic
+                }
+            }
+        })
     }
 
     onchange(args: SelectedIndexChangedEventData) {
@@ -109,7 +133,7 @@ export class OwnerInfoComponent implements OnInit {
     }
 
     getDesignationDropdown() {
-        
+
         this.createdAppService.getDesignationDropdown().subscribe(
             (data: any[]) => {
                 console.log(data);
@@ -120,8 +144,14 @@ export class OwnerInfoComponent implements OnInit {
                         display: data[i]['designation_name'],
                     });
                 }
+                this.items = [];
+                for (var i = 0; i < 5; i++) {
+                    this.items.push("data item " + i);
+                }
+                this.loader.hide();
             },
             error => {
+                this.loader.hide();
                 console.log(error)
             }
         );
@@ -138,33 +168,48 @@ export class OwnerInfoComponent implements OnInit {
                     this.create_app_data = data;
                 }
                 else {
-                   
+
                 }
             }
         );
     }
-    submitOwnerInfo()
-    {
+    submitOwnerInfo() {
         if (this.form.valid) {
-           
+
             var data = {
                 app_category: this.create_app_data.app_category,
-                business_name:this.create_app_data.business_name,
-                business_description: this.create_app_data.business_name,
+                business_name: this.create_app_data.business_name,
+                business_description: this.create_app_data.business_description,
                 app_website_url: this.create_app_data.app_website_url,
+                logo: this.create_app_data.logo,
                 store_address: this.owner_details.store_address,
                 lat: this.owner_details.lat,
                 long: this.owner_details.long,
                 owner_name: this.owner_details.owner_name,
                 owner_designation: this.owner_details.owner_designation,
-                business_est_year:this.owner_details.business_est_year,
+                business_est_year: this.owner_details.business_est_year,
+                owner_pic: this.owner_pic,
+                user: this.user_id
             }
-
-          
             console.log(data);
+            this.loader.show(this.lodaing_options);
+            this.createdAppService.createNewApp(data).subscribe(
+                res => {
+                    console.log(res)
+                    var d = {};
+                    this.setCreateAppData(d)
+                    this.loader.hide()
+                    this.router.navigate(['/created-app/' + res['id'] + '/edit-business-images/' + 'new'])
+                },
+                error => {
+                    console.log(error)
+                    this.loader.hide()
+                }
+            )
+
         }
         else {
-            this.markFormGroupTouched(this.form)  
+            this.markFormGroupTouched(this.form)
         }
     }
 
@@ -213,5 +258,5 @@ export class OwnerInfoComponent implements OnInit {
             'is-valid': this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched)
         };
     }
-    
+
 }

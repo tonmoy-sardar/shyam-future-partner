@@ -1,0 +1,36 @@
+<ScrollView row="0">
+    <StackLayout padding="10" *ngIf="visible_key">
+        <Label text="Congratulations! Your app has been successfully created." textWrap="true" class="m-b-30"
+            textAlignment="center" class="heading"></Label>
+        <Label textAlignment="center" fontSize="15" lineHeight="10" text="You note the details:" class="m-t-30"
+            textWrap="true"></Label>
+        <StackLayout horizontalAlignment="right" verticalAlignment="center" backgroundColor="#fff">
+            <GridLayout rows="*,*,*" verticalAlignment="center">
+                <Label row="0" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Name - "></Span>
+                        <Span [text]="app_details.business_name"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="1" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Owner name - "></Span>
+                        <Span [text]="app_details.owner_name"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="2" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Category - "></Span>
+                        <Span [text]="app_details.category"></Span>
+                    </FormattedString>
+                </Label>
+            </GridLayout>
+        </StackLayout>
+        <Label textAlignment="center" fontSize="15" lineHeight="10" text="Now, enjoy the features and make the most of it! You can also visit Banao.partner App to manage your app and make changes. But before these, here’s your app Download Link:"
+            class="m-t-30" textWrap="true"></Label>
+        <Label textAlignment="center" fontSize="15" lineHeight="10" text="to us on our helpline number *********** for assistance or guidance, any time!"
+            class="m-t-30" textWrap="true"></Label>
+        <Button *ngIf="key != ''" class="btn btn-primary simple-btn" text="Ok" (tap)="ok()">
+        </Button>
+    </StackLayout>
+</ScrollView>

@@ -79,24 +79,24 @@ export class CreatedAppService {
   }
 
 
-  editOwnerLogo(data){
+  editOwnerLogo(data) {
     return this.http.put(Globals.apiEndpoint + 'edit_ownerlogo/' + data.id + '/', data)
   }
 
 
-  editAppLogo(data){
+  editAppLogo(data) {
     return this.http.put(Globals.apiEndpoint + 'edit_applogo/' + data.id + '/', data)
   }
 
-  updateBusinessImages(data){
+  updateBusinessImages(data) {
     return this.http.post(Globals.apiEndpoint + 'delete_create_business_images/', data)
   }
 
-  updateCustomerOrderPayment(data){
+  updateCustomerOrderPayment(data) {
     return this.http.put(Globals.apiEndpoint + 'order_payment/' + data.id + '/', data)
   }
 
-  updateCustomerOrderDelivery(data){
+  updateCustomerOrderDelivery(data) {
     return this.http.put(Globals.apiEndpoint + 'order_delivery/' + data.id + '/', data)
   }
 
@@ -108,5 +108,8 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'app_social_media/' + id + '/')
   }
 
+  createNewApp(data) {
+    return this.http.post(Globals.apiEndpoint + 'add_new-app/', data)
+  }
 
 }
