@@ -3,16 +3,15 @@
         <StackLayout class="form">
             <StackLayout class="full-content">
                 <StackLayout class="edit-container">
-
                     <StackLayout class="input-filld" *ngFor="let social_media of social_media_type">
                         <GridLayout rows="*" columns="40,*">
-                            <Label class="fa social-icon" [text]="social_media.social_media_icon | fonticon" top="10" left="10" row="0" col="0" verticalAlignment="center"></Label>
-                            <TextField hint="Link" class="input input-border cyan-border m-t-10" returnKeyType="next" height="40" padding="10" fontSize="12" row="0" col="1" ></TextField>
+                            <Label class="fa social-icon" [text]="social_media.social_media_icon | fonticon" top="10"
+                                left="10" row="0" col="0" verticalAlignment="center"></Label>
+                            <TextField hint="Link" [(ngModel)]="social_media.url" class="input input-border cyan-border m-t-10"
+                                returnKeyType="next" height="40" padding="10" fontSize="12" row="0" col="1"></TextField>
                         </GridLayout>
                     </StackLayout>
-
-
-                    <Button class="btn btn-primary simple-btn" text="Update">
+                    <Button class="btn btn-primary simple-btn" text="Update" (tap)="update()">
                     </Button>
                 </StackLayout>
             </StackLayout>

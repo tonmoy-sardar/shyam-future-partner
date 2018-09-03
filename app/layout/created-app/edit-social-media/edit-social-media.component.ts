@@ -25,7 +25,7 @@ export class EditSocialMediaComponent implements OnInit {
     app_id: string;
     visible_key: boolean;
     social_media_type: any;
-    app_socila_media:any;
+    app_social_media: any;
 
     loader = new LoadingIndicator();
     lodaing_options = {
@@ -51,6 +51,11 @@ export class EditSocialMediaComponent implements OnInit {
             hideBezel: true,
         }
     }
+    social_media_data_set: any = [
+        {
+
+        }
+    ]
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -66,36 +71,29 @@ export class EditSocialMediaComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        // this.form = this.formBuilder.group({
-        //     owner_name: ['', Validators.required],
-        //     owner_designation: [''],
-        //     business_est_year: [''],
-        //     store_address: [''],
-        //     lat: [''],
-        //     long: ['']
-        // });
-
-        //this.getSocialMediaType();
         this.getAppSocialMedia(this.app_id);
     }
 
-  
 
-    getSocialMediaType(app_socila_media) {
-        
+
+    getSocialMediaType() {
+
         this.CreatedAppService.getSocialMediaType().subscribe(
             (data: any[]) => {
                 console.log(data);
-
-                
-                this.social_media_type =data;
-                for(var i=0 ; i<this.social_media_type.length;i++)
-                {
-                    
+                this.social_media_type = data;
+                for (var i = 0; i < this.social_media_type.length; i++) {
+                    var d = this.app_social_media.filter(x => x.social_media_type == this.social_media_type[i].id)
+                    if (d.length > 0) {
+                        this.social_media_type[i]['url'] = d[0]['url']
+                    }
+                    else {
+                        this.social_media_type[i]['url'] = '';
+                    }
                 }
-                    
+
                 this.loader.hide();
-                
+
             },
             error => {
                 console.log(error)
@@ -109,9 +107,8 @@ export class EditSocialMediaComponent implements OnInit {
         this.CreatedAppService.getAppSocialMedia(id).subscribe(
             res => {
                 console.log(res);
-                this.app_socila_media = res;
-                this.loader.hide();
-                this.getSocialMediaType(this.app_socila_media);
+                this.app_social_media = res;
+                this.getSocialMediaType();
             },
             error => {
                 console.log(error)
@@ -120,7 +117,34 @@ export class EditSocialMediaComponent implements OnInit {
         )
     }
 
-    
+    update() {
+        var data = [];
+        for (var i = 0; i < this.social_media_type.length; i++) {
+            if (this.social_media_type[i]['url'] != '') {
+                var d = {
+                    app_master: this.app_id,
+                    social_media_type: this.social_media_type[i]['id'],
+                    url: this.social_media_type[i]['url'].toLowerCase()
+                }
+                data.push(d)
+            }
+        }
+        console.log(data)
+        this.loader.show(this.lodaing_options);
+        this.CreatedAppService.updateAppSocialMedia(this.app_id, data).subscribe(
+            res => {
+                console.log(res);
+                this.loader.hide();
+                this.router.navigate(['/created-app/' + this.app_id + '/manage-app'])
+            },
+            error => {
+                console.log(error)
+                this.loader.hide();
+            }
+        )
+    }
+
+
 
     markFormGroupTouched(formGroup: FormGroup) {
         (<any>Object).values(formGroup.controls).forEach(control => {

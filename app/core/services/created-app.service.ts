@@ -108,6 +108,10 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'app_social_media/' + id + '/')
   }
 
+  updateAppSocialMedia(id, data) {
+    return this.http.post(Globals.apiEndpoint + 'app_social_media/' + id + '/', data)
+  }
+
   createNewApp(data) {
     return this.http.post(Globals.apiEndpoint + 'add_new-app/', data)
   }
