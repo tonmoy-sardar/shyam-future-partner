@@ -21,6 +21,7 @@ import { EditOwnerInfoComponent } from "./edit-owner-info/edit-owner-info.compon
 import { EditBusinessImagesComponent } from "./edit-business-images/edit-business-images.component";
 import { ReportComponent } from "./report/report.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
+import { EditSocialMediaComponent } from "./edit-social-media/edit-social-media.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -48,7 +49,8 @@ import { CoreModule } from "../../core/core.module";
         EditOwnerInfoComponent,
         EditBusinessImagesComponent,
         ReportComponent,
-        OrderDetailsComponent
+        OrderDetailsComponent,
+        EditSocialMediaComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

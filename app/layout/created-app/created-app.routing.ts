@@ -21,7 +21,7 @@ import { EditOwnerInfoComponent } from "./edit-owner-info/edit-owner-info.compon
 import { EditBusinessImagesComponent } from "./edit-business-images/edit-business-images.component";
 import { ReportComponent } from "./report/report.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
-
+import { EditSocialMediaComponent } from "./edit-social-media/edit-social-media.component";
 
 const routes: Routes = [
     {
@@ -45,6 +45,7 @@ const routes: Routes = [
             { path: "edit-business-images", component: EditBusinessImagesComponent },
             { path: "report", component: ReportComponent },
             { path: "order-details/:order", component: OrderDetailsComponent },
+            { path: "edit-social-media", component: EditSocialMediaComponent },
         ]
     }
 

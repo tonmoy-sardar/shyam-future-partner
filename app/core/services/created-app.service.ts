@@ -100,4 +100,13 @@ export class CreatedAppService {
     return this.http.put(Globals.apiEndpoint + 'order_delivery/' + data.id + '/', data)
   }
 
+  getSocialMediaType() {
+    return this.http.get(Globals.apiEndpoint + 'social_media_type_dropdown/')
+  }
+
+  getAppSocialMedia(id) {
+    return this.http.get(Globals.apiEndpoint + 'app_social_media/' + id + '/')
+  }
+
+
 }

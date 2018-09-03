@@ -1,0 +1,12 @@
+.social-icon {
+    background-color: #cb202d;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 15;
+    display: inline-block;
+    height: 30;
+    width: 30;
+    text-align: center;
+    line-height: 15;
+    padding-top: 8;
+}

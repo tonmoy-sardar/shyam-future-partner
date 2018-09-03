@@ -39,6 +39,11 @@
                 <Label class="action-text" text="Edit Business Images" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="4" [nsRouterLink]="['/created-app/', app_id, 'edit-social-media']">
+                <Label class="fa fa-edit icon-st" [text]="'fa-edit' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Edit Social Media" row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
         </GridLayout>
     </StackLayout>
 </ScrollView>
