@@ -80,4 +80,8 @@ export class MessagesComponent implements OnInit {
         )
     }
 
+    goToChat(id){
+        this.router.navigate(['/created-app/' + this.app_id + '/chat/' + id])
+    }
+
 }

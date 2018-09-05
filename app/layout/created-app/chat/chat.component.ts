@@ -7,6 +7,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 require("nativescript-websockets");
 import { LoadingIndicator } from "nativescript-loading-indicator";
+import { NotificationService } from "../../../core/services/notification.service";
 
 @Component({
     selector: 'chat',
@@ -55,15 +56,18 @@ export class ChatComponent implements OnInit, OnDestroy {
         private router: RouterExtensions,
         private zone: NgZone,
         private CreatedAppService: CreatedAppService,
+        private notificationService: NotificationService
     ) {
 
         this.messages = [];
         this.message = "";
     }
+    customer_device_token: string;
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.user_id = this.route.snapshot.params["user"];
+        this.getCustomerDeviceToken(this.user_id);
         this.createChatSession();
         this.socket = new WebSocket("ws://132.148.147.239:8001/messages/?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer");
         this.socket.onopen = (evt) => this.onOpen(evt)
@@ -72,28 +76,40 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.socket.onerror = (evt) => this.onError(evt)
     }
 
+    getCustomerDeviceToken(id) {
+        this.notificationService.getCustomerDeviceToken(id).subscribe(
+            res => {
+                console.log(res)
+                this.customer_device_token = res['customer_device_token']
+            },
+            error => {
+                console.log(error)
+            }
+        )
+    }
+
+    pushNotf(message: string) {
+        var value = {
+            title: "BanaoApp(new message)",
+            subtitle: "New message",
+            text: message
+        }
+        this.notificationService.sendPushNotification(this.customer_device_token, value).subscribe(
+            res => {
+                console.log(res)
+            },
+            error => {
+                console.log(error)
+            }
+        )
+    }
+
     onOpen(evt) {
         console.log(evt)
-        // this.zone.run(() => {
-        //     var data = {
-        //         text: "Welcome to the chat!",
-        //         created: new Date(),
-        //         sender: false
-        //     }
-        //     this.messages.push(data);
-        // });
         console.log("Welcome to the chat!");
     }
 
     onClose(evt) {
-        // this.zone.run(() => {
-        //     var data = {
-        //         text: "You have been disconnected",
-        //         created: new Date(),
-        //         sender: false
-        //     }
-        //     this.messages.push(data);
-        // });
         console.log("You have been disconnected");
     }
 
@@ -138,6 +154,7 @@ export class ChatComponent implements OnInit, OnDestroy {
                 message: this.message
             }
             this.socket.send(JSON.stringify(data));
+            this.pushNotf(this.message);
             this.message = "";
         }
     }
@@ -183,9 +200,9 @@ export class ChatComponent implements OnInit, OnDestroy {
                         data['sender'] = false
                     }
                     this.messages.push(data)
-                    console.log(this.messages)
-                    this.scrollToBottom();
                 })
+                console.log(this.messages)
+                this.scrollToBottom();
                 this.loader.hide();
             },
             error => {

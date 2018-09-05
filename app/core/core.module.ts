@@ -20,6 +20,7 @@ import { ModalDialogService } from "nativescript-angular/modal-dialog";
 import { CreatedAppService } from './services/created-app.service';
 import { MessageService } from './services/message.service';
 import { CustomerService } from './services/customer.service';
+import { NotificationService } from './services/notification.service';
 // component
 import { ActionBarComponent } from './component/action-bar/action-bar.component';
 import { MenuBarComponent } from './component/menu-bar/menu-bar.component';
@@ -93,7 +94,8 @@ export class CoreModule {
                 ModalDialogService,
                 CreatedAppService,
                 MessageService,
-                CustomerService
+                CustomerService,
+                NotificationService
             ]
         };
     }

@@ -6,6 +6,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 const firebase = require("nativescript-plugin-firebase");
 const dialogs = require("ui/dialogs");
 let deviceToken = "";
+import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 
 @Component({
     selector: "ns-app",
@@ -31,6 +32,9 @@ export class AppComponent {
             onPushTokenReceivedCallback: function (token) {
                 dialogs.alert("--onPushTokenReceivedCallback token :" + token);
                 deviceToken = token;
+                if (deviceToken != '') {
+                    setString('device_token', token)
+                }
                 console.log("Firebase push token: " + token);
             },
             onMessageReceivedCallback: function (message) {
@@ -53,6 +57,9 @@ export class AppComponent {
         );
         firebase.getCurrentPushToken().then((token: string) => {
             // may be null if not known yet
+            if (token != null) {
+                setString('device_token', token)
+            }
             console.log(`Current push token: ${token}`);
         });
     }
