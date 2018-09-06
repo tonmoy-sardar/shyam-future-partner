@@ -1,0 +1,19 @@
+<ScrollView row="0">
+    <StackLayout class="full-dashboard">
+        <StackLayout class="full-content">
+                <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0">
+                    <StackLayout class="m-t-10">
+                        <Label class="section_heading" text="Subscription Type" row="0" col="0"></Label>
+                        <StackLayout *ngFor="let option of subscriptionTypeList">
+                            <StackLayout orientation="horizontal" verticalAlignment="center">
+                                <CheckBox #elem [checked]="option.selected" class="checkbox" boxType="circle"></CheckBox>
+                                <StackLayout verticalAlignment="center">
+                                    <Label [text]="option.type_name" textWrap="true" ></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </CardView>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

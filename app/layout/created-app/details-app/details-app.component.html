@@ -11,7 +11,7 @@
                 </StackLayout>
             </CardView>
         </FlexboxLayout>
-        <GridLayout rows="auto, auto, auto, auto,auto">
+        <GridLayout rows="auto, auto, auto, auto,auto,auto">
             <GridLayout class="action-section" VerticalAlignment="center" row="0" rows="*" columns="40,*,40" [nsRouterLink]="['/created-app/', app_id, 'manage-app']">
                 <Label VerticalAlignment="center" class="fa fa-building-o icon-st" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
                 <Label class="action-text" text="Manage App" row="0" col="1" VerticalAlignment="center"></Label>
@@ -37,11 +37,11 @@
                 <Label class="action-text" text="Market your App" row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
-            <!-- <GridLayout class="action-section-odd" VerticalAlignment="center" rows="*" columns="40,*,40" row="5">
-                <Label class="fa fa-building-o" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
-                <Label class="action-text" text="Subscription"  row="0" col="1" VerticalAlignment="center"></Label>
-                <Label class="fa fa-chevron-right" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
-            </GridLayout> -->
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="5" *ngIf="!app_details.is_paid" [nsRouterLink]="['/created-app/', app_id, 'payment']">
+                <Label class="fa fa-building-o icon-st" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Make Payment"  row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
         </GridLayout>
 
 

@@ -30,7 +30,7 @@ import { UploadSingleImageModalComponent } from './component/upload-single-image
 import { UploadMultipleImageModalComponent } from './component/upload-multiple-image-modal/upload-multiple-image-modal.component';
 import { LocationModalComponent } from './component/location-modal/location-modal.component';
 import { AppActionBarComponent } from './component/app-action-bar/app-action-bar.component';
-
+import { CreateAppActionBarComponent } from './component/create-app-action-bar/create-app-action-bar.component';
 @NgModule({
     imports: [
         NativeScriptCommonModule,
@@ -56,7 +56,8 @@ import { AppActionBarComponent } from './component/app-action-bar/app-action-bar
         UploadSingleImageModalComponent,
         UploadMultipleImageModalComponent,
         LocationModalComponent,
-        AppActionBarComponent
+        AppActionBarComponent,
+        CreateAppActionBarComponent
     ],
     exports: [
         TNSFontIconModule,
@@ -70,7 +71,8 @@ import { AppActionBarComponent } from './component/app-action-bar/app-action-bar
         MenuBarComponent,
         CarouselDirective,
         DropDownModule,
-        AppActionBarComponent
+        AppActionBarComponent,
+        CreateAppActionBarComponent
     ],
     entryComponents: [
         LoginModalComponent,
