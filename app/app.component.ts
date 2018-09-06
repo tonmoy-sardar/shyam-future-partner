@@ -7,6 +7,9 @@ const firebase = require("nativescript-plugin-firebase");
 const dialogs = require("ui/dialogs");
 let deviceToken = "";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
+import * as utils from "utils/utils";
+var services = require("./service-helper");
+import { NotificationService } from "./core/services/notification.service";
 
 @Component({
     selector: "ns-app",
@@ -16,7 +19,10 @@ import { getString, setString, getBoolean, setBoolean, clear } from "application
 export class AppComponent {
 
 
-    constructor(private router: RouterExtensions) {
+    constructor(
+        private router: RouterExtensions,
+        private notificationService: NotificationService
+    ) {
         orientation.setOrientation("portrait");
         application.android.on(application.AndroidApplication.activityBackPressedEvent, (args: any) => {
             if (this.router.canGoBack()) {
@@ -32,19 +38,20 @@ export class AppComponent {
             onPushTokenReceivedCallback: function (token) {
                 dialogs.alert("--onPushTokenReceivedCallback token :" + token);
                 deviceToken = token;
-                if (deviceToken != '') {
+                if (token != '') {
                     setString('device_token', token)
                 }
                 console.log("Firebase push token: " + token);
             },
             onMessageReceivedCallback: function (message) {
-                dialogs.alert({
-                    title: "Push message: " +
-                        (message.title !== undefined ? message.title : ""),
-                    message: JSON.stringify(message),
-                    okButtonText: "OK"
-                });
-                dialogs.alert("--onMessageReceivedCallback deviceToken :" + deviceToken);
+                // dialogs.alert({
+                //     title: "Push message: " +
+                //         (message.title !== undefined ? message.title : ""),
+                //     message: JSON.stringify(message),
+                //     okButtonText: "OK"
+                // });
+                // dialogs.alert("--onMessageReceivedCallback deviceToken :" + deviceToken);
+                notificationService.badgeCountStatus(true);
             },
             persist: false
         }).then(
@@ -62,6 +69,9 @@ export class AppComponent {
             }
             console.log(`Current push token: ${token}`);
         });
+
+        // background service
+        // services.setupAlarm(utils.ad.getApplicationContext());
     }
 
 

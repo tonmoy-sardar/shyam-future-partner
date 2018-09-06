@@ -169,10 +169,23 @@ export class ChatComponent implements OnInit, OnDestroy {
         var param = "?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer"
         this.loader.show(this.lodaing_options);
         this.messageService.createChatSessionView(param, data).subscribe(
-            res => {
-                this.loader.hide();
+            res => {                
                 console.log(res)
-                var thread = res['thread']
+                var thread = res['thread']                
+                this.viewMessages(thread)
+            },
+            error => {
+                this.loader.hide();
+                console.log(error)
+            }
+        )
+    }
+
+    viewMessages(thread) {
+        var param = "?user=" + this.user_id + "&user_type=customer&thread_id=" + thread;
+        this.messageService.viewMessages(param).subscribe(
+            res => {
+                console.log(res)
                 this.getMessageList(thread);
             },
             error => {
@@ -184,7 +197,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 
     getMessageList(thread) {
-        this.loader.show(this.lodaing_options);
         this.messageService.getMessageListByCustomer(thread).subscribe(
             (res: any[]) => {
                 console.log(res)

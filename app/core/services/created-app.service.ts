@@ -135,5 +135,13 @@ export class CreatedAppService {
   appSubscription(data) {
     return this.http.post(Globals.apiEndpoint + 'app_subscription/', data)
   }
+  
+  customerOrderSeen(id) {
+    return this.http.put(Globals.apiEndpoint + 'order_seen_activity/' + id + '/', {})
+  }
+
+  getOrderSeenActivity(id) {
+    return this.http.get(Globals.apiEndpoint + 'order_seen_activity_count/' + id + '/')
+  }
 
 }

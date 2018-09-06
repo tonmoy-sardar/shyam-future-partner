@@ -7,6 +7,8 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { MessageService } from '../../../core/services/message.service';
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
+import { NotificationService } from "../../../core/services/notification.service";
+
 @Component({
     selector: 'messages',
     moduleId: module.id,
@@ -44,6 +46,7 @@ export class MessagesComponent implements OnInit {
             hideBezel: true,
         }
     }
+    badgeCountStatus: boolean;
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -51,12 +54,22 @@ export class MessagesComponent implements OnInit {
         private router: RouterExtensions,
         private messageService: MessageService,
         private location: Location,
-    ) { }
+        private notificationService: NotificationService
+    ) {
+        notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
+    }
+
+    private changebadgeCountStatus(status: boolean): void {
+        this.badgeCountStatus = status;
+        console.log(this.badgeCountStatus)
+        if (this.badgeCountStatus == true) {
+            this.newGetChatMembersDetails();
+        }
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-       
         this.getChatMembersDetails();
     }
 
@@ -65,9 +78,9 @@ export class MessagesComponent implements OnInit {
             receiver: this.app_id,
             receiver_type: "app_master"
         }
-        var papram = "?user=" + this.app_id + "&user_type=app_master"
+        var param = "?user=" + this.app_id + "&user_type=app_master"
         this.loader.show(this.lodaing_options);
-        this.messageService.getChatMembersDetails(papram).subscribe(
+        this.messageService.getChatMembersDetails(param).subscribe(
             (res: any[]) => {
                 console.log(res)
                 this.chats = res;
@@ -80,7 +93,27 @@ export class MessagesComponent implements OnInit {
         )
     }
 
-    goToChat(id){
+    newGetChatMembersDetails() {
+        var data = {
+            receiver: this.app_id,
+            receiver_type: "app_master"
+        }
+        var param = "?user=" + this.app_id + "&user_type=app_master"
+        this.loader.show(this.lodaing_options);
+        this.messageService.getChatMembersDetails(param).subscribe(
+            (res: any[]) => {
+                console.log(res)
+                this.chats = [];
+                this.loader.hide();
+            },
+            error => {
+                console.log(error)
+                this.loader.hide();
+            }
+        )
+    }
+
+    goToChat(id) {
         this.router.navigate(['/created-app/' + this.app_id + '/chat/' + id])
     }
 

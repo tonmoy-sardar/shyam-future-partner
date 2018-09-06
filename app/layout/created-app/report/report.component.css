@@ -1,0 +1,9 @@
+.unread {
+    text-align: center;
+    min-width: 20;
+    min-height: 20;
+    color: #fff;
+    font-size: 10;
+    border-radius: 50%;
+    background-color: #3C5AFD
+}
