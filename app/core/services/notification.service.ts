@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter, Output } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
@@ -12,7 +12,19 @@ import * as Globals from '../../core/globals';
 @Injectable()
 export class NotificationService {
 
+  @Output() getBadgeCountStatus: EventEmitter<any> = new EventEmitter();
+
   constructor(private http: HttpClient) { }
+
+  badgeCountStatus(data) {
+    if (data == true) {
+      this.getBadgeCountStatus.emit(true);
+      return
+    } else {
+      this.getBadgeCountStatus.emit(false);
+      return
+    }
+  }
 
   updateDeviceToken(id, data) {
     return this.http.put(Globals.apiEndpoint + 'partner_device_token/' + id + '/', data)
@@ -43,5 +55,6 @@ export class NotificationService {
       headers: new HttpHeaders().set('Authorization', 'key=' + Globals.server_key)
     })
   }
+
 
 }

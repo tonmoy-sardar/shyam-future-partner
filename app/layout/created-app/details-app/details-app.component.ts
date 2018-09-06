@@ -6,6 +6,8 @@ import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 import * as SocialShare from "nativescript-social-share";
+import { MessageService } from '../../../core/services/message.service';
+import { NotificationService } from "../../../core/services/notification.service";
 
 @Component({
   selector: 'details-app',
@@ -18,12 +20,12 @@ export class DetailsAppComponent implements OnInit {
   app_id: string;
   app_details: any;
   visible_key: boolean;
-  
+
   app_data = {
     logo: '',
-    business_name:''
+    business_name: ''
   }
- 
+
   loader = new LoadingIndicator();
   lodaing_options = {
     message: 'Loading...',
@@ -48,17 +50,36 @@ export class DetailsAppComponent implements OnInit {
       hideBezel: true,
     }
   }
+  unSeenOrder: number = 0;
+  unSeenMessage: number = 0;
+  badgeCountStatus: boolean;
   constructor(
     private route: ActivatedRoute,
     private CreatedAppService: CreatedAppService,
     private location: Location,
-  ) {}
+    private messageService: MessageService,
+    private notificationService: NotificationService
+  ) {
+    notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
+  }
+
+  private changebadgeCountStatus(status: boolean): void {
+    this.badgeCountStatus = status;
+    console.log(this.badgeCountStatus)
+    if (this.badgeCountStatus == true) {
+      this.unSeenMessage = 10;
+      console.log(this.unSeenMessage)
+      // this.getOrderSeenActivity(this.app_id);
+      // this.gerMessageSeenActivity(this.app_id)
+    }
+  }
 
   ngOnInit() {
     var full_location = this.location.path().split('/');
     this.app_id = full_location[2].trim();
     this.getAppDetails(this.app_id);
-    
+    this.getOrderSeenActivity(this.app_id);
+    this.gerMessageSeenActivity(this.app_id)
   }
 
   getAppDetails(id) {
@@ -66,8 +87,8 @@ export class DetailsAppComponent implements OnInit {
     this.CreatedAppService.getCreatedAppDetails(id).subscribe(
       res => {
         this.app_details = res;
-        this.app_data.logo =  this.app_details.logo;
-        this.app_data.business_name =  this.app_details.business_name;
+        this.app_data.logo = this.app_details.logo;
+        this.app_data.business_name = this.app_details.business_name;
         this.visible_key = true
         console.log(res)
         this.loader.hide();
@@ -79,9 +100,41 @@ export class DetailsAppComponent implements OnInit {
     )
   }
 
-  shareApp()
-  {
+  shareApp() {
     SocialShare.shareText("I love NativeScript!");
+  }
+
+
+  getOrderSeenActivity(id) {
+    this.CreatedAppService.getOrderSeenActivity(id).subscribe(
+      res => {
+        console.log(res)
+        this.unSeenOrder = res['unseen_count'];
+        console.log(this.unSeenOrder)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+
+  gerMessageSeenActivity(id) {
+    var param = "?user=" + id + "&user_type=app_master"
+    this.messageService.getChatMembersDetails(param).subscribe(
+      (res: any[]) => {
+        console.log(res)
+        var total = 0;
+        res.forEach(x => {
+          total += x.unread_messages;
+        })
+        this.unSeenMessage = total;
+        console.log(this.unSeenMessage)
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
 
