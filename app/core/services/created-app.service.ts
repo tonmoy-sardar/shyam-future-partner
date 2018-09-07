@@ -144,4 +144,20 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'order_seen_activity_count/' + id + '/')
   }
 
+ updateAppSubscription(id,data) {
+    return this.http.put(Globals.apiEndpoint + 'app_subscription/' + id + '/', data)
+  }
+
+}
+
+
+export class RadioOption {
+  text: string;
+  id: number;
+  selected: boolean = false;
+
+  constructor(text: string, id: number) {
+    this.text = text;
+    this.id = id;
+  }
 }

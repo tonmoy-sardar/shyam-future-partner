@@ -20,7 +20,7 @@
                             </StackLayout>
                         </CardView>
                     </FlexboxLayout>
-                    <GridLayout rows="auto,auto,auto">
+                    <GridLayout rows="auto,auto,auto,auto">
                         
                         <StackLayout class="input-filld" row="0">
                             <TextField height="40" padding="10" fontSize="12" hint="Name Of Your Business" class="input input-border cyan-border m-t-10"
@@ -38,13 +38,14 @@
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="2">
-                            <TextView lineHeight="12" height="200" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10"
+                            <TextView lineHeight="12" height="100" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10"
                                 returnKeyType="done" formControlName="business_description" [ngClass]="displayFieldCss('business_description')"
                                 borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextView>
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
                                 <Label text="Description Of Your Business is required"></Label>
                             </StackLayout>
                         </StackLayout>
+                        
 
                     </GridLayout>
 

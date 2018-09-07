@@ -14,9 +14,10 @@
         <StackLayout class="full-content">
             <StackLayout class="edit-container">
                 <StackLayout class="form" [formGroup]="form" novalidate>
-                    <GridLayout rows="auto, auto,auto">
+                    <GridLayout rows="auto, auto,auto,auto">
                         <StackLayout class="input-filld" row="0">
-                            <TextField height="40" padding="10" fontSize="12" hint="Name Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="business_name" [(ngModel)]="app_data.business_name" [ngClass]="displayFieldCss('business_name')"
+                            <TextField height="40" padding="10" fontSize="12" hint="Name Of Your Business" class="input input-border cyan-border m-t-10"
+                                returnKeyType="next" formControlName="business_name" [(ngModel)]="app_data.business_name" [ngClass]="displayFieldCss('business_name')"
                                 borderRadius="2" borderColor="#6c6969"></TextField>
                             <StackLayout *ngIf="isFieldValid('business_name')" class="invalid-feedback">
                                 <Label fontSize="8" text="Name Of Your Business is required pull-right"></Label>
@@ -24,18 +25,32 @@
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="1">
-                            <TextField height="40" padding="10" fontSize="12" hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="app_website_url" [(ngModel)]="app_data.app_website_url" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
+                            <TextField height="40" padding="10" fontSize="12" hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="done"
+                                formControlName="app_website_url" [(ngModel)]="app_data.app_website_url" borderRadius="2" borderColor="#6c6969"
+                                backgroundColor="#fff"></TextField>
 
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="2">
-                            <TextView lineHeight="12" height="200" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="business_description" [(ngModel)]="app_data.business_description"
+                            <TextView lineHeight="12" height="100" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10"
+                                returnKeyType="done" formControlName="business_description" [(ngModel)]="app_data.business_description"
                                 [ngClass]="displayFieldCss('business_description')" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextView>
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
                                 <Label text="Description Of Your Business is required"></Label>
                             </StackLayout>
                         </StackLayout>
-
+                        <StackLayout class="input-filld" row="3">
+                            <Label class="section_heading" text="Business Type" ></Label>
+                            <StackLayout *ngFor="let option of businessTypeOptions">
+                                <StackLayout orientation="horizontal" verticalAlignment="center">
+                                    <CheckBox #elem [checked]="option.selected" (checkedChange)="elem.checked !== option.selected && changeCheckedRadioBusinessType(option)"
+                                        class="checkbox" boxType="circle"></CheckBox>
+                                    <StackLayout verticalAlignment="center">
+                                        <Label [text]="option.text" textWrap="true" (tap)="changeCheckedRadioBusinessType(option)"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
                     </GridLayout>
 
                     <Button class="btn btn-primary simple-btn" text="Update" (tap)="updateAppInfo()">

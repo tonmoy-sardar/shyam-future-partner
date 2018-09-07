@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Location } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CreatedAppService } from "../../../core/services/created-app.service";
+import { CreatedAppService, RadioOption} from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 
@@ -26,8 +26,10 @@ export class EditAppComponent implements OnInit {
         app_website_url:''
     }
     visible_key: boolean;
-
+    radioOptions?: Array<RadioOption>;
+    businessTypeOptions: Array<RadioOption>;
     loader = new LoadingIndicator();
+    business_type: number;
     lodaing_options = {
         message: 'Loading...',
         progress: 0.65,
@@ -70,6 +72,11 @@ export class EditAppComponent implements OnInit {
             business_description: ['', Validators.required],
             app_website_url: [''],
         });
+
+        this.businessTypeOptions = [
+            new RadioOption("Product", 1),
+            new RadioOption("Service", 2)
+        ]
     }
 
     getAppDetails(id) {
@@ -136,6 +143,26 @@ export class EditAppComponent implements OnInit {
             'is-invalid': this.form.get(field).invalid && (this.form.get(field).dirty || this.form.get(field).touched),
             'is-valid': this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched)
         };
+    }
+
+
+
+    changeCheckedRadioBusinessType(radioOption: RadioOption): void {
+        radioOption.selected = !radioOption.selected;
+        this.business_type = radioOption.id
+        if (!radioOption.selected) {
+            return;
+        }
+
+        // uncheck all other options
+        this.businessTypeOptions.forEach(option => {
+            if (option.text !== radioOption.text) {
+                option.selected = false;
+            }
+        });
+        console.log(this.business_type)
+
+       
     }
 
 
