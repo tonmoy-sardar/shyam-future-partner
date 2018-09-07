@@ -75,23 +75,18 @@ ActionBar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .app-icon Image {
     width: 50;
     height: 50;
     border-radius: 50%;
-    background: #f9ece3;
 }
-
 
 .create-app-icon {
     border-radius: 5;
-    background: #cccccc;
     padding: 5;
     margin: 5 5 0 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 .create-app-icon Image {
     width: 50;
@@ -99,6 +94,7 @@ ActionBar {
     border-radius: 50%;
     background: #f9ece3;
 }
+
 .app-name {
     font-size: 8;
     text-align: center;
@@ -193,7 +189,7 @@ ActionBar {
 }
 
 .hr-light {
-    background: #021733;
+    background: #dadada;
     text-align: left;
     float: left;
 }
@@ -207,6 +203,16 @@ ActionBar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-DropDown Label{
+.product-image {
+    padding: 10;
+    border-radius: 0;
+    background-color: #fff;
+}
+
+DropDown Label {
     padding: 8 10;
+}
+
+.full-content {
+    padding: 10;
 }
