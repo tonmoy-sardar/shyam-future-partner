@@ -1,17 +1,28 @@
-<action-bar></action-bar>
+<create-app-action-bar></create-app-action-bar>
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-
+        <Label color="#021733" fontSize="15" text="Business Information"></Label>
+        <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
         <StackLayout class="full-content">
             <StackLayout class="edit-container">
                 <StackLayout class="form" [formGroup]="form" novalidate>
-                    <GridLayout rows="auto, auto,auto,auto">
-                        <StackLayout class="app-icon" (tap)="pickImage()" row="0">
-                            <Image [src]="logo" *ngIf="logo != ''"></Image>
-                            <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa" [text]="'fa-camera' | fonticon"
-                                width="30" height="30" *ngIf="logo == ''"></Label>
-                        </StackLayout>
-                        <StackLayout class="input-filld" row="1">
+                    <FlexboxLayout marginBottom="30" flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
+                        <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+                            <StackLayout orientation="vertical">
+                                <StackLayout class="create-app-icon" (tap)="pickImage()">
+
+                                    <Image [src]="logo" *ngIf="logo != ''"></Image>
+                                    <Image src="~/images/no-image-logo.jpg" *ngIf="logo == ''"></Image>
+                                    <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa change_logo" [text]="'fa-camera' | fonticon"
+                                        width="20" height="20"></Label>
+                                </StackLayout>
+                                <Label fontSize="15" VerticalAlignment="center" textAlignment="center" text="Upload Logo"></Label>
+                            </StackLayout>
+                        </CardView>
+                    </FlexboxLayout>
+                    <GridLayout rows="auto,auto,auto">
+                        
+                        <StackLayout class="input-filld" row="0">
                             <TextField height="40" padding="10" fontSize="12" hint="Name Of Your Business" class="input input-border cyan-border m-t-10"
                                 returnKeyType="next" formControlName="business_name" [ngClass]="displayFieldCss('business_name')"
                                 borderRadius="2" borderColor="#6c6969"></TextField>
@@ -20,18 +31,16 @@
                             </StackLayout>
                         </StackLayout>
 
-                        <StackLayout class="input-filld" row="2">
-                            <TextField height="40" padding="10" fontSize="12" hint="Website URL" class="input input-border cyan-border m-t-10"
-                                returnKeyType="next" formControlName="app_website_url" borderRadius="2" borderColor="#6c6969"
-                                backgroundColor="#fff"></TextField>
+                        <StackLayout class="input-filld" row="1">
+                            <TextField height="40" padding="10" fontSize="12" hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="next"
+                                formControlName="app_website_url" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
 
                         </StackLayout>
 
-                        <StackLayout class="input-filld" row="3">
-                            <TextView lineHeight="12" height="200" padding="10" fontSize="12" hint="Description Of Your Business"
-                                class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="business_description"
-                                [ngClass]="displayFieldCss('business_description')" borderRadius="2" borderColor="#6c6969"
-                                backgroundColor="#fff"></TextView>
+                        <StackLayout class="input-filld" row="2">
+                            <TextView lineHeight="12" height="200" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10"
+                                returnKeyType="done" formControlName="business_description" [ngClass]="displayFieldCss('business_description')"
+                                borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextView>
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
                                 <Label text="Description Of Your Business is required"></Label>
                             </StackLayout>
@@ -39,7 +48,7 @@
 
                     </GridLayout>
 
-                    <Button class="btn btn-primary simple-btn" text="Update" (tap)="submitCreateAppBusinessInfo()">
+                    <Button class="btn btn-primary simple-btn" text="Submit" (tap)="submitCreateAppBusinessInfo()">
                     </Button>
                 </StackLayout>
             </StackLayout>

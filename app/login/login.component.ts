@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
           this.loader.hide();
           console.log(error)
           this.feedback.error({
-            title: error.error.non_field_errors[0],
+            title: error.error.message,
             backgroundColor: new Color("red"),
             titleColor: new Color("black"),
             position: FeedbackPosition.Bottom,

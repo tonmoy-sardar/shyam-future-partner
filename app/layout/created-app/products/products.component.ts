@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
         business_name: '',
         business_description: ''
     }
+    
     category_list: any = [];
     serviceType;
 
@@ -74,10 +75,14 @@ export class ProductsComponent implements OnInit {
             business_name: ['', Validators.required],
             business_description: ['', Validators.required]
         });
+
+        
     }
 
+   
+
     next() {
-        this.router.navigate(['/created-app/' + this.app_id + '/payment-success'])
+        this.router.navigate(['/created-app/' + this.app_id + '/payment'])
     }
 
     addProdCat() {
