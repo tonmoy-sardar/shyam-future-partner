@@ -73,11 +73,7 @@ export class MessagesComponent implements OnInit {
         this.getChatMembersDetails();
     }
 
-    getChatMembersDetails() {
-        var data = {
-            receiver: this.app_id,
-            receiver_type: "app_master"
-        }
+    getChatMembersDetails() {        
         var param = "?user=" + this.app_id + "&user_type=app_master"
         this.loader.show(this.lodaing_options);
         this.messageService.getChatMembersDetails(param).subscribe(
@@ -93,11 +89,7 @@ export class MessagesComponent implements OnInit {
         )
     }
 
-    newGetChatMembersDetails() {
-        var data = {
-            receiver: this.app_id,
-            receiver_type: "app_master"
-        }
+    newGetChatMembersDetails() {        
         var param = "?user=" + this.app_id + "&user_type=app_master"
         this.loader.show(this.lodaing_options);
         this.messageService.getChatMembersDetails(param).subscribe(

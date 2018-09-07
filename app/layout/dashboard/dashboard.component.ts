@@ -9,6 +9,7 @@ import { ExploreService } from "../../core/services/explore.service";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import * as Globals from '../../core/globals';
 import { NotificationService } from "../../core/services/notification.service";
+const firebase = require("nativescript-plugin-firebase");
 
 @Component({
     selector: "dashboard",
@@ -51,7 +52,13 @@ export class DashboardComponent implements OnInit {
         private exploreService: ExploreService,
         private notificationService: NotificationService
     ) {
-
+        firebase.getCurrentPushToken().then((token: string) => {
+            // may be null if not known yet
+            if (token != null) {
+                setString('device_token', token)
+            }
+            console.log(`Current push token: ${token}`);
+        });
     }
 
     ngOnInit() {

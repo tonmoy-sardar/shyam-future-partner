@@ -7,8 +7,6 @@ const firebase = require("nativescript-plugin-firebase");
 const dialogs = require("ui/dialogs");
 let deviceToken = "";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
-import * as utils from "utils/utils";
-var services = require("./service-helper");
 import { NotificationService } from "./core/services/notification.service";
 
 @Component({
@@ -36,21 +34,10 @@ export class AppComponent {
         // push notification
         firebase.init({
             onPushTokenReceivedCallback: function (token) {
-                dialogs.alert("--onPushTokenReceivedCallback token :" + token);
                 deviceToken = token;
-                if (token != '') {
-                    setString('device_token', token)
-                }
                 console.log("Firebase push token: " + token);
             },
             onMessageReceivedCallback: function (message) {
-                // dialogs.alert({
-                //     title: "Push message: " +
-                //         (message.title !== undefined ? message.title : ""),
-                //     message: JSON.stringify(message),
-                //     okButtonText: "OK"
-                // });
-                // dialogs.alert("--onMessageReceivedCallback deviceToken :" + deviceToken);
                 notificationService.badgeCountStatus(true);
             },
             persist: false
@@ -61,17 +48,9 @@ export class AppComponent {
             error => {
                 console.log(`firebase.init error: ${error}`);
             }
-        );
-        firebase.getCurrentPushToken().then((token: string) => {
-            // may be null if not known yet
-            if (token != null) {
-                setString('device_token', token)
-            }
-            console.log(`Current push token: ${token}`);
-        });
+        );       
 
-        // background service
-        // services.setupAlarm(utils.ad.getApplicationContext());
+        
     }
 
 

@@ -67,10 +67,7 @@ export class DetailsAppComponent implements OnInit {
     this.badgeCountStatus = status;
     console.log(this.badgeCountStatus)
     if (this.badgeCountStatus == true) {
-      this.unSeenMessage = 10;
-      console.log(this.unSeenMessage)
-      // this.getOrderSeenActivity(this.app_id);
-      // this.gerMessageSeenActivity(this.app_id)
+      this.ngOnInit();
     }
   }
 
