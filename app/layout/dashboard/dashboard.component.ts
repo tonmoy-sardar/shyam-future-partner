@@ -91,7 +91,19 @@ export class DashboardComponent implements OnInit {
             res => {
                 // this.processing = false;
                 console.log(res);
-                this.user_app_list = res['user_details'][0].app_details;
+                res['user_details'][0].app_details.forEach(x => {
+                    var chatUnReadCount = 0;
+                    var orderUnreadCount = 0;
+                    x.chat_details.forEach(y => {
+                        chatUnReadCount += y.unread_messages
+                    })
+                    x.order_details.forEach(z => {
+                        orderUnreadCount += z.order_unseen
+                    })
+                    x['total_unread_notification'] = chatUnReadCount + orderUnreadCount;
+                    this.user_app_list.push(x)
+                })
+                // this.user_app_list = res['user_details'][0].app_details;
                 console.log(this.user_app_list);
                 this.loader.hide();
             },

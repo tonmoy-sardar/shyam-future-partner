@@ -37,9 +37,9 @@ export class AppComponent {
                 deviceToken = token;
                 console.log("Firebase push token: " + token);
             },
-            onMessageReceivedCallback: function (message) {
-                notificationService.badgeCountStatus(true);
-            },
+            // onMessageReceivedCallback: function (message) {
+            //     notificationService.badgeCountStatus(true);
+            // },
             persist: false
         }).then(
             instance => {

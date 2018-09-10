@@ -119,7 +119,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.zone.run(() => {
             var data = {
                 text: msgData.message,
-                created: new Date()
+                created: new Date(),
+                read_status: true
             }
             if (msgData.chat_user == this.app_id) {
                 data['sender'] = true
@@ -143,7 +144,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 
     isViewed(message) {
-        return false
+        if (message.read_status) {
+            return true
+        }
+        else {
+            return false
+        }
     }
 
     send() {
@@ -169,9 +175,9 @@ export class ChatComponent implements OnInit, OnDestroy {
         var param = "?sender=" + this.app_id + "&sender_type=app_master&receiver=" + this.user_id + "&receiver_type=customer"
         this.loader.show(this.lodaing_options);
         this.messageService.createChatSessionView(param, data).subscribe(
-            res => {                
+            res => {
                 console.log(res)
-                var thread = res['thread']                
+                var thread = res['thread']
                 this.viewMessages(thread)
             },
             error => {
@@ -203,7 +209,8 @@ export class ChatComponent implements OnInit, OnDestroy {
                 res.forEach(x => {
                     var data = {
                         text: x.message,
-                        created: x.datetime
+                        created: x.datetime,
+                        read_status: x.read_status
                     }
                     if (x.chat_user == this.app_id) {
                         data['sender'] = true
