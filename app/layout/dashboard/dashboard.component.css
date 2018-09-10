@@ -1,7 +1,11 @@
 .unread {
     color: #fff;
-    font-size: 10;
+    font-size: 8;
     border-radius: 50%;
-    background-color: #3C5AFD
+    background-color: #cb202d;
+    padding: 2;
 }
-.due-payment {}
+
+.noti .unread {
+    bottom: -10;
+}
