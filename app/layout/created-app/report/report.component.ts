@@ -5,7 +5,9 @@ import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterExtensions } from "nativescript-angular/router";
 import { CreatedAppService } from "../../../core/services/created-app.service";
-import { LoadingIndicator } from "nativescript-loading-indicator"
+import { LoadingIndicator } from "nativescript-loading-indicator";
+import { NotificationService } from "../../../core/services/notification.service";
+
 @Component({
     selector: 'report',
     moduleId: module.id,
@@ -43,26 +45,38 @@ export class ReportComponent implements OnInit {
             hideBezel: true,
         }
     }
+    badgeCountStatus: boolean;
     constructor(
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private createdAppService: CreatedAppService,
         private location: Location,
-    ) { }
+        private notificationService: NotificationService
+    ) {
+        notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
+    }
 
     ngOnInit() {
+        this.loader.show(this.lodaing_options);
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.getOrderList(this.app_id)
     }
 
+    private changebadgeCountStatus(status: boolean): void {
+        this.badgeCountStatus = status;
+        console.log(this.badgeCountStatus)
+        if (this.badgeCountStatus == true) {
+            this.getOrderList(this.app_id);
+        }
+    }
+
     getOrderList(id) {
-        this.loader.show(this.lodaing_options);
         this.createdAppService.getAppOrderList(id).subscribe(
             (res: any[]) => {
                 console.log(res)
-               
+                this.order_list = [];
                 this.order_list = res;
                 this.visible_key = true;
                 this.loader.hide();

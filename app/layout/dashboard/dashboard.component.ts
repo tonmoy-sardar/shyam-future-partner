@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
         }
     }
     device_token: string;
+    badgeCountStatus: boolean;
     constructor(
         private exploreService: ExploreService,
         private notificationService: NotificationService
@@ -59,15 +60,25 @@ export class DashboardComponent implements OnInit {
             }
             console.log(`Current push token: ${token}`);
         });
+        notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
     }
 
     ngOnInit() {
+        this.loader.show(this.lodaing_options);
         this.user_id = getString('user_id');
         this.device_token = getString('device_token');
         console.log(this.device_token);
         console.log(this.user_id);
         this.getDashboardAppList();
         this.updateDeviceToken();
+    }
+
+    private changebadgeCountStatus(status: boolean): void {
+        this.badgeCountStatus = status;
+        console.log(this.badgeCountStatus)
+        if (this.badgeCountStatus == true) {
+            this.getDashboardAppList();
+        }
     }
 
     updateDeviceToken() {
@@ -86,11 +97,12 @@ export class DashboardComponent implements OnInit {
     }
 
     getDashboardAppList() {
-        this.loader.show(this.lodaing_options);
+
         this.exploreService.getAppAndUserDetailsByUserID(this.user_id).subscribe(
             res => {
                 // this.processing = false;
                 console.log(res);
+                this.user_app_list = [];
                 res['user_details'][0].app_details.forEach(x => {
                     var chatUnReadCount = 0;
                     var orderUnreadCount = 0;

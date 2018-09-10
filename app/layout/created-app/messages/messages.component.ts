@@ -63,39 +63,25 @@ export class MessagesComponent implements OnInit {
         this.badgeCountStatus = status;
         console.log(this.badgeCountStatus)
         if (this.badgeCountStatus == true) {
-            this.newGetChatMembersDetails();
+            this.getChatMembersDetails();
         }
     }
 
     ngOnInit() {
+        this.loader.show(this.lodaing_options);
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.getChatMembersDetails();
     }
 
-    getChatMembersDetails() {        
+    getChatMembersDetails() {
         var param = "?user=" + this.app_id + "&user_type=app_master"
-        this.loader.show(this.lodaing_options);
-        this.messageService.getChatMembersDetails(param).subscribe(
-            (res: any[]) => {
-                console.log(res)
-                this.chats = res;
-                this.loader.hide();
-            },
-            error => {
-                console.log(error)
-                this.loader.hide();
-            }
-        )
-    }
 
-    newGetChatMembersDetails() {        
-        var param = "?user=" + this.app_id + "&user_type=app_master"
-        this.loader.show(this.lodaing_options);
         this.messageService.getChatMembersDetails(param).subscribe(
             (res: any[]) => {
                 console.log(res)
-                this.chats = [];
+                this.chats = []
+                this.chats = res;
                 this.loader.hide();
             },
             error => {

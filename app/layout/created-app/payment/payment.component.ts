@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
     offerList: any = [];
     offer_price: number = 0;
     coupon_code: string;
-    coupon:string;
+    coupon: string;
     visible_key: boolean;
     loader = new LoadingIndicator();
     radioOptions?: Array<RadioOption>;
@@ -94,7 +94,7 @@ export class PaymentComponent implements OnInit {
 
         this.form = this.formBuilder.group({
             coupon: [null, Validators.required]
-          });
+        });
     }
 
 
@@ -200,30 +200,28 @@ export class PaymentComponent implements OnInit {
         )
     }
 
-    applyOffer()
-    {
+    applyOffer() {
         var valid = this.offerList.filter(x => x.offer_code == this.coupon.toUpperCase())
         console.log(valid)
         if (valid.length > 0) {
-          this.offer_price = valid[0].offer_value;
-          this.coupon_code = valid[0].offer_code;
-          console.log("sdadawd")
+            this.offer_price = valid[0].offer_value;
+            this.coupon_code = valid[0].offer_code;
+            console.log("sdadawd")
         }
         else {
             console.log("qweqw")
         }
     }
-    getPaidTotalAfterOffer ()
-    {
-        var totalPrice =  this.subscription_value * this.totalPrice;
+    getPaidTotalAfterOffer() {
+        var totalPrice = this.subscription_value * this.totalPrice;
         var totalAfterOffer = totalPrice - this.offer_price;
-        return(totalAfterOffer).toFixed(2);
-        
+        return (totalAfterOffer).toFixed(2);
+
     }
 
-    updateAppSubscription(id,data) {
+    updateAppSubscription(id, data) {
         this.loader.show(this.lodaing_options);
-        this.CreatedAppService.updateAppSubscription(id,data).subscribe(
+        this.CreatedAppService.updateAppSubscription(id, data).subscribe(
             res => {
                 console.log(res)
                 console.log("pa")
@@ -231,8 +229,8 @@ export class PaymentComponent implements OnInit {
                 this.loader.hide();
                 //this.router.navigate(['/created-app/' + this.app_id + '/payment-success'])
                 this.router.navigateByUrl('/created-app/' + this.app_id + '/payment-success');
-               // this.offerList = res;
-               console.log("asda")
+                // this.offerList = res;
+                console.log("asda")
 
             },
             error => {
@@ -345,30 +343,26 @@ export class PaymentComponent implements OnInit {
                 var ORDERID = response['ORDERID'];
                 var txn_id = response['TXNID'];
                 var txn_status;
-                if(response['STATUS'] == 'TXN_SUCCESS')
-                {
+                if (response['STATUS'] == 'TXN_SUCCESS') {
                     txn_status = 2;
                 }
-                else if(response['STATUS'] == 'PROCESSING')
-                {
+                else if (response['STATUS'] == 'PROCESSING') {
                     txn_status = 1;
                 }
-                else if(response['STATUS'] == 'TXN_FAILURE')
-                {
+                else if (response['STATUS'] == 'TXN_FAILURE') {
                     txn_status = 0;
                 }
-                else if(response['STATUS'] == 'PENDING')
-                {
+                else if (response['STATUS'] == 'PENDING') {
                     txn_status = 3;
                 }
-                var data ={
+                var data = {
                     txn_status: txn_status,
                     txn_id: txn_id,
+                    paytm_response: inResponse
                 }
                 console.log(ORDERID);
                 console.log(data);
-               
-                $this.updateAppSubscription(ORDERID,data)
+                $this.updateAppSubscription(ORDERID, data)
 
             },
             networkNotAvailable: function () {

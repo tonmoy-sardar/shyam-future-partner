@@ -120,7 +120,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             var data = {
                 text: msgData.message,
                 created: new Date(),
-                read_status: true
+                // read_status: true
             }
             if (msgData.chat_user == this.app_id) {
                 data['sender'] = true

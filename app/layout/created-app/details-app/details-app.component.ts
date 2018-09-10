@@ -8,8 +8,7 @@ import { LoadingIndicator } from "nativescript-loading-indicator"
 import * as SocialShare from "nativescript-social-share";
 import { MessageService } from '../../../core/services/message.service';
 import { NotificationService } from "../../../core/services/notification.service";
-import { Button } from "ui/button";
-const firebase = require("nativescript-plugin-firebase");
+
 @Component({
   selector: 'details-app',
   moduleId: module.id,
@@ -54,29 +53,13 @@ export class DetailsAppComponent implements OnInit {
   unSeenOrder: number = 0;
   unSeenMessage: number = 0;
   badgeCountStatus: boolean;
-  @ViewChild("button") button: ElementRef;
   constructor(
     private route: ActivatedRoute,
     private CreatedAppService: CreatedAppService,
     private location: Location,
     private messageService: MessageService,
     private notificationService: NotificationService
-  ) {
-    var $this = this;
-    firebase.init({
-      onMessageReceivedCallback: function (message) {
-        let el: Button = $this.button.nativeElement;
-        el.notify({ eventName: "tap", object: el })
-      },
-      persist: false
-    }).then(
-      instance => {
-        console.log("firebase.init done");
-      },
-      error => {
-        console.log(`firebase.init error: ${error}`);
-      }
-    );
+  ) {    
     notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
 
   }
@@ -97,11 +80,6 @@ export class DetailsAppComponent implements OnInit {
     this.getAppDetails(this.app_id);
     this.getOrderSeenActivity(this.app_id);
     this.gerMessageSeenActivity(this.app_id)
-  }
-
-  pushN() {
-    console.log("manna")
-    this.notificationService.badgeCountStatus(true);
   }
 
   getAppDetails(id) {
