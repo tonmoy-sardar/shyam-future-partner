@@ -23,13 +23,14 @@ export class EditAppComponent implements OnInit {
         logo: '',
         business_name: '',
         business_description: '',
-        app_website_url:''
+        app_website_url:'',
+        is_product_service:'',
     }
     visible_key: boolean;
     radioOptions?: Array<RadioOption>;
     businessTypeOptions: Array<RadioOption>;
     loader = new LoadingIndicator();
-    business_type: number;
+    is_product_service: number;
     lodaing_options = {
         message: 'Loading...',
         progress: 0.65,
@@ -71,6 +72,7 @@ export class EditAppComponent implements OnInit {
             business_name: ['', Validators.required],
             business_description: ['', Validators.required],
             app_website_url: [''],
+            is_product_service: [''],
         });
 
         this.businessTypeOptions = [
@@ -88,6 +90,16 @@ export class EditAppComponent implements OnInit {
                 this.app_data.business_name = this.app_details.business_name;
                 this.app_data.business_description = this.app_details.business_description;
                 this.app_data.app_website_url = this.app_details.app_website_url;
+                this.app_data.app_website_url = this.app_details.app_website_url;
+                this.app_data.is_product_service = this.app_details.is_product_service;
+                if(this.app_details.is_product_service ==2)
+                {
+                    this.businessTypeOptions[0]['selected'] = true;
+                }
+                else if(this.app_details.is_product_service ==1)
+                {
+                    this.businessTypeOptions[1]['selected'] = true;
+                }
                 this.visible_key = true
                 
                 this.loader.hide();
@@ -149,7 +161,7 @@ export class EditAppComponent implements OnInit {
 
     changeCheckedRadioBusinessType(radioOption: RadioOption): void {
         radioOption.selected = !radioOption.selected;
-        this.business_type = radioOption.id
+        this.is_product_service = radioOption.id
         if (!radioOption.selected) {
             return;
         }
@@ -160,7 +172,7 @@ export class EditAppComponent implements OnInit {
                 option.selected = false;
             }
         });
-        console.log(this.business_type)
+        console.log(this.is_product_service)
 
        
     }

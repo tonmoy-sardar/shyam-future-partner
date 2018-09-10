@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { registerElement } from 'nativescript-angular/element-registry';
 import { CardView } from 'nativescript-cardview';
 import { LoadingIndicator } from "nativescript-loading-indicator"
-import { CreatedAppService } from "../../../core/services/created-app.service";
+import { CreatedAppService, RadioOption } from "../../../core/services/created-app.service";
 import { SecureStorage } from "nativescript-secure-storage";
 // registerElement('CardView', () => CardView);
 
@@ -59,6 +59,10 @@ export class BusinessInfoComponent implements OnInit {
         viewContainerRef: this.vcRef
     };
     logo: string = '';
+    visible_key: boolean;
+    radioOptions?: Array<RadioOption>;
+    businessTypeOptions: Array<RadioOption>;
+    is_product_service: number;
     constructor(
         private exploreService: ExploreService,
         private createdAppService: CreatedAppService,
@@ -76,9 +80,15 @@ export class BusinessInfoComponent implements OnInit {
             business_name: ['', Validators.required],
             business_description: ['', Validators.required],
             app_website_url: [''],
+            is_product_service:[''],
         });
         //this.getCategoryList();
         this.populateData();
+
+        this.businessTypeOptions = [
+            new RadioOption("Product", 1),
+            new RadioOption("Service", 2)
+        ]
 
     }
 
@@ -164,6 +174,24 @@ export class BusinessInfoComponent implements OnInit {
         };
     }
 
+
+    changeCheckedRadioBusinessType(radioOption: RadioOption): void {
+        radioOption.selected = !radioOption.selected;
+        this.is_product_service = radioOption.id
+        if (!radioOption.selected) {
+            return;
+        }
+
+        // uncheck all other options
+        this.businessTypeOptions.forEach(option => {
+            if (option.text !== radioOption.text) {
+                option.selected = false;
+            }
+        });
+        console.log(this.is_product_service)
+
+       
+    }
 
 
 
