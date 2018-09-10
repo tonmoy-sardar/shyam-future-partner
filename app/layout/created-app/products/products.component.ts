@@ -165,7 +165,7 @@ export class ProductsComponent implements OnInit {
             res => {
                 console.log("Success");
                 this.loader.hide();
-                this.router.navigate(['/created-app/' + this.app_id + 'products'])
+                this.router.navigate(['/created-app/' + this.app_id + '/products'])
             },
             error => {
                 this.loader.hide();
@@ -184,7 +184,7 @@ export class ProductsComponent implements OnInit {
             res => {
                 console.log("Success");
                 this.loader.hide();
-                this.router.navigate(['/created-app/' + this.app_id + 'products'])
+                this.router.navigate(['/created-app/' + this.app_id + '/products'])
             },
             error => {
                 this.loader.hide();

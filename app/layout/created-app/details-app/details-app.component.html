@@ -62,6 +62,11 @@
                 <Label class="action-text" text="Make Payment"  row="0" col="1" VerticalAlignment="center"></Label>
                 <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
             </GridLayout>
+            <GridLayout class="action-section" VerticalAlignment="center" rows="*" columns="40,*,40" row="5" *ngIf="app_details.is_paid" [nsRouterLink]="['/created-app/', app_id, 'payment-success']">
+                <Label class="fa fa-building-o icon-st" [text]="'fa-building-o' | fonticon" row="0" col="0" VerticalAlignment="center"></Label>
+                <Label class="action-text" text="Payment Success"  row="0" col="1" VerticalAlignment="center"></Label>
+                <Label class="fa fa-chevron-right icon-next" [text]="'fa-chevron-right' | fonticon" row="0" col="2" VerticalAlignment="center"></Label>
+            </GridLayout>
         </GridLayout>
 
         <Button #button class="btn btn-primary simple-btn" text="Submit" (tap)="pushN()">

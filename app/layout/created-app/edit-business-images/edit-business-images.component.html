@@ -1,8 +1,11 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
+        <Label color="#021733" textAlignment="center" fontSize="15" text="Edit Business Image"></Label>
+        <StackLayout width="100%" textAlignment="center" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+
+
         <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0"
-                shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickBusinessImages(item.id)">
 
@@ -12,8 +15,7 @@
                     </StackLayout>
                 </StackLayout>
             </CardView>
-            <CardView class="card" *ngIf="gallery_images.length<3" elevation="0" radius="0" shadowOpacity="0"
-                shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+            <CardView class="card" *ngIf="gallery_images.length<3" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickNewBusinessImages()">
                         <Label class="fa change_logo" [text]="'fa-edit' | fonticon" fontSize="15"></Label>

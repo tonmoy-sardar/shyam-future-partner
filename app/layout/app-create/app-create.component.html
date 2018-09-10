@@ -1,19 +1,21 @@
 <create-app-action-bar></create-app-action-bar>
 <GridLayout rows="*">
-    <ScrollView row="0"> 
+    <ScrollView row="0">
         <StackLayout class="full-dashboard">
-            <Label color="#021733" fontSize="15" text="Choose your business category"></Label>
+            <Label color="#021733" fontSize="15" textAlignment="center" text="Owner Introduction"></Label>
+            <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+            <Label color="#021733" textAlignment="center" fontSize="15" text="Choose your Business Category"></Label>
             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
             <FlexboxLayout flexWrap="wrap" alignItems="flex-start">
-               
-                    <CardView *ngFor="let item of category_list" class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="2" shadowOffsetHeight="2" alignSelf="flex-start" (tap)="chooseCategory(item.id)">
-                        <StackLayout orientation="vertical">
-                            <StackLayout class="app-icon">
-                                <Image class="dash-image" [src]="item.icon"></Image>
-                            </StackLayout>
-                            <Label class="app-name" [text]="item.category_name"></Label>
+
+                <CardView *ngFor="let item of category_list" class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="2" shadowOffsetHeight="2" alignSelf="flex-start" (tap)="chooseCategory(item.id)">
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="app-icon">
+                            <Image borderRadius="0" backgroundColor="#fff" class="dash-image product-image" [src]="item.icon"></Image>
                         </StackLayout>
-                    </CardView>
+                        <Label class="app-name" [text]="item.category_name"></Label>
+                    </StackLayout>
+                </CardView>
             </FlexboxLayout>
         </StackLayout>
     </ScrollView>
