@@ -1,5 +1,5 @@
 
-import { Component } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
 var orientation = require('nativescript-orientation');
 import * as application from "tns-core-modules/application";
 import { RouterExtensions } from "nativescript-angular/router";
@@ -8,7 +8,7 @@ const dialogs = require("ui/dialogs");
 let deviceToken = "";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import { NotificationService } from "./core/services/notification.service";
-
+import { Button } from "ui/button";
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
@@ -16,7 +16,7 @@ import { NotificationService } from "./core/services/notification.service";
 
 export class AppComponent {
 
-
+    @ViewChild("button") button: ElementRef;
     constructor(
         private router: RouterExtensions,
         private notificationService: NotificationService
@@ -32,13 +32,15 @@ export class AppComponent {
         });
 
         // push notification
+        var $this = this;
         firebase.init({
             onPushTokenReceivedCallback: function (token) {
                 deviceToken = token;
                 console.log("Firebase push token: " + token);
             },
             onMessageReceivedCallback: function (message) {
-                notificationService.badgeCountStatus(true);
+                let el: Button = $this.button.nativeElement;
+                el.notify({ eventName: "tap", object: el })
             },
             persist: false
         }).then(
@@ -48,9 +50,13 @@ export class AppComponent {
             error => {
                 console.log(`firebase.init error: ${error}`);
             }
-        );       
+        );
 
-        
+
+    }
+
+    pushN() {
+        this.notificationService.badgeCountStatus(true);
     }
 
 

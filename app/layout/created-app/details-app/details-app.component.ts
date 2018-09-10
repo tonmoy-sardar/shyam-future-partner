@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { CreatedAppService } from "../../../core/services/created-app.service";
 import { Location } from '@angular/common';
@@ -59,15 +59,18 @@ export class DetailsAppComponent implements OnInit {
     private location: Location,
     private messageService: MessageService,
     private notificationService: NotificationService
-  ) {
+  ) {    
     notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
+
   }
 
   private changebadgeCountStatus(status: boolean): void {
     this.badgeCountStatus = status;
     console.log(this.badgeCountStatus)
     if (this.badgeCountStatus == true) {
-      this.ngOnInit();
+      this.getOrderSeenActivity(this.app_id);
+      this.gerMessageSeenActivity(this.app_id)
+
     }
   }
 
