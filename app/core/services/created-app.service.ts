@@ -93,7 +93,7 @@ export class CreatedAppService {
   }
 
   updateCustomerOrderPayment(data) {
-    return this.http.put(Globals.apiEndpoint + 'order_payment/' + data.id + '/', data)
+    return this.http.put(Globals.apiEndpoint + 'order-payment-status_activity/' + data.id + '/', data)
   }
 
   updateCustomerOrderDelivery(data) {
@@ -108,8 +108,8 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'app_social_media/' + id + '/')
   }
 
-  updateAppSocialMedia(id, data) {
-    return this.http.put(Globals.apiEndpoint + 'app_social_media/' + id + '/', data)
+  updateAppSocialMedia(data) {
+    return this.http.post(Globals.apiEndpoint + 'bulk-add_app-social-media/', data)
   }
 
   createNewApp(data) {
