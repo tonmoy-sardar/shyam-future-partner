@@ -57,6 +57,7 @@ export class OrderDetailsComponent implements OnInit {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.order_id = this.route.snapshot.params["order"];
+        console.log(this.order_id)
         this.getAppOrderDetails(this.order_id)
         this.viewOrder(this.order_id)
     }
@@ -95,7 +96,7 @@ export class OrderDetailsComponent implements OnInit {
     updateCustomerOrderPayment() {
 
         var data = {
-            id: this.app_id,
+            id: this.order_id,
         }
         this.loader.show(this.lodaing_options);
         this.createdAppService.updateCustomerOrderPayment(data).subscribe(
@@ -116,7 +117,7 @@ export class OrderDetailsComponent implements OnInit {
 
     updateCustomerOrderDelivery() {
         var data = {
-            id: this.app_id,
+            id: this.order_id,
         }
         this.loader.show(this.lodaing_options);
         this.createdAppService.updateCustomerOrderDelivery(data).subscribe(

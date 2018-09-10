@@ -13,6 +13,9 @@ import * as Globals from '../../../core/globals';
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
 import { FORMS_DIRECTIVES } from 'nativescript-angular/forms';
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+
 @Component({
     selector: 'edit-social-media',
     moduleId: module.id,
@@ -56,6 +59,7 @@ export class EditSocialMediaComponent implements OnInit {
 
         }
     ]
+    private feedback: Feedback;
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -65,13 +69,14 @@ export class EditSocialMediaComponent implements OnInit {
         private router: RouterExtensions,
         private location: Location,
     ) {
-
+        
     }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.getAppSocialMedia(this.app_id);
+        this.feedback = new Feedback();
     }
 
 
@@ -131,10 +136,17 @@ export class EditSocialMediaComponent implements OnInit {
         }
         console.log(data)
         this.loader.show(this.lodaing_options);
-        this.CreatedAppService.updateAppSocialMedia(this.app_id, data).subscribe(
+        this.CreatedAppService.updateAppSocialMedia(data).subscribe(
             res => {
                 console.log(res);
                 this.loader.hide();
+                this.feedback.success({
+                    title: 'Social media links updated successfully',
+                    backgroundColor: new Color("green"),
+                    titleColor: new Color("black"),
+                    position: FeedbackPosition.Bottom,
+                    type: FeedbackType.Custom
+                });
                 this.router.navigate(['/created-app/' + this.app_id + '/manage-app'])
             },
             error => {
