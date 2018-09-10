@@ -6,6 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreatedAppService, RadioOption } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+
 import {
     Paytm,
     Order,
@@ -20,6 +23,7 @@ import {
     styleUrls: [`payment.component.css`]
 })
 export class PaymentComponent implements OnInit {
+    private feedback: Feedback;
     form: FormGroup;
     app_id: string;
     totalPrice: number;
@@ -82,7 +86,9 @@ export class PaymentComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
-    ) { }
+    ) { 
+        this.feedback = new Feedback();
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -207,9 +213,24 @@ export class PaymentComponent implements OnInit {
             this.offer_price = valid[0].offer_value;
             this.coupon_code = valid[0].offer_code;
             console.log("sdadawd")
+            this.feedback.success({
+                title: 'Coupon applied successfully',
+                backgroundColor: new Color("green"),
+                titleColor: new Color("black"),
+                position: FeedbackPosition.Bottom,
+                type: FeedbackType.Custom
+              });
         }
         else {
             console.log("qweqw")
+            this.feedback.error({
+                title:  'Invalid Coupon code!',
+                backgroundColor: new Color("red"),
+                titleColor: new Color("black"),
+                position: FeedbackPosition.Bottom,
+                type: FeedbackType.Custom
+              });
+            
         }
     }
     getPaidTotalAfterOffer() {

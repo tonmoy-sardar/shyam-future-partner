@@ -6,6 +6,9 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+
 @Component({
     selector: 'add-product-category',
     moduleId: module.id,
@@ -16,7 +19,7 @@ import { Location } from '@angular/common';
 export class AddProductCategoyComponent implements OnInit {
     form: FormGroup;
     processing = false;
-
+    private feedback: Feedback;
     app_id: string;
     product_category_data = {
         category_name: '',
@@ -56,7 +59,9 @@ export class AddProductCategoyComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
-    ) { }
+    ) {
+        this.feedback = new Feedback();
+     }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -82,7 +87,13 @@ export class AddProductCategoyComponent implements OnInit {
             this.CreatedAppService.createProductCategory(this.product_category_data).subscribe(
                 res => {
                     console.log("Success");
-                    // this.processing = false;
+                    this.feedback.success({
+                        title: 'Category added successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                      });
                     this.loader.hide();
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])

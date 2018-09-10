@@ -9,6 +9,9 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import * as Globals from '../../../core/globals';
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+
 @Component({
     selector: 'edit-business-images',
     moduleId: module.id,
@@ -18,6 +21,7 @@ import { Location } from '@angular/common';
 
 export class EditBusinessImagesComponent implements OnInit {
     form: FormGroup;
+    private feedback: Feedback;
     processing = false;
     app_id: string;
     app_details: any;
@@ -61,7 +65,9 @@ export class EditBusinessImagesComponent implements OnInit {
         private vcRef: ViewContainerRef,
         private CreatedAppService: CreatedAppService,
         private location: Location,
-    ) { }
+    ) {
+        this.feedback = new Feedback();
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -170,9 +176,16 @@ export class EditBusinessImagesComponent implements OnInit {
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.updateBusinessImages(data).subscribe(
             res => {
-
+                this.feedback.success({
+                    title: 'Business image updated successfully',
+                    backgroundColor: new Color("green"),
+                    titleColor: new Color("black"),
+                    position: FeedbackPosition.Bottom,
+                    type: FeedbackType.Custom
+                });
+                
                 this.getAppDetails(this.app_id);
-                console.log(res)
+               
                 this.loader.hide();
             },
             error => {
@@ -182,7 +195,7 @@ export class EditBusinessImagesComponent implements OnInit {
         )
     }
 
-    next(){
+    next() {
         if (this.key != '') {
             this.router.navigate(['/created-app/' + this.app_id + '/products/' + 'new'])
         }

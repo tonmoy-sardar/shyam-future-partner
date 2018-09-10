@@ -8,6 +8,8 @@ import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
 import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
 
 @Component({
     selector: 'add-product',
@@ -18,7 +20,7 @@ import { UploadSingleImageModalComponent } from "../../../core/component/upload-
 
 export class AddProductComponent implements OnInit {
     form: FormGroup;
-
+    private feedback: Feedback;
     app_id: string;
     cat_id: string;
     product_details: any;
@@ -72,7 +74,9 @@ export class AddProductComponent implements OnInit {
         private location: Location,
         private modal: ModalDialogService,
         private vcRef: ViewContainerRef,
-    ) { }
+    ) { 
+        this.feedback = new Feedback();
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -111,7 +115,13 @@ export class AddProductComponent implements OnInit {
                 res => {
                     this.loader.hide();
                     console.log("Success");
-
+                    this.feedback.success({
+                        title: 'Product added successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                      });
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
                     }

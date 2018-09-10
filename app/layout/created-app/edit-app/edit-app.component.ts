@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreatedAppService, RadioOption} from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
 
 @Component({
     selector: 'edit-app',
@@ -16,7 +18,7 @@ import { LoadingIndicator } from "nativescript-loading-indicator"
 
 export class EditAppComponent implements OnInit {
     form: FormGroup;
-
+    private feedback: Feedback;
     app_id: string;
     app_details: any;
     app_data: any = {
@@ -61,7 +63,9 @@ export class EditAppComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
-    ) { }
+    ) { 
+        this.feedback = new Feedback();
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -92,11 +96,11 @@ export class EditAppComponent implements OnInit {
                 this.app_data.app_website_url = this.app_details.app_website_url;
                 this.app_data.app_website_url = this.app_details.app_website_url;
                 this.app_data.is_product_service = this.app_details.is_product_service;
-                if(this.app_details.is_product_service ==2)
+                if(this.app_details.is_product_service ==1)
                 {
                     this.businessTypeOptions[0]['selected'] = true;
                 }
-                else if(this.app_details.is_product_service ==1)
+                else if(this.app_details.is_product_service ==2)
                 {
                     this.businessTypeOptions[1]['selected'] = true;
                 }
@@ -114,14 +118,26 @@ export class EditAppComponent implements OnInit {
 
     updateAppInfo() {
         if (this.form.valid) {
-            console.log("aaa");
-            console.log(this.form.value);
+            
+            var data = {
+                business_name: this.form.value.business_name,
+                business_description: this.form.value.business_description,
+                app_website_url:this.form.value.app_website_url,
+                is_product_service:this.is_product_service,
+            }
 
             this.loader.show(this.lodaing_options);
-            this.CreatedAppService.updateAppInfo(this.app_id, this.form.value).subscribe(
+            this.CreatedAppService.updateAppInfo(this.app_id, data).subscribe(
                 res => {
-                    console.log("Success");
+                   
                     this.loader.hide();
+                    this.feedback.success({
+                        title: 'App information updated successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                      });
                     this.router.navigate(['/created-app/' + this.app_id+'/manage-app'])
 
                 },
