@@ -4,6 +4,8 @@
     border-radius: 50%;
     background-color: #cb202d;
     padding: 2;
+    width: 15;
+    height: 15;
 }
 
 .noti .unread {

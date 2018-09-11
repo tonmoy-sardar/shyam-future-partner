@@ -6,7 +6,7 @@
             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
             <FlexboxLayout flexWrap="wrap" alignItems="flex-start">
                 <AbsoluteLayout *ngFor="let item of user_app_list" class="noti">
-                    <Label *ngIf="item.total_unread_notification > 0" verticalAlignment="center" [text]="item.total_unread_notification" class="body unread" textAlignment="center"></Label>
+
                     <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="2" shadowOffsetHeight="2" alignSelf="flex-start" [nsRouterLink]="['/created-app/', item.id, 'details']">
                         <StackLayout orientation="vertical">
 
@@ -27,7 +27,7 @@
                             <Label class="app-name" [text]="item.app_name"></Label>
                         </StackLayout>
                     </CardView>
-
+                    <Label *ngIf="item.total_unread_notification > 0" verticalAlignment="center" [text]="item.total_unread_notification" class="body unread" textAlignment="center"></Label>
                 </AbsoluteLayout>
                 <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="2" shadowOffsetHeight="2" alignSelf="flex-start" [nsRouterLink]="['/app-create']">
                     <StackLayout orientation="vertical">

@@ -6,6 +6,8 @@ import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
 
 @Component({
     selector: 'edit-product-category',
@@ -17,7 +19,7 @@ import { Location } from '@angular/common';
 export class EditProductCategoyComponent implements OnInit {
     form: FormGroup;
     processing = false;
-
+    private feedback: Feedback;
     app_id: string;
     product_category_id: string;
     product_category_details: any;
@@ -58,7 +60,9 @@ export class EditProductCategoyComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
-    ) { }
+    ) {
+        this.feedback = new Feedback();
+     }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -105,6 +109,13 @@ export class EditProductCategoyComponent implements OnInit {
                     console.log("Success");
                     this.loader.hide();
                     // this.processing = false;
+                    this.feedback.success({
+                        title: 'Category updated successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                      });
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
                     }

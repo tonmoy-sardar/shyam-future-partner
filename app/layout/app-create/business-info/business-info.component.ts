@@ -135,8 +135,11 @@ export class BusinessInfoComponent implements OnInit {
                 business_name: this.form.value.business_name,
                 business_description: this.form.value.business_name,
                 app_website_url: this.form.value.app_website_url,
+                is_product_service:this.is_product_service,
                 logo: this.logo
             }
+
+            
             this.setCreateAppData(data)
             this.router.navigate(['/app-create/owner-info'])
         }

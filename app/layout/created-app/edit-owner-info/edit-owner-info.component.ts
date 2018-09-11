@@ -12,6 +12,9 @@ import { LocationModalComponent } from '../../../core/component/location-modal/l
 import * as Globals from '../../../core/globals';
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+
 @Component({
     selector: 'edit-owner-info',
     moduleId: module.id,
@@ -21,6 +24,7 @@ import { Location } from '@angular/common';
 
 export class EditOwnerInfoComponent implements OnInit {
     form: FormGroup;
+    private feedback: Feedback;
     app_id: string;
     visible_key: boolean;
     app_details: any;
@@ -84,7 +88,7 @@ export class EditOwnerInfoComponent implements OnInit {
         private router: RouterExtensions,
         private location: Location,
     ) {
-
+        this.feedback = new Feedback();
     }
 
     ngOnInit() {
@@ -196,6 +200,13 @@ export class EditOwnerInfoComponent implements OnInit {
         this.CreatedAppService.editOwnerLogo(data).subscribe(
             res => {
                 this.loader.hide();
+                this.feedback.success({
+                    title: 'Owner image updated successfully',
+                    backgroundColor: new Color("green"),
+                    titleColor: new Color("black"),
+                    position: FeedbackPosition.Bottom,
+                    type: FeedbackType.Custom
+                  });
                 this.getAppOwnerDetails(this.app_id);
                 console.log(res)
             },
@@ -224,6 +235,13 @@ export class EditOwnerInfoComponent implements OnInit {
                 res => {
                     this.loader.hide();
                     console.log(res);
+                    this.feedback.success({
+                        title: 'Owner information updated successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                      });
                     this.router.navigate(['/created-app/' + this.app_id+'/manage-app'])
                     // this.getAppOwnerDetails(res['id'])
                 },

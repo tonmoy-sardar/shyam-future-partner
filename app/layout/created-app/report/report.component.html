@@ -4,23 +4,19 @@
             <StackLayout *ngIf="order_list.length>0">
                 <StackLayout marginBottom="10" *ngFor="let order of order_list" class="list-group action-section">
                     <CardView class="whiteCard">
-                        <GridLayout rows="auto, auto" columns="*, *, *, 40" class="list-group-item" padding="10"
-                            verticalAlignment="center">
+                        <GridLayout rows="auto, auto" columns="*, *, *, 40" class="list-group-item" padding="10" verticalAlignment="center">
                             <Label row="0" col="0" [text]="order.customer_details.name" verticalAlignment="center"></Label>
-                            <Label row="1" col="0" [text]="order.customer_details.contact_no" class="body"
-                                verticalAlignment="center"></Label>
+                            <Label row="1" col="0" [text]="order.customer_details.contact_no" class="body" verticalAlignment="center"></Label>
                             <Label row="0" col="1" [text]="order.price" class="body" verticalAlignment="center"></Label>
                             <Label row="1" col="1" *ngIf="!order.is_paid" text="Not Paid"></Label>
                             <Label row="1" col="1" *ngIf="order.is_paid" text="Paid"></Label>
-                            <Label row="0" col="2" [text]="order.created_at | date:'yy-mm-dd'" class="body"
-                                verticalAlignment="center"></Label>
+                            <Label row="0" col="2" [text]="order.created_at | date:'yy-mm-dd'" class="body" verticalAlignment="center"></Label>
                             <Label row="1" col="2" *ngIf="!order.delivery_status" text="Not Delivered"></Label>
                             <Label row="1" col="2" *ngIf="order.delivery_status" text="Delivered"></Label>
                             <StackLayout row="0" col="3" class="m-x-auto" *ngIf="!order.is_seen">
                                 <Label text="New" class="body unread"></Label>
                             </StackLayout>
-                            <Label row="1" col="3" class="fa fa-eye icon-st" [text]="'fa-eye' | fonticon"
-                                verticalAlignment="center" [nsRouterLink]="['/created-app/', app_id, 'order-details', order.id]"></Label>
+                            <Label row="1" col="3" class="fa fa-eye icon-st" [text]="'fa-eye' | fonticon" verticalAlignment="center" [nsRouterLink]="['/created-app/', app_id, 'order-details', order.id]"></Label>
                         </GridLayout>
                     </CardView>
                 </StackLayout>
