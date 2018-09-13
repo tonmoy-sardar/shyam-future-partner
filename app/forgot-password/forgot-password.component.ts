@@ -128,7 +128,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.loginService.userForgetPasswordOtp(this.form.value).subscribe(
         res => {
           this.loader.hide();
-          console.log(res)
           this.otp = res.otp
           this.showOtpSection = true;
 
@@ -162,7 +161,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.loginService.userForgetPasswordOtp(data).subscribe(
       res => {
         this.loader.hide();
-        console.log(res)
         this.otp = res.otp
         this.showOtpSection = true;
       },

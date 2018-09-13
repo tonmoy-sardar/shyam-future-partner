@@ -85,7 +85,6 @@ export class EditSocialMediaComponent implements OnInit {
 
         this.CreatedAppService.getSocialMediaType().subscribe(
             (data: any[]) => {
-                console.log(data);
                 this.social_media_type = data;
                 for (var i = 0; i < this.social_media_type.length; i++) {
                     var d = this.app_social_media.filter(x => x.social_media_type == this.social_media_type[i].id)
@@ -111,7 +110,6 @@ export class EditSocialMediaComponent implements OnInit {
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.getAppSocialMedia(id).subscribe(
             res => {
-                console.log(res);
                 this.app_social_media = res;
                 this.getSocialMediaType();
             },
@@ -134,11 +132,9 @@ export class EditSocialMediaComponent implements OnInit {
                 data.push(d)
             }
         }
-        console.log(data)
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.updateAppSocialMedia(data).subscribe(
             res => {
-                console.log(res);
                 this.loader.hide();
                 this.feedback.success({
                     title: 'Social media links updated successfully',

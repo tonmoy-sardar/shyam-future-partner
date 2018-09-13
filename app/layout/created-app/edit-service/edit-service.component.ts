@@ -81,8 +81,6 @@ export class EditServiceComponent implements OnInit {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.product_id = full_location[4].trim();
-        console.log(this.product_id);
-        console.log(this.app_id);
         this.getProductDetails(this.product_id);
         this.form = this.formBuilder.group({
             product_name: ['', Validators.required],
@@ -95,17 +93,14 @@ export class EditServiceComponent implements OnInit {
 
     pickImage() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
             if (res != undefined) {
                 this.product_image = ''
                 if (res.camera == true) {
-                    console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image;
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image;
@@ -131,7 +126,6 @@ export class EditServiceComponent implements OnInit {
                     this.product_image = this.product_details.product_image
                 }
                 this.visible_key = true
-                console.log(res)
                 this.loader.hide();
 
             },
@@ -144,12 +138,9 @@ export class EditServiceComponent implements OnInit {
 
     updateProduct() {
         if (this.form.valid) {
-            console.log(this.product_data);
-
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.updateProduct(this.product_id, this.product_data).subscribe(
                 res => {
-                    console.log("Success");
                     this.loader.hide();
 
                     this.feedback.success({

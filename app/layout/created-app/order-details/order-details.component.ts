@@ -57,7 +57,6 @@ export class OrderDetailsComponent implements OnInit {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.order_id = this.route.snapshot.params["order"];
-        console.log(this.order_id)
         this.getAppOrderDetails(this.order_id)
         this.viewOrder(this.order_id)
     }
@@ -68,7 +67,6 @@ export class OrderDetailsComponent implements OnInit {
             res => {
                 this.order_details = res[0];
                 this.visible_key = true
-                console.log(res)
                 this.loader.hide();
             },
             error => {
@@ -81,7 +79,6 @@ export class OrderDetailsComponent implements OnInit {
     viewOrder(id) {
         this.createdAppService.customerOrderSeen(id).subscribe(
             res => {
-                console.log(res)
             },
             error => {
                 console.log(error)
@@ -101,7 +98,6 @@ export class OrderDetailsComponent implements OnInit {
         this.loader.show(this.lodaing_options);
         this.createdAppService.updateCustomerOrderPayment(data).subscribe(
             res => {
-                console.log("Success");
                 this.loader.hide();
                 this.getAppOrderDetails(this.order_id)
 

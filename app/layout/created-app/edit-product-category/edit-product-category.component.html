@@ -1,25 +1,28 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <StackLayout class="full-content">
+        <Label color="#021733" fontSize="15" textAlignment="center" text="Edit Category"></Label>
+        <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+
+        <StackLayout class="full-content m-t-30">
             <StackLayout class="edit-container">
                 <StackLayout class="form" [formGroup]="form" novalidate>
                     <GridLayout rows="auto, auto">
                         <StackLayout class="input-filld" row="0">
-                            <TextField hint="Category" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" [isEnabled]="!processing" formControlName="category_name" [(ngModel)]="product_category_data.category_name"
+                            <TextField hint="Category" class="input input-border cyan-border m-t-10" height="40" padding="10" fontSize="12"
+                                returnKeyType="next" formControlName="category_name" [(ngModel)]="product_category_data.category_name"
                                 [ngClass]="displayFieldCss('category_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('category_name')" class="invalid-feedback">
                                 <Label text="Category is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="1">
-                            <TextField hint="Description" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" [isEnabled]="!processing" formControlName="description" [(ngModel)]="product_category_data.description"></TextField>
+                            <TextField hint="Description" class="input input-border cyan-border m-t-10" height="40" padding="10" fontSize="12"
+                                returnKeyType="next" formControlName="description" [(ngModel)]="product_category_data.description"></TextField>
 
                         </StackLayout>
-
-                        <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
                     </GridLayout>
 
-                    <Button class="btn btn-primary simple-btn" text="Update" [isEnabled]="!processing" (tap)="updateProductCategory()">
+                    <Button class="btn btn-primary simple-btn" text="Update" (tap)="updateProductCategory()">
                     </Button>
                 </StackLayout>
             </StackLayout>

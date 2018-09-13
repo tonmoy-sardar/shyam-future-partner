@@ -1,5 +1,7 @@
 <StackLayout class="full-dashboard">
-    <StackLayout padding="10" *ngIf="visible_key">
+    <Label color="#021733" fontSize="15" textAlignment="center" text="Customer List"></Label>
+    <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+    <StackLayout class="m-t-30" *ngIf="visible_key">
         <StackLayout *ngIf="customer_list.length>0">
             <StackLayout *ngFor="let customer of customer_list" class="list-group">
                 <CardView class="whiteCard action-section">

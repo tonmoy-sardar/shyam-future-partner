@@ -94,15 +94,15 @@ export class BusinessInfoComponent implements OnInit {
 
     pickImage() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
+
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
+                    
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.logo = _pic
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
+                    
                     var _pic = 'data:image/png;base64,' + res.image
                     this.logo = _pic
                 }
@@ -117,7 +117,7 @@ export class BusinessInfoComponent implements OnInit {
         }).then(
             value => {
                 var data = JSON.parse(value);
-                console.log(data);
+               
                 if (data != null) {
                     this.create_app_data = data;
                 }
@@ -153,7 +153,7 @@ export class BusinessInfoComponent implements OnInit {
             key: 'create_app_data',
             value: JSON.stringify(data)
         }).then(success => {
-            console.log(success)
+           
         });
     };
 
@@ -191,7 +191,6 @@ export class BusinessInfoComponent implements OnInit {
                 option.selected = false;
             }
         });
-        console.log(this.is_product_service)
 
        
     }

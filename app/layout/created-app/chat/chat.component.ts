@@ -79,7 +79,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     getCustomerDeviceToken(id) {
         this.notificationService.getCustomerDeviceToken(id).subscribe(
             res => {
-                console.log(res)
+
                 this.customer_device_token = res['customer_device_token']
             },
             error => {
@@ -96,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         }
         this.notificationService.sendPushNotification(this.customer_device_token, value).subscribe(
             res => {
-                console.log(res)
+
             },
             error => {
                 console.log(error)
@@ -105,7 +105,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
 
     onOpen(evt) {
-        console.log(evt)
+
         console.log("Welcome to the chat!");
     }
 
@@ -114,7 +114,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
 
     onMessage(evt) {
-        console.log(JSON.parse(evt.data))
+
         var msgData = JSON.parse(evt.data)
         this.zone.run(() => {
             var data = {
@@ -176,7 +176,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.loader.show(this.lodaing_options);
         this.messageService.createChatSessionView(param, data).subscribe(
             res => {
-                console.log(res)
+
                 var thread = res['thread']
                 this.viewMessages(thread)
             },
@@ -191,7 +191,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         var param = "?user=" + this.user_id + "&user_type=customer&thread_id=" + thread;
         this.messageService.viewMessages(param).subscribe(
             res => {
-                console.log(res)
+
                 this.getMessageList(thread);
             },
             error => {
@@ -205,7 +205,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     getMessageList(thread) {
         this.messageService.getMessageListByCustomer(thread).subscribe(
             (res: any[]) => {
-                console.log(res)
+
                 res.forEach(x => {
                     var data = {
                         text: x.message,
@@ -220,7 +220,7 @@ export class ChatComponent implements OnInit, OnDestroy {
                     }
                     this.messages.push(data)
                 })
-                console.log(this.messages)
+
                 this.scrollToBottom();
                 this.loader.hide();
             },

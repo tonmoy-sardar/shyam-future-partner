@@ -109,15 +109,15 @@ export class OwnerInfoComponent implements OnInit {
 
     pickImage() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
+            
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
+                    
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.owner_pic = _pic
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
+                    
                     var _pic = 'data:image/png;base64,' + res.image
                     this.owner_pic = _pic
                 }
@@ -136,7 +136,7 @@ export class OwnerInfoComponent implements OnInit {
 
         this.createdAppService.getDesignationDropdown().subscribe(
             (data: any[]) => {
-                console.log(data);
+               
                 this.designations = new ValueList<string>();
                 for (let i = 0; i < data.length; i++) {
                     this.designations.push({
@@ -163,7 +163,7 @@ export class OwnerInfoComponent implements OnInit {
         }).then(
             value => {
                 var data = JSON.parse(value);
-                console.log(data);
+                
                 if (data != null) {
                     this.create_app_data = data;
                 }
@@ -191,11 +191,11 @@ export class OwnerInfoComponent implements OnInit {
                 owner_pic: this.owner_pic,
                 user: this.user_id
             }
-            console.log(data);
+           
             this.loader.show(this.lodaing_options);
             this.createdAppService.createNewApp(data).subscribe(
                 res => {
-                    console.log(res)
+                   
                     var d = {};
                     this.setCreateAppData(d)
                     this.loader.hide()
@@ -218,7 +218,7 @@ export class OwnerInfoComponent implements OnInit {
             key: 'create_app_data',
             value: JSON.stringify(data)
         }).then(success => {
-            console.log(success)
+            
         });
     };
 
@@ -229,7 +229,7 @@ export class OwnerInfoComponent implements OnInit {
             viewContainerRef: this.vcRef
         };
         this.modal.showModal(LocationModalComponent, option).then(res => {
-            console.log(res);
+           
             if (res.name != "") {
                 this.owner_details.store_address = res.name;
                 this.owner_details.lat = res.latitude;

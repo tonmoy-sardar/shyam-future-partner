@@ -1,6 +1,8 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <StackLayout padding="10" *ngIf="visible_key">
+        <Label color="#021733" fontSize="15" textAlignment="center" text="Order List"></Label>
+        <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+        <StackLayout class="m-t-30" *ngIf="visible_key">
             <StackLayout *ngIf="order_list.length>0">
                 <StackLayout marginBottom="10" *ngFor="let order of order_list" class="list-group action-section">
                     <CardView class="whiteCard">

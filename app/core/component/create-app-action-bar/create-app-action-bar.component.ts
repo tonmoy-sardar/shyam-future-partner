@@ -36,4 +36,8 @@ export class CreateAppActionBarComponent implements OnInit {
         this._routerExtensions.navigate(["/login"], { clearHistory: true });
     }
 
+    navigateToHome(){
+        this._routerExtensions.navigate(["/dashboard"]);
+    }
+
 }

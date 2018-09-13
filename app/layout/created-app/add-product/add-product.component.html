@@ -1,45 +1,39 @@
 <ScrollView row="0">
     <StackLayout class="full-dashboard">
-        <StackLayout class="full-content">
+        <Label color="#021733" fontSize="15" textAlignment="center" text="Add Product"></Label>
+        <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+        <StackLayout class="full-content m-t-30">
             <StackLayout class="edit-container">
                 <StackLayout class="form" [formGroup]="form" novalidate>
                     <GridLayout rows="auto, auto, auto, auto, auto, auto">
                         <StackLayout class="product_image" (tap)="pickImage()" row="0">
                             <Image [src]="product_image" *ngIf="product_image != ''"></Image>
-                            <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa" [text]="'fa-camera' | fonticon"
-                                width="30" height="30" *ngIf="product_image == ''"></Label>
+                            <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa" [text]="'fa-camera' | fonticon" width="30"
+                                height="30" *ngIf="product_image == ''"></Label>
                         </StackLayout>
                         <StackLayout class="input-filld" row="1">
-                            <TextField hint="Product Name" class="input input-border cyan-border m-t-10" borderRadius="2"
-                                borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="product_name"
-                                [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
+                            <TextField hint="Product Name" class="input input-border cyan-border m-t-10"  height="40" padding="10" fontSize="12"
+                                returnKeyType="next" formControlName="product_name" [(ngModel)]="product_data.product_name" [ngClass]="displayFieldCss('product_name')"></TextField>
                             <StackLayout *ngIf="isFieldValid('product_name')" class="invalid-feedback">
                                 <Label text="Product Name is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="2">
-                            <TextField hint="Price" class="input input-border cyan-border m-t-10" borderRadius="2"
-                                borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="price"
-                                [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')"></TextField>
+                            <TextField hint="Price" class="input input-border cyan-border m-t-10"  height="40" padding="10" fontSize="12"
+                                returnKeyType="next" formControlName="price" [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')"></TextField>
                             <StackLayout *ngIf="isFieldValid('price')" class="invalid-feedback">
                                 <Label text="Price is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="3">
-                            <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10"
-                                borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                formControlName="discounted_price" [(ngModel)]="product_data.discounted_price"></TextField>
+                            <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10"  height="40" padding="10" fontSize="12"  returnKeyType="next" formControlName="discounted_price" [(ngModel)]="product_data.discounted_price"></TextField>
                         </StackLayout>
                         <StackLayout class="input-filld" row="4">
-                            <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10"
-                                borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next"
-                                formControlName="packing_charges" [(ngModel)]="product_data.packing_charges"></TextField>
+                            <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10"  height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="packing_charges" [(ngModel)]="product_data.packing_charges"></TextField>
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="5">
-                            <TextField hint="Tags" class="input input-border cyan-border m-t-10" borderRadius="2"
-                                borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="tags"
-                                [(ngModel)]="product_data.tags"></TextField>
+                            <TextField hint="Tags" class="input input-border cyan-border m-t-10"  height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="tags" [(ngModel)]="product_data.tags"></TextField>
                         </StackLayout>
 
                     </GridLayout>

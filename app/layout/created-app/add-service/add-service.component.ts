@@ -81,8 +81,7 @@ export class AddServiceComponent implements OnInit {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.cat_id = full_location[4].trim();
-        console.log(this.cat_id);
-        console.log(this.app_id);
+
 
         this.form = this.formBuilder.group({
             product_name: ['', Validators.required],
@@ -95,16 +94,14 @@ export class AddServiceComponent implements OnInit {
 
     pickImage() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
+
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image
@@ -120,12 +117,10 @@ export class AddServiceComponent implements OnInit {
             this.product_data.app_master = this.app_id;
             this.product_data.product_category = this.cat_id;
 
-            console.log(this.product_data);
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.createProduct(this.product_data).subscribe(
                 res => {
                     this.loader.hide();
-                    console.log("Success");
                     this.feedback.success({
                         title: 'Service added successfully',
                         backgroundColor: new Color("green"),

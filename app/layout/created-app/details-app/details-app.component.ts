@@ -66,7 +66,7 @@ export class DetailsAppComponent implements OnInit {
 
   private changebadgeCountStatus(status: boolean): void {
     this.badgeCountStatus = status;
-    console.log(this.badgeCountStatus)
+
     if (this.badgeCountStatus == true) {
       this.getOrderSeenActivity(this.app_id);
       this.gerMessageSeenActivity(this.app_id)
@@ -90,7 +90,7 @@ export class DetailsAppComponent implements OnInit {
         this.app_data.logo = this.app_details.logo;
         this.app_data.business_name = this.app_details.business_name;
         this.visible_key = true
-        console.log(res)
+
         this.loader.hide();
       },
       error => {
@@ -108,9 +108,7 @@ export class DetailsAppComponent implements OnInit {
   getOrderSeenActivity(id) {
     this.CreatedAppService.getOrderSeenActivity(id).subscribe(
       res => {
-        console.log(res)
         this.unSeenOrder = res['unseen_count'];
-        console.log(this.unSeenOrder)
       },
       error => {
         console.log(error)
@@ -123,13 +121,11 @@ export class DetailsAppComponent implements OnInit {
     var param = "?user=" + id + "&user_type=app_master"
     this.messageService.getChatMembersDetails(param).subscribe(
       (res: any[]) => {
-        console.log(res)
         var total = 0;
         res.forEach(x => {
           total += x.unread_messages;
         })
         this.unSeenMessage = total;
-        console.log(this.unSeenMessage)
       },
       error => {
         console.log(error)

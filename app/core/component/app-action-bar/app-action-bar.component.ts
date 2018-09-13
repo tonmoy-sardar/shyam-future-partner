@@ -15,6 +15,7 @@ export class AppActionBarComponent implements OnInit {
     @Input('appId') appId: string;
     visible_key: boolean
     isLoggedin: boolean;
+    
     constructor(
         private _routerExtensions: RouterExtensions,
         private createdAppService: CreatedAppService,
@@ -39,8 +40,6 @@ export class AppActionBarComponent implements OnInit {
                         this.product_list.push(y)
                     })
                 })
-                console.log(res)
-                console.log(this.product_list)
                 this.visible_key = true;
             },
             error => {
@@ -57,4 +56,10 @@ export class AppActionBarComponent implements OnInit {
         this._routerExtensions.navigate(["/login"], { clearHistory: true });
     }
 
+    navigateToHome(){
+        //this._routerExtensions.navigate(["/dashboard"]);
+        this._routerExtensions.navigate(["/created-app",this.appId,'details']);
+    }
+
+    
 }

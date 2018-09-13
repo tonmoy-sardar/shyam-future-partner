@@ -54,8 +54,6 @@ export class PaymentSuccessComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        console.log("aaaaa");
-        console.log(this.app_id);
         this.getAppDetails(this.app_id);
     }
 
@@ -64,7 +62,6 @@ export class PaymentSuccessComponent implements OnInit {
         this.CreatedAppService.getCreatedAppDetails(id).subscribe(
             res => {
                 this.app_details = res;
-                console.log(res)
                 this.visible_key = true
                 this.loader.hide();
             },

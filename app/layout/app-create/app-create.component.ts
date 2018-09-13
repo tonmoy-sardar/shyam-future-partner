@@ -80,7 +80,6 @@ export class AppCreateComponent implements OnInit {
             key: 'create_app_data',
             value: JSON.stringify(data)
         }).then(success => {
-            console.log(success)
         });
     };
 

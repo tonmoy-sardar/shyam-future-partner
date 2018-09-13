@@ -61,7 +61,6 @@ export class MessagesComponent implements OnInit {
 
     private changebadgeCountStatus(status: boolean): void {
         this.badgeCountStatus = status;
-        console.log(this.badgeCountStatus)
         if (this.badgeCountStatus == true) {
             this.getChatMembersDetails();
         }
@@ -79,7 +78,6 @@ export class MessagesComponent implements OnInit {
 
         this.messageService.getChatMembersDetails(param).subscribe(
             (res: any[]) => {
-                console.log(res)
                 this.chats = []
                 this.chats = res;
                 this.loader.hide();

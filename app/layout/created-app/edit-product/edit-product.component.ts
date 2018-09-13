@@ -86,8 +86,7 @@ export class EditProductComponent implements OnInit {
         if (full_location.length > 5) {
             this.key = full_location[5].trim();
         }
-        console.log(this.product_id);
-        console.log(this.app_id);
+
         this.getProductDetails(this.product_id);
         this.form = this.formBuilder.group({
             product_name: ['', Validators.required],
@@ -100,17 +99,14 @@ export class EditProductComponent implements OnInit {
 
     pickImage() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
             if (res != undefined) {
                 this.product_image = ''
                 if (res.camera == true) {
-                    console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image;
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
                     var _pic = 'data:image/png;base64,' + res.image
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image;
@@ -137,7 +133,6 @@ export class EditProductComponent implements OnInit {
                 }
 
                 this.visible_key = true
-                console.log(res)
                 this.loader.hide();
 
             },
@@ -150,7 +145,6 @@ export class EditProductComponent implements OnInit {
 
     updateProduct() {
         if (this.form.valid) {
-            console.log(this.product_data);
             if (this.product_data.discounted_price == '') {
                 this.product_data.discounted_price = '0.00'
             }
@@ -160,7 +154,6 @@ export class EditProductComponent implements OnInit {
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.updateProduct(this.product_id, this.product_data).subscribe(
                 res => {
-                    console.log("Success");
                     this.loader.hide();
                     this.feedback.success({
                         title: 'Product updated successfully',

@@ -64,7 +64,6 @@ export class CustomersComponent implements OnInit {
         this.customerService.getCustomerListByApp(id).subscribe(
             res => {
                 this.loader.hide();
-                console.log(res)
                 this.customer_list = res;
                 this.visible_key = true;
             },

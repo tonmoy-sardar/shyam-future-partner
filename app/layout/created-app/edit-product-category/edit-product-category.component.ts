@@ -88,7 +88,6 @@ export class EditProductCategoyComponent implements OnInit {
                 this.product_category_data.description = this.product_category_details.description;
                 this.product_category_data.app_master = this.app_id;
                 this.visible_key = true
-                console.log(res)
                 this.loader.hide();
             },
             error => {
@@ -100,13 +99,9 @@ export class EditProductCategoyComponent implements OnInit {
 
     updateProductCategory() {
         if (this.form.valid) {
-            // this.processing = true;
-            console.log("aaa");
-            console.log(this.product_category_data);
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.updateProductCategory(this.product_category_id, this.product_category_data).subscribe(
                 res => {
-                    console.log("Success");
                     this.loader.hide();
                     // this.processing = false;
                     this.feedback.success({

@@ -84,7 +84,6 @@ export class ManageAppComponent implements OnInit {
         this.app_data.logo = this.app_details.logo;
         this.app_data.business_name = this.app_details.business_name;
         this.visible_key = true
-        console.log(res)
         this.loader.hide();
 
       },
@@ -97,10 +96,8 @@ export class ManageAppComponent implements OnInit {
 
   pickLogo() {
     this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-      console.log(res);
       if (res != undefined) {
         if (res.camera == true) {
-          console.log(res.image)
           this.imageUrl = res.image
           this.app_data.logo = 'data:image/png;base64,' + res.image;
           var data = {
@@ -111,7 +108,6 @@ export class ManageAppComponent implements OnInit {
 
         }
         else if (res.gallery == true) {
-          console.log(res.image)
           this.imageUrl = res.image
           this.app_data.logo = 'data:image/png;base64,' + res.image;
 
@@ -131,7 +127,6 @@ export class ManageAppComponent implements OnInit {
       res => {
         this.loader.hide();
         this.getAppDetails(this.app_id);
-        console.log(res)
       },
       error => {
         this.loader.hide();

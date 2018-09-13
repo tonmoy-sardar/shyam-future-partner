@@ -1,7 +1,9 @@
 <ScrollView row="0">
 
     <StackLayout class="full-dashboard" *ngIf="visible_key">
-        <StackLayout padding="10">
+        <Label color="#021733" fontSize="15" textAlignment="center" text="Order Details"></Label>
+        <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+        <StackLayout class="m-t-30">
             <CardView class="action-section">
                 <StackLayout>
                     <GridLayout rows="auto, auto" columns="*, *, *, 40" class="list-group-item" padding="10" verticalAlignment="center">
@@ -24,7 +26,8 @@
                             <StackLayout orientation="horizontal">
                                 <Label [text]="item.product_details.discounted_price" class="discounted_price" textWrap="true" *ngIf="item.product_details.discounted_price > 0"></Label>
                                 <Label [text]="item.product_details.price" class="original_price" textWrap="true" [ngClass]="[item.product_details.discounted_price > 0 ? 'isDiscount' : '']"></Label>
-                                <Label [text]="getDiscount(item.product_details.price,item.product_details.discounted_price)" class="discount" textWrap="true" *ngIf="item.product_details.discounted_price > 0"></Label>
+                                <Label [text]="getDiscount(item.product_details.price,item.product_details.discounted_price)" class="discount" textWrap="true"
+                                    *ngIf="item.product_details.discounted_price > 0"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout horizontalAlignment="right" verticalAlignment="center" col="1" row="0">

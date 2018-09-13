@@ -117,7 +117,6 @@ export class EditOwnerInfoComponent implements OnInit {
         
         this.CreatedAppService.getDesignationDropdown().subscribe(
             (data: any[]) => {
-                console.log(data);
                 this.designations = new ValueList<string>();
                 for (let i = 0; i < data.length; i++) {
                     this.designations.push({
@@ -139,10 +138,7 @@ export class EditOwnerInfoComponent implements OnInit {
             res => {
                 this.owner_details = res;
                 this.selectedIndex = this.designations.getIndex(this.owner_details.owner_designation.toString());
-                console.log(this.selectedIndex)
-                console.log(this.owner_details.owner_designation)
                 this.visible_key = true
-                console.log(res)
                 this.loader.hide();
             },
             error => {
@@ -159,7 +155,7 @@ export class EditOwnerInfoComponent implements OnInit {
             viewContainerRef: this.vcRef
         };
         this.modal.showModal(LocationModalComponent, option).then(res => {
-            console.log(res);
+
             if (res.name != "") {
                 this.owner_details.store_address = res.name;
                 this.owner_details.lat = res.latitude;
@@ -171,10 +167,9 @@ export class EditOwnerInfoComponent implements OnInit {
 
     pickLogo() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
+
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
                     this.owner_details.owner_pic = 'data:image/png;base64,' + res.image;
                     var data = {
                         id: this.app_id,
@@ -183,7 +178,6 @@ export class EditOwnerInfoComponent implements OnInit {
                     this.updateOwnerLogo(data);
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
                     var data = {
                         id: this.app_id,
                         owner_pic: 'data:image/png;base64,' + res.image
@@ -208,7 +202,7 @@ export class EditOwnerInfoComponent implements OnInit {
                     type: FeedbackType.Custom
                   });
                 this.getAppOwnerDetails(this.app_id);
-                console.log(res)
+
             },
             error => {
                 this.loader.hide();
@@ -234,7 +228,6 @@ export class EditOwnerInfoComponent implements OnInit {
             this.CreatedAppService.editOwnerInfo(this.owner_data).subscribe(
                 res => {
                     this.loader.hide();
-                    console.log(res);
                     this.feedback.success({
                         title: 'Owner information updated successfully',
                         backgroundColor: new Color("green"),

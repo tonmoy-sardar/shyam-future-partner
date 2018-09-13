@@ -79,14 +79,13 @@ export class AddProductCategoyComponent implements OnInit {
 
     createProductCategory() {
         if (this.form.valid) {
-            // this.processing = true;
-            console.log("aaa");
+
             this.product_category_data.app_master = this.app_id;
-            console.log(this.product_category_data);
+
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.createProductCategory(this.product_category_data).subscribe(
                 res => {
-                    console.log("Success");
+
                     this.feedback.success({
                         title: 'Category added successfully',
                         backgroundColor: new Color("green"),

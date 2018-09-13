@@ -85,8 +85,6 @@ export class AddProductComponent implements OnInit {
         if (full_location.length > 5) {
             this.key = full_location[5].trim();
         }
-        console.log(this.cat_id);
-        console.log(this.app_id);
 
         this.form = this.formBuilder.group({
             product_name: ['', Validators.required],
@@ -109,12 +107,11 @@ export class AddProductComponent implements OnInit {
             if (this.product_data.packing_charges == '') {
                 this.product_data.packing_charges = '0.00'
             }
-            console.log(this.product_data);
             this.loader.show(this.lodaing_options);
             this.CreatedAppService.createProduct(this.product_data).subscribe(
                 res => {
                     this.loader.hide();
-                    console.log("Success");
+
                     this.feedback.success({
                         title: 'Product added successfully',
                         backgroundColor: new Color("green"),
@@ -144,16 +141,16 @@ export class AddProductComponent implements OnInit {
 
     pickImage() {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
+
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
+
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
+
                     var _pic = 'data:image/png;base64,' + res.image
                     this.product_image = _pic
                     this.product_data['product_image'] = this.product_image

@@ -75,7 +75,6 @@ export class ReportComponent implements OnInit {
     getOrderList(id) {
         this.createdAppService.getAppOrderList(id).subscribe(
             (res: any[]) => {
-                console.log(res)
                 this.order_list = [];
                 this.order_list = res;
                 this.visible_key = true;

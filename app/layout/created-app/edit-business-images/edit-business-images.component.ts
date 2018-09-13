@@ -96,8 +96,6 @@ export class EditBusinessImagesComponent implements OnInit {
                 }
 
                 this.visible_key = true
-                console.log(res);
-                console.log(this.gallery_images);
                 this.loader.hide();
             },
             error => {
@@ -109,13 +107,11 @@ export class EditBusinessImagesComponent implements OnInit {
 
     pickBusinessImages(id) {
         this.modal.showModal(UploadSingleImageModalComponent, this.options).then(res => {
-            console.log(res);
+
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
-                    // this.gallery.push({
-                    //     image: 'data:image/png;base64,' + res.image
-                    // })
+
+
                     var data = {
                         app_image_id: id,
                         appmaster: this.app_id,
@@ -124,10 +120,7 @@ export class EditBusinessImagesComponent implements OnInit {
                     this.updateBusinessImages(data);
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
-                    // this.gallery.push({
-                    //     image: 'data:image/png;base64,' + res.image
-                    // })
+
                     var data = {
                         app_image_id: id,
                         appmaster: this.app_id,
@@ -144,10 +137,7 @@ export class EditBusinessImagesComponent implements OnInit {
             console.log(res);
             if (res != undefined) {
                 if (res.camera == true) {
-                    console.log(res.image)
-                    // this.gallery.push({
-                    //     image: 'data:image/png;base64,' + res.image
-                    // })
+
                     var data = {
                         app_image_id: 0,
                         appmaster: this.app_id,
@@ -156,10 +146,7 @@ export class EditBusinessImagesComponent implements OnInit {
                     this.updateBusinessImages(data);
                 }
                 else if (res.gallery == true) {
-                    console.log(res.image)
-                    // this.gallery.push({
-                    //     image: 'data:image/png;base64,' + res.image
-                    // })
+
                     var data = {
                         app_image_id: 0,
                         appmaster: this.app_id,

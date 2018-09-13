@@ -24,9 +24,6 @@ import { CustomerService } from './services/customer.service';
 import { NotificationService } from './services/notification.service';
 // component
 import { ActionBarComponent } from './component/action-bar/action-bar.component';
-import { MenuBarComponent } from './component/menu-bar/menu-bar.component';
-import { LoginModalComponent } from './component/login-modal/login-modal.component';
-import { SignUpModalComponent } from './component/signup-modal/signup-modal.component';
 import { UploadSingleImageModalComponent } from './component/upload-single-image-modal/upload-single-image-modal.component';
 import { UploadMultipleImageModalComponent } from './component/upload-multiple-image-modal/upload-multiple-image-modal.component';
 import { LocationModalComponent } from './component/location-modal/location-modal.component';
@@ -51,9 +48,6 @@ import { CreateAppActionBarComponent } from './component/create-app-action-bar/c
         MaxLengthDirective,
         IsEmailDirective,
         ActionBarComponent,
-        MenuBarComponent,
-        LoginModalComponent,
-        SignUpModalComponent,
         CarouselDirective,
         UploadSingleImageModalComponent,
         UploadMultipleImageModalComponent,
@@ -71,15 +65,12 @@ import { CreateAppActionBarComponent } from './component/create-app-action-bar/c
         ActionBarComponent,
         NativeScriptFormsModule,
         ReactiveFormsModule,
-        MenuBarComponent,
         CarouselDirective,
         DropDownModule,
         AppActionBarComponent,
         CreateAppActionBarComponent
     ],
     entryComponents: [
-        LoginModalComponent,
-        SignUpModalComponent,
         UploadSingleImageModalComponent,
         UploadMultipleImageModalComponent,
         LocationModalComponent

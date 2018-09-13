@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from "../core/services/login.service";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import { RouterExtensions } from "nativescript-angular/router";
+
 @Component({
   selector: "signup",
   moduleId: module.id,
@@ -15,7 +16,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 export class SignupComponent implements OnInit {
 
   form: FormGroup;
-  processing = false;
+  
 
   constructor(
     private page: Page,
@@ -29,7 +30,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.formBuilder.group({
-      customer_name: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
       ]],
@@ -55,17 +56,10 @@ export class SignupComponent implements OnInit {
 
   signUp() {
     if (this.form.valid) {
-      this.processing = true;
+     
       this.loginService.signup(this.form.value).subscribe(
         res => {
-          console.log(res)
-          clear();
-          setBoolean("isLoggedin", true)
-          if(res.email != ""){
-            setString('email', res.email)
-          }          
-          setString('contact_no', res.contact_no)
-          setString('user_id', res.user_id.toString())
+          
           this.router.navigate(['/'])
         },
         error => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone} from '@angular/core';
 import { Router } from "@angular/router";
 import { Location } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
@@ -23,6 +23,8 @@ import {
     styleUrls: [`payment.component.css`]
 })
 export class PaymentComponent implements OnInit {
+
+    
     private feedback: Feedback;
     form: FormGroup;
     app_id: string;
@@ -82,6 +84,7 @@ export class PaymentComponent implements OnInit {
     subscription_type: number;
     constructor(
         private route: ActivatedRoute,
+        private ngZone: NgZone,
         private CreatedAppService: CreatedAppService,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
@@ -244,15 +247,10 @@ export class PaymentComponent implements OnInit {
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.updateAppSubscription(id, data).subscribe(
             res => {
-                console.log(res)
-                console.log("pa")
-                console.log(this.app_id)
                 this.loader.hide();
-                //this.router.navigate(['/created-app/' + this.app_id + '/payment-success'])
-                this.router.navigateByUrl('/created-app/' + this.app_id + '/payment-success');
-                // this.offerList = res;
-                console.log("asda")
-
+                this.ngZone.run(() => {
+                    this.router.navigate(['/created-app/', this.app_id, 'payment-success'])
+                })
             },
             error => {
                 this.loader.hide();
@@ -260,6 +258,11 @@ export class PaymentComponent implements OnInit {
             }
         )
     }
+
+    // redirectToSuccess()
+    // {
+    //     this.router.navigate(['created-app', this.app_id , 'payment-success'])
+    // }
 
     pay() {
         var sum = this.totalPrice * this.subscription_value - this.offer_price;
@@ -271,7 +274,6 @@ export class PaymentComponent implements OnInit {
             (
                 data => {
                     this.paymentdetails_data = data;
-                    console.log(this.paymentdetails_data)
                     var subscription_data = {
                         app_master: +this.app_id,
                         subscription_type: this.subscription_type_id,
@@ -294,7 +296,6 @@ export class PaymentComponent implements OnInit {
     appSubscribe(data) {
         this.CreatedAppService.appSubscription(data).subscribe(
             res => {
-                console.log(res)
                 this.payViaPaytm();
             },
             error => {

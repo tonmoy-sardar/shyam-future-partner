@@ -188,7 +188,6 @@ export class EditAppComponent implements OnInit {
                 option.selected = false;
             }
         });
-        console.log(this.is_product_service)
 
        
     }
