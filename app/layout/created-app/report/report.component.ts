@@ -7,6 +7,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { CreatedAppService } from "../../../core/services/created-app.service";
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { NotificationService } from "../../../core/services/notification.service";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'report',
@@ -46,37 +47,49 @@ export class ReportComponent implements OnInit {
         }
     }
     badgeCountStatus: boolean;
+    page: number = 1;
+    next_page: string;
+    total_item: number;
     constructor(
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private createdAppService: CreatedAppService,
         private location: Location,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private exploreService: ExploreService
     ) {
         notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {
         this.loader.show(this.lodaing_options);
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
-        this.getOrderList(this.app_id)
+        this.getOrderList()
     }
 
     private changebadgeCountStatus(status: boolean): void {
         this.badgeCountStatus = status;
         console.log(this.badgeCountStatus)
         if (this.badgeCountStatus == true) {
-            this.getOrderList(this.app_id);
+            this.order_list = [];
+            this.getOrderList();
         }
     }
 
-    getOrderList(id) {
-        this.createdAppService.getAppOrderList(id).subscribe(
-            (res: any[]) => {
-                this.order_list = [];
-                this.order_list = res;
+    getOrderList() {
+        let params = '';
+        params = '?page=' + this.page;
+        this.createdAppService.getAppOrderList(this.app_id, params).subscribe(
+            (res) => {
+                this.next_page = res['next'];
+                this.total_item = res['count'];
+                res['results'].forEach(x => {
+                    this.order_list.push(x)
+                })
+
                 this.visible_key = true;
                 this.loader.hide();
             },
@@ -85,6 +98,17 @@ export class ReportComponent implements OnInit {
                 console.log(error)
             }
         )
+    }
+
+    more() {
+        if (this.next_page != null) {
+            var num_arr = this.next_page.split('=');
+            var count = +num_arr[num_arr.length - 1]
+            if (this.page == count - 1) {
+                this.page = count;
+                this.getOrderList();
+            }
+        }
     }
 
 

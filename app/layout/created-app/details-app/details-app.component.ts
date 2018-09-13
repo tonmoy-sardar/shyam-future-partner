@@ -8,6 +8,7 @@ import { LoadingIndicator } from "nativescript-loading-indicator"
 import * as SocialShare from "nativescript-social-share";
 import { MessageService } from '../../../core/services/message.service';
 import { NotificationService } from "../../../core/services/notification.service";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
   selector: 'details-app',
@@ -58,10 +59,11 @@ export class DetailsAppComponent implements OnInit {
     private CreatedAppService: CreatedAppService,
     private location: Location,
     private messageService: MessageService,
-    private notificationService: NotificationService
-  ) {    
+    private notificationService: NotificationService,
+    private exploreService: ExploreService
+  ) {
     notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
-
+    exploreService.homePageStatus(true);
   }
 
   private changebadgeCountStatus(status: boolean): void {

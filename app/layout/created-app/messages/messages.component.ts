@@ -8,6 +8,7 @@ import { MessageService } from '../../../core/services/message.service';
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
 import { NotificationService } from "../../../core/services/notification.service";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'messages',
@@ -54,9 +55,11 @@ export class MessagesComponent implements OnInit {
         private router: RouterExtensions,
         private messageService: MessageService,
         private location: Location,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private exploreService: ExploreService
     ) {
         notificationService.getBadgeCountStatus.subscribe(status => this.changebadgeCountStatus(status))
+        exploreService.homePageStatus(false);
     }
 
     private changebadgeCountStatus(status: boolean): void {

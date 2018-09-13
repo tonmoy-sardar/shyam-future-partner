@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable,EventEmitter, Output } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
@@ -12,30 +12,25 @@ import * as Globals from '../../core/globals';
 @Injectable()
 export class ExploreService {
 
+  @Output() getHomePageStatus: EventEmitter<any> = new EventEmitter();
+
+  homePageStatus(data) {
+    if (data == true) {
+      this.getHomePageStatus.emit(true);
+      return
+    } else {
+      this.getHomePageStatus.emit(false);
+      return
+    }
+  }
   constructor(private http: HttpClient) { }
 
   getCategoryList(): Observable<any> {
     return this.http.get(Globals.apiEndpoint + 'all_categories/')
   }
 
-  getMostViewAppList(): Observable<any> {
-    return this.http.get(Globals.apiEndpoint + 'most_viewed_app/')
-  }
-
-  getAllAppList(params): Observable<any> {
-    return this.http.get(Globals.apiEndpoint + 'search_app/' + params)
-  }
-
-  getUserDashboardAppList(id) {
-    return this.http.get(Globals.apiEndpoint + 'customer_dashbord/' + id + '/')
-  }
-
   getAppAndUserDetailsByUserID(id): Observable<any> {
     return this.http.get(Globals.apiEndpoint + 'app_and_user_details/' + id + '/')
-  }
-
-  appAttachAndDisattachToDashboard(data){
-    return this.http.post(Globals.apiEndpoint + 'mapping_app_and_customer/', data)
   }
 
 }

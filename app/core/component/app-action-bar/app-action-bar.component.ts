@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RouterExtensions } from "nativescript-angular/router";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import { CreatedAppService } from "../../services/created-app.service";
+import { ExploreService } from "../../services/explore.service";
 
 @Component({
     selector: "app-action-bar",
@@ -15,13 +16,21 @@ export class AppActionBarComponent implements OnInit {
     @Input('appId') appId: string;
     visible_key: boolean
     isLoggedin: boolean;
-    
+    homePageStatus: boolean = false;
     constructor(
         private _routerExtensions: RouterExtensions,
         private createdAppService: CreatedAppService,
-        private routerExtensions: RouterExtensions
+        private routerExtensions: RouterExtensions,
+        private exploreService: ExploreService
     ) {
+        exploreService.getHomePageStatus.subscribe(status => this.changePageStatus(status));
+    }
 
+    private changePageStatus(status: boolean): void {
+        this.homePageStatus = status;
+        // if (this.homePageStatus == true) {
+            
+        // }
     }
 
     ngOnInit() {
@@ -57,8 +66,14 @@ export class AppActionBarComponent implements OnInit {
     }
 
     navigateToHome(){
-        //this._routerExtensions.navigate(["/dashboard"]);
-        this._routerExtensions.navigate(["/created-app",this.appId,'details']);
+        console.log(this.homePageStatus)        
+        if(this.homePageStatus){
+            this._routerExtensions.navigate(["/dashboard"]);
+        }
+        else{
+            this._routerExtensions.navigate(["/created-app",this.appId,'details']);
+        }
+        
     }
 
     

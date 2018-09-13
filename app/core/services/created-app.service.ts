@@ -70,8 +70,8 @@ export class CreatedAppService {
     return this.http.put(Globals.apiEndpoint + 'edit_owner_info/' + data.id + '/', data)
   }
 
-  getAppOrderList(id) {
-    return this.http.get(Globals.apiEndpoint + 'all_order_by_app_id/' + id + '/')
+  getAppOrderList(id, params) {
+    return this.http.get(Globals.apiEndpoint + 'all_order_by_app_id/' + id + '/' + params)
   }
 
   getAppOrderDetails(id) {
@@ -128,14 +128,14 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'dropdown_offer_code/')
   }
 
-  paytmFormValue(app_id,order_amount): Observable<any> {
-    return this.http.get(Globals.apiEndpoint + 'get_payment_details/?app_id='+app_id+'&order_amount=' + order_amount+'&type=app')
+  paytmFormValue(app_id, order_amount): Observable<any> {
+    return this.http.get(Globals.apiEndpoint + 'get_payment_details/?app_id=' + app_id + '&order_amount=' + order_amount + '&type=app')
   }
 
   appSubscription(data) {
     return this.http.post(Globals.apiEndpoint + 'app_subscription/', data)
   }
-  
+
   customerOrderSeen(id) {
     return this.http.put(Globals.apiEndpoint + 'order_seen_activity/' + id + '/', {})
   }
@@ -144,7 +144,7 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'order_seen_activity_count/' + id + '/')
   }
 
- updateAppSubscription(id,data) {
+  updateAppSubscription(id, data) {
     return this.http.put(Globals.apiEndpoint + 'app_subscription/' + id + '/', data)
   }
 

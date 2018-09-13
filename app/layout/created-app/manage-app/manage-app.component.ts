@@ -6,6 +6,7 @@ import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
 import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
   selector: 'manage-app',
@@ -61,7 +62,10 @@ export class ManageAppComponent implements OnInit {
     private modal: ModalDialogService,
     private vcRef: ViewContainerRef,
     private location: Location,
-  ) { }
+    private exploreService: ExploreService
+  ) {
+    exploreService.homePageStatus(false);
+  }
 
   ngOnInit() {
     var full_location = this.location.path().split('/');
