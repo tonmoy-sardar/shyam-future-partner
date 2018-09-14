@@ -8,6 +8,7 @@ import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Location } from '@angular/common';
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'edit-product-category',
@@ -60,8 +61,10 @@ export class EditProductCategoyComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
+        private exploreService: ExploreService
     ) {
         this.feedback = new Feedback();
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {

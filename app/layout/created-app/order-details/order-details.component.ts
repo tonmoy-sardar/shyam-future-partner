@@ -6,6 +6,8 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { CreatedAppService } from "../../../core/services/created-app.service";
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
+import { ExploreService } from "../../../core/services/explore.service";
+
 @Component({
     selector: 'order-details',
     moduleId: module.id,
@@ -51,7 +53,10 @@ export class OrderDetailsComponent implements OnInit {
         private router: RouterExtensions,
         private createdAppService: CreatedAppService,
         private location: Location,
-    ) { }
+        private exploreService: ExploreService
+    ) {
+        exploreService.homePageStatus(false);
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');

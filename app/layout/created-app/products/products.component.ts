@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'products',
@@ -25,7 +26,7 @@ export class ProductsComponent implements OnInit {
         business_name: '',
         business_description: ''
     }
-    
+
     category_list: any = [];
     serviceType;
 
@@ -61,7 +62,10 @@ export class ProductsComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
-    ) { }
+        private exploreService: ExploreService
+    ) {
+        exploreService.homePageStatus(false);
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -76,10 +80,10 @@ export class ProductsComponent implements OnInit {
             business_description: ['', Validators.required]
         });
 
-        
+
     }
 
-   
+
 
     next() {
         this.router.navigate(['/created-app/' + this.app_id + '/payment'])
