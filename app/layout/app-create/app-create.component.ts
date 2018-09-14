@@ -56,6 +56,7 @@ export class AppCreateComponent implements OnInit {
         private router: RouterExtensions,
     ) {
         this.secureStorage = new SecureStorage();
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {

@@ -10,6 +10,7 @@ import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { UploadSingleImageModalComponent } from "../../../core/component/upload-single-image-modal/upload-single-image-modal.component";
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'add-product',
@@ -74,8 +75,10 @@ export class AddProductComponent implements OnInit {
         private location: Location,
         private modal: ModalDialogService,
         private vcRef: ViewContainerRef,
+        private exploreService: ExploreService
     ) {
         this.feedback = new Feedback();
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {

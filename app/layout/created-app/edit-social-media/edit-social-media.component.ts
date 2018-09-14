@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 import { FORMS_DIRECTIVES } from 'nativescript-angular/forms';
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'edit-social-media',
@@ -68,8 +69,9 @@ export class EditSocialMediaComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
+        private exploreService: ExploreService
     ) {
-        
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {

@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreatedAppService } from "../../../core/services/created-app.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { LoadingIndicator } from "nativescript-loading-indicator"
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'payment-success',
@@ -47,8 +48,9 @@ export class PaymentSuccessComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
+        private exploreService: ExploreService
     ) {
-
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {
