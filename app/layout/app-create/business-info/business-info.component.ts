@@ -62,7 +62,7 @@ export class BusinessInfoComponent implements OnInit {
     visible_key: boolean;
     radioOptions?: Array<RadioOption>;
     businessTypeOptions: Array<RadioOption>;
-    is_product_service: number;
+    is_product_service: number = 0;
     constructor(
         private exploreService: ExploreService,
         private createdAppService: CreatedAppService,
@@ -79,8 +79,7 @@ export class BusinessInfoComponent implements OnInit {
         this.form = this.formBuilder.group({
             business_name: ['', Validators.required],
             business_description: ['', Validators.required],
-            app_website_url: [''],
-            is_product_service:[''],
+            app_website_url: ['']
         });
         //this.getCategoryList();
         this.populateData();
@@ -97,12 +96,12 @@ export class BusinessInfoComponent implements OnInit {
 
             if (res != undefined) {
                 if (res.camera == true) {
-                    
+
                     var _pic = 'data:image/png;base64,' + res.image;
                     this.logo = _pic
                 }
                 else if (res.gallery == true) {
-                    
+
                     var _pic = 'data:image/png;base64,' + res.image
                     this.logo = _pic
                 }
@@ -117,7 +116,7 @@ export class BusinessInfoComponent implements OnInit {
         }).then(
             value => {
                 var data = JSON.parse(value);
-               
+
                 if (data != null) {
                     this.create_app_data = data;
                 }
@@ -135,11 +134,11 @@ export class BusinessInfoComponent implements OnInit {
                 business_name: this.form.value.business_name,
                 business_description: this.form.value.business_name,
                 app_website_url: this.form.value.app_website_url,
-                is_product_service:this.is_product_service,
+                is_product_service: this.is_product_service,
                 logo: this.logo
             }
 
-            
+
             this.setCreateAppData(data)
             this.router.navigate(['/app-create/owner-info'])
         }
@@ -153,7 +152,7 @@ export class BusinessInfoComponent implements OnInit {
             key: 'create_app_data',
             value: JSON.stringify(data)
         }).then(success => {
-           
+
         });
     };
 
@@ -192,7 +191,7 @@ export class BusinessInfoComponent implements OnInit {
             }
         });
 
-       
+
     }
 
 

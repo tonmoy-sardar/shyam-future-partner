@@ -65,6 +65,7 @@ export class AddServiceComponent implements OnInit {
         viewContainerRef: this.vcRef
     };
     product_image: string = '';
+    key: string = '';
     constructor(
         private route: ActivatedRoute,
         private CreatedAppService: CreatedAppService,
@@ -73,7 +74,7 @@ export class AddServiceComponent implements OnInit {
         private location: Location,
         private modal: ModalDialogService,
         private vcRef: ViewContainerRef,
-    ) { 
+    ) {
         this.feedback = new Feedback();
     }
 
@@ -81,7 +82,9 @@ export class AddServiceComponent implements OnInit {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.cat_id = full_location[4].trim();
-
+        if (full_location.length > 5) {
+            this.key = full_location[5].trim();
+        }
 
         this.form = this.formBuilder.group({
             product_name: ['', Validators.required],
@@ -121,14 +124,20 @@ export class AddServiceComponent implements OnInit {
             this.CreatedAppService.createProduct(this.product_data).subscribe(
                 res => {
                     this.loader.hide();
-                    this.feedback.success({
-                        title: 'Service added successfully',
-                        backgroundColor: new Color("green"),
-                        titleColor: new Color("black"),
-                        position: FeedbackPosition.Bottom,
-                        type: FeedbackType.Custom
-                      });
-                    this.router.navigate(['/created-app/' + this.app_id + '/products'])
+
+                    if (this.key != '') {
+                        this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
+                    }
+                    else {
+                        this.feedback.success({
+                            title: 'Service added successfully',
+                            backgroundColor: new Color("green"),
+                            titleColor: new Color("black"),
+                            position: FeedbackPosition.Bottom,
+                            type: FeedbackType.Custom
+                        });
+                        this.router.navigate(['/created-app/' + this.app_id + '/products'])
+                    }
 
                 },
                 error => {

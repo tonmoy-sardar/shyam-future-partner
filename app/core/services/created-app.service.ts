@@ -75,7 +75,7 @@ export class CreatedAppService {
   }
 
   getAppOrderDetails(id) {
-    return this.http.get(Globals.apiEndpoint + 'all_order_details/' + id + '/')
+    return this.http.get(Globals.apiEndpoint + 'order_details/' + id + '/')
   }
 
 

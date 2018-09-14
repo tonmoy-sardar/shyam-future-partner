@@ -62,7 +62,7 @@ export class EditProductCategoyComponent implements OnInit {
         private location: Location,
     ) {
         this.feedback = new Feedback();
-     }
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -103,18 +103,18 @@ export class EditProductCategoyComponent implements OnInit {
             this.CreatedAppService.updateProductCategory(this.product_category_id, this.product_category_data).subscribe(
                 res => {
                     this.loader.hide();
-                    // this.processing = false;
-                    this.feedback.success({
-                        title: 'Category updated successfully',
-                        backgroundColor: new Color("green"),
-                        titleColor: new Color("black"),
-                        position: FeedbackPosition.Bottom,
-                        type: FeedbackType.Custom
-                      });
+
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
                     }
                     else {
+                        this.feedback.success({
+                            title: 'Category updated successfully',
+                            backgroundColor: new Color("green"),
+                            titleColor: new Color("black"),
+                            position: FeedbackPosition.Bottom,
+                            type: FeedbackType.Custom
+                        });
                         this.router.navigate(['/created-app/' + this.app_id + '/products'])
                     }
 

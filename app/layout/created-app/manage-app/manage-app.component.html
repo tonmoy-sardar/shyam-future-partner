@@ -5,8 +5,8 @@
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickLogo()">
 
-                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
-                        <Image src="~/images/no-image-logo.jpg" *ngIf="app_data.logo == ''"></Image>
+                        <Image [src]="app_data.logo" *ngIf="app_data.logo != '' || app_data.logo != null"></Image>
+                        <Image src="~/images/no-image-logo.jpg" *ngIf="app_data.logo == '' || app_data.logo == null"></Image>
                         <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa change_logo" [text]="'fa-camera' | fonticon" width="20" height="20"></Label>
                     </StackLayout>
                     <Label fontSize="15" VerticalAlignment="center" textAlignment="center" [text]="app_data.business_name"></Label>

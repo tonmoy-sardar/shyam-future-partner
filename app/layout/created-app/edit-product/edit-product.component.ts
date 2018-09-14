@@ -75,7 +75,7 @@ export class EditProductComponent implements OnInit {
         private location: Location,
         private modal: ModalDialogService,
         private vcRef: ViewContainerRef,
-    ) { 
+    ) {
         this.feedback = new Feedback();
     }
 
@@ -155,17 +155,18 @@ export class EditProductComponent implements OnInit {
             this.CreatedAppService.updateProduct(this.product_id, this.product_data).subscribe(
                 res => {
                     this.loader.hide();
-                    this.feedback.success({
-                        title: 'Product updated successfully',
-                        backgroundColor: new Color("green"),
-                        titleColor: new Color("black"),
-                        position: FeedbackPosition.Bottom,
-                        type: FeedbackType.Custom
-                      });
+
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
                     }
                     else {
+                        this.feedback.success({
+                            title: 'Product updated successfully',
+                            backgroundColor: new Color("green"),
+                            titleColor: new Color("black"),
+                            position: FeedbackPosition.Bottom,
+                            type: FeedbackType.Custom
+                        });
                         this.router.navigate(['/created-app/' + this.app_id + '/products'])
                     }
 

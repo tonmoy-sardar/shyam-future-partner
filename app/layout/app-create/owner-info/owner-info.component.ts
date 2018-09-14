@@ -181,6 +181,7 @@ export class OwnerInfoComponent implements OnInit {
                 business_name: this.create_app_data.business_name,
                 business_description: this.create_app_data.business_description,
                 app_website_url: this.create_app_data.app_website_url,
+                is_product_service: this.create_app_data.is_product_service,
                 logo: this.create_app_data.logo,
                 store_address: this.owner_details.store_address,
                 lat: this.owner_details.lat,

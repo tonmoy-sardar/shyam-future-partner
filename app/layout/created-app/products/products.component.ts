@@ -122,6 +122,24 @@ export class ProductsComponent implements OnInit {
         }
     }
 
+    addService(id) {
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/add-service/' + id + '/new'])
+        }
+        else {
+            this.router.navigate(['/created-app/' + this.app_id + '/add-service/' + id])
+        }
+    }
+
+    editService(id) {
+        if (this.key != '') {
+            this.router.navigate(['/created-app/' + this.app_id + '/edit-service/' + id + '/new'])
+        }
+        else {
+            this.router.navigate(['/created-app/' + this.app_id + '/edit-service/' + id])
+        }
+    }
+
     getAppDetails(id) {
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.getCreatedAppDetails(id).subscribe(

@@ -75,13 +75,14 @@ export class EditBusinessImagesComponent implements OnInit {
         if (full_location.length > 4) {
             this.key = full_location[4].trim();
         }
-        this.getAppDetails(this.app_id);
+        this.getAppDetails();
     }
 
-    getAppDetails(id) {
+    getAppDetails() {
         this.loader.show(this.lodaing_options);
-        this.CreatedAppService.getCreatedAppDetails(id).subscribe(
+        this.CreatedAppService.getCreatedAppDetails(this.app_id).subscribe(
             res => {
+                console.log(res)
                 this.app_details = res;
                 this.gallery_images = [];
                 if (this.app_details.app_imgs.length > 0) {
@@ -110,22 +111,21 @@ export class EditBusinessImagesComponent implements OnInit {
 
             if (res != undefined) {
                 if (res.camera == true) {
-
-
                     var data = {
                         app_image_id: id,
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
+                    
                     this.updateBusinessImages(data);
                 }
                 else if (res.gallery == true) {
-
                     var data = {
                         app_image_id: id,
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
+                    
                     this.updateBusinessImages(data);
                 }
             }
@@ -137,21 +137,21 @@ export class EditBusinessImagesComponent implements OnInit {
             console.log(res);
             if (res != undefined) {
                 if (res.camera == true) {
-
                     var data = {
                         app_image_id: 0,
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
+                    
                     this.updateBusinessImages(data);
                 }
                 else if (res.gallery == true) {
-
                     var data = {
                         app_image_id: 0,
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
+                    
                     this.updateBusinessImages(data);
                 }
             }
@@ -163,17 +163,18 @@ export class EditBusinessImagesComponent implements OnInit {
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.updateBusinessImages(data).subscribe(
             res => {
-                this.feedback.success({
-                    title: 'Business image updated successfully',
-                    backgroundColor: new Color("green"),
-                    titleColor: new Color("black"),
-                    position: FeedbackPosition.Bottom,
-                    type: FeedbackType.Custom
-                });
-                
-                this.getAppDetails(this.app_id);
-               
-                this.loader.hide();
+                if (this.key == '') {
+                    this.feedback.success({
+                        title: 'Business image updated successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                    });
+                }
+                console.log(this.app_id)
+                this.getAppDetails();
+                console.log(res)
             },
             error => {
                 console.log(error)
@@ -184,7 +185,13 @@ export class EditBusinessImagesComponent implements OnInit {
 
     next() {
         if (this.key != '') {
-            this.router.navigate(['/created-app/' + this.app_id + '/products/' + 'new'])
+            if (this.app_details.is_product_service != 0) {
+                this.router.navigate(['/created-app/' + this.app_id + '/products/' + 'new'])
+            }
+            else {
+                this.router.navigate(['/created-app/' + this.app_id + '/payment'])
+            }
+
         }
     }
 
