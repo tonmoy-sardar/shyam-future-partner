@@ -74,7 +74,7 @@ export class AddProductComponent implements OnInit {
         private location: Location,
         private modal: ModalDialogService,
         private vcRef: ViewContainerRef,
-    ) { 
+    ) {
         this.feedback = new Feedback();
     }
 
@@ -112,17 +112,18 @@ export class AddProductComponent implements OnInit {
                 res => {
                     this.loader.hide();
 
-                    this.feedback.success({
-                        title: 'Product added successfully',
-                        backgroundColor: new Color("green"),
-                        titleColor: new Color("black"),
-                        position: FeedbackPosition.Bottom,
-                        type: FeedbackType.Custom
-                      });
+
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
                     }
                     else {
+                        this.feedback.success({
+                            title: 'Product added successfully',
+                            backgroundColor: new Color("green"),
+                            titleColor: new Color("black"),
+                            position: FeedbackPosition.Bottom,
+                            type: FeedbackType.Custom
+                        });
                         this.router.navigate(['/created-app/' + this.app_id + '/products'])
                     }
 

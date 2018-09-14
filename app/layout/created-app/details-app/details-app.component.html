@@ -4,8 +4,8 @@
             <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon">
-                        <Image [src]="app_data.logo" *ngIf="app_data.logo != ''"></Image>
-                        <Image src="~/images/no-image-logo.jpg" *ngIf="app_data.logo == ''"></Image>
+                        <Image [src]="app_data.logo" *ngIf="app_data.logo != '' || app_data.logo != null"></Image>
+                        <Image src="~/images/no-image-logo.jpg" *ngIf="app_data.logo == '' || app_data.logo == null"></Image>
                     </StackLayout>
                     <Label fontSize="15" VerticalAlignment="center" textAlignment="center" [text]="app_data.business_name"></Label>
                 </StackLayout>

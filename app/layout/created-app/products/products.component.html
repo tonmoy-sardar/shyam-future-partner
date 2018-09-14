@@ -5,48 +5,49 @@
 
     <StackLayout orientation="vertical">
         <Button textWrap="true" class="btn btn-primary simple-btn" (tap)="addProdCat()">
-        <FormattedString>
-            <Span class="fa fa-plus" [text]="'fa-plus' | fonticon"></Span>
-            <Span text=" Add New Category"></Span>
-        </FormattedString>
-    </Button>
+            <FormattedString>
+                <Span class="fa fa-plus" [text]="'fa-plus' | fonticon"></Span>
+                <Span text=" Add New Category"></Span>
+            </FormattedString>
+        </Button>
 
         <Accordion [items]="category_list" itemTapped="tapped" class="category_product_accordian" separatorColor="transparent">
 
             <ng-template accordionHeaderTemplate let-item="item" let-i="index" marginBottom="30">
-                <GridLayout columns="*,*,40,40" rows="*" class="category_heading add-product-list" borderWidth="1" borderColor="#ccc" backgroundColor="#fff">
+                <GridLayout textAlignment="center" VerticalAlignment="center" columns="*,*,40,40,40" rows="*" class="category_heading add-product-list action-section" borderWidth="1" borderColor="#ccc" backgroundColor="#fff">
                     <Label [text]="item.category_name" textWrap="true" row="0" col="0"></Label>
-                    <StackLayout orientation="horizontal" *ngIf="serviceType ==1" row="0" col="1" (tap)="addProd(item.id)">
-                        <Label class="fa fa-plus" [text]="'fa-plus' | fonticon"></Label>
-                        <Label text="Add Product" textWrap="true"></Label>
+                    <StackLayout textAlignment="center" VerticalAlignment="center" orientation="horizontal" *ngIf="serviceType ==1" row="0" col="1" (tap)="addProd(item.id)">
+                        <Label textAlignment="center" VerticalAlignment="center" class="fa icon-squre" [text]="'fa-plus' | fonticon"></Label>
+                        <Label class="icon-text" textAlignment="center" VerticalAlignment="center" text="Add Product" textWrap="true"></Label>
                     </StackLayout>
-                    <StackLayout orientation="horizontal" *ngIf="serviceType ==2" row="0" col="1" [nsRouterLink]="['/created-app/', app_id, 'add-service', item.id]">
-                        <Label class="fa fa-plus" [text]="'fa-plus' | fonticon"></Label>
+                    <StackLayout orientation="horizontal" *ngIf="serviceType ==2" row="0" col="1" (tap)="addService(item.id)">
+                        <Label class="fa icon-next" [text]="'fa-plus' | fonticon"></Label>
                         <Label text="Add Service" textWrap="true"></Label>
                     </StackLayout>
-                    <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="2" (tap)="editProdCat(item.id)"></Label>
-                    <Label class="fa fa-trash" [text]="'fa-trash' | fonticon" row="0" col="3" (tap)="deleteProductCategory(item.id)"></Label>
+                    <Label class="fa icon-st" [text]="'fa-edit' | fonticon" row="0" col="2" (tap)="editProdCat(item.id)"></Label>
+                    <Label class="fa icon-next" [text]="'fa-trash' | fonticon" row="0" col="3" (tap)="deleteProductCategory(item.id)"></Label>
+                    <Label class="fa icon-next" [text]="'fa-eye' | fonticon" row="0" col="4"></Label>
                 </GridLayout>
             </ng-template>
             <ng-template accordionItemTemplate let-item="item" let-parent="parentIndex" let-even="even" let-child="childIndex">
                 <StackLayout class="product_list" borderRightWidth="1" borderLeftWidth="1" borderColor="#ccc">
                     <CardView class="whiteCard" *ngIf="serviceType ==1">
-                        <GridLayout rows="*" columns="*,*,40,40" padding="5" verticalAlignment="center" (tap)="editProd(item.id)">
+                        <GridLayout rows="*" columns="*,*,40,40" padding="5" class="action-section" verticalAlignment="center" (tap)="editProd(item.id)">
                             <Label [text]="item.product_name" textWrap="true" row="0" col="0" verticalAlignment="center" class="product_name"></Label>
                             <StackLayout row="0" col="1" verticalAlignment="center" orientation="horizontal">
                                 <Label [text]="item.discounted_price" class="discounted_price" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
                                 <Label [text]="item.price" class="original_price" textWrap="true" [ngClass]="[item.discounted_price > 0 ? 'isDiscount' : '']"></Label>
                                 <Label [text]="getDiscount(item.price,item.discounted_price)" class="discount" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
                             </StackLayout>
-                            <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="2"></Label>
-                            <Label class="fa fa-trash" [text]="'fa-trash' | fonticon" row="0" col="3" (tap)="deleteProduct(item.id)"></Label>
+                            <Label class="fa icon-next" [text]="'fa-edit' | fonticon" row="0" col="2"></Label>
+                            <Label class="fa icon-next" [text]="'fa-trash' | fonticon" row="0" col="3" (tap)="deleteProduct(item.id)"></Label>
                         </GridLayout>
                     </CardView>
-                    <CardView class="whiteCard" *ngIf="serviceType ==2">
-                        <GridLayout rows="*" columns="*,40,40" padding="5" verticalAlignment="center" [nsRouterLink]="['/created-app/', app_id, 'edit-service', item.id]">
+                    <CardView class="action-section" *ngIf="serviceType ==2">
+                        <GridLayout rows="*" columns="*,40,40" verticalAlignment="center" textAlignment="center" (tap)="editService(item.id)">
                             <Label [text]="item.product_name" textWrap="true" row="0" col="0" verticalAlignment="center" class="product_name"></Label>
-                            <Label class="fa fa-edit" [text]="'fa-edit' | fonticon" row="0" col="1"></Label>
-                            <Label class="fa fa-trash" [text]="'fa-trash' | fonticon" row="0" col="2" (tap)="deleteProduct(item.id)"></Label>
+                            <Label class="fa icon-next" [text]="'fa-edit' | fonticon" row="0" col="1"></Label>
+                            <Label class="fa icon-next" [text]="'fa-trash' | fonticon" row="0" col="2" (tap)="deleteProduct(item.id)"></Label>
                         </GridLayout>
                     </CardView>
                 </StackLayout>
@@ -61,6 +62,6 @@
 
         </Accordion>
         <Button *ngIf="key != ''" class="btn btn-primary simple-btn" text="Next" (tap)="next()">
-    </Button>
+        </Button>
     </StackLayout>
 </StackLayout>

@@ -118,7 +118,27 @@ ActionBar {
     width: 30;
     text-align: center;
     line-height: 25;
-    padding-top: 8;
+    padding-top: 10;
+}
+
+.action-section .icon-squre {
+    background-color: green;
+    color: #fff;
+    font-size: 10;
+    display: inline-block;
+    height: 25;
+    text-align: center;
+    padding: 7, 5;
+}
+
+.action-section .icon-text {
+    background-color: #6a6a6a;
+    color: #fff;
+    font-size: 8;
+    display: inline-block;
+    height: 25;
+    text-align: left;
+    padding: 7, 5;
 }
 
 .action-section .icon-next {
@@ -131,7 +151,7 @@ ActionBar {
     width: 30;
     text-align: center;
     line-height: 25;
-    padding-top: 9;
+    padding-top: 10;
 }
 
 .action-section .action-text {

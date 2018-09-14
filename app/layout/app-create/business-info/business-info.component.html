@@ -12,10 +12,7 @@
                             <StackLayout orientation="vertical">
                                 <StackLayout class="create-app-icon" (tap)="pickImage()">
                                     <Image [src]="logo" *ngIf="logo != ''"></Image>
-                                    <Image src="~/images/no-image-logo.jpg" *ngIf="logo == ''"></Image>
-                                    <!-- <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa change_logo" [text]="'fa-camera' | fonticon" width="20" height="20"></Label> -->
-
-                                    <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa change_logo" text="Edit" width="20" height="20"></Label>
+                                    <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa change_logo" [text]="'fa-camera' | fonticon" width="20" height="20" *ngIf="logo == ''"></Label>
                                 </StackLayout>
                                 <Label fontSize="15" VerticalAlignment="center" textAlignment="center" text="Upload Logo"></Label>
                             </StackLayout>
@@ -28,7 +25,7 @@
                                 returnKeyType="next" formControlName="business_name" [ngClass]="displayFieldCss('business_name')"
                                 borderRadius="2" borderColor="#6c6969"></TextField>
                             <StackLayout *ngIf="isFieldValid('business_name')" class="invalid-feedback">
-                                <Label fontSize="8" text="Name Of Your Business is required pull-right"></Label>
+                                <Label fontSize="8" text="Name Of Your Business is required"></Label>
                             </StackLayout>
                         </StackLayout>
 

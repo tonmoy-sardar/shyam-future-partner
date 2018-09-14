@@ -61,7 +61,7 @@ export class AddProductCategoyComponent implements OnInit {
         private location: Location,
     ) {
         this.feedback = new Feedback();
-     }
+    }
 
     ngOnInit() {
         var full_location = this.location.path().split('/');
@@ -86,18 +86,19 @@ export class AddProductCategoyComponent implements OnInit {
             this.CreatedAppService.createProductCategory(this.product_category_data).subscribe(
                 res => {
 
-                    this.feedback.success({
-                        title: 'Category added successfully',
-                        backgroundColor: new Color("green"),
-                        titleColor: new Color("black"),
-                        position: FeedbackPosition.Bottom,
-                        type: FeedbackType.Custom
-                      });
+
                     this.loader.hide();
                     if (this.key != '') {
                         this.router.navigate(['/created-app/' + this.app_id + '/products' + '/new'])
                     }
                     else {
+                        this.feedback.success({
+                            title: 'Category added successfully',
+                            backgroundColor: new Color("green"),
+                            titleColor: new Color("black"),
+                            position: FeedbackPosition.Bottom,
+                            type: FeedbackType.Custom
+                        });
                         this.router.navigate(['/created-app/' + this.app_id + '/products'])
                     }
 

@@ -65,7 +65,7 @@ export class OrderDetailsComponent implements OnInit {
         this.loader.show(this.lodaing_options);
         this.createdAppService.getAppOrderDetails(id).subscribe(
             res => {
-                this.order_details = res[0];
+                this.order_details = res;
                 this.visible_key = true
                 this.loader.hide();
             },

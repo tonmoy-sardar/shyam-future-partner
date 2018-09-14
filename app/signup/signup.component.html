@@ -17,7 +17,7 @@
 
                     <StackLayout class="input-filld" row="1">
                         <TextField class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" hint="Contact No." returnKeyType="next" formControlName="contact_no" [ngClass]="displayFieldCss('contact_no')" height="35" padding="10"
-                            fontSize="12"></TextField>
+                            fontSize="12" keyboardType="number"></TextField>
                         <StackLayout *ngIf="isFieldValid('contact_no')" class="invalid-feedback">
                             <Label fontSize="8" text="Please enter valid phone number"></Label>
                         </StackLayout>
@@ -25,14 +25,15 @@
 
 
                     <StackLayout class="input-filld" row="2">
-                        <TextField class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" hint="Email id" returnKeyType="next" formControlName="email" [ngClass]="displayFieldCss('email')" height="35" padding="10" fontSize="12"></TextField>
+                        <TextField class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" hint="Email id" returnKeyType="next" formControlName="email" [ngClass]="displayFieldCss('email')" height="35" padding="10" fontSize="12"
+                            keyboardType="email"></TextField>
                         <StackLayout *ngIf="isFieldValid('email')" class="invalid-feedback">
                             <Label fontSize="8" text="Please enter a valid email address"></Label>
                         </StackLayout>
                     </StackLayout>
 
                     <StackLayout class="input-filld" row="3">
-                        <TextField class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" hint="Password" returnKeyType="next" formControlName="password" [ngClass]="displayFieldCss('password')" height="35" padding="10" fontSize="12"
+                        <TextField class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" hint="Password" returnKeyType="done" formControlName="password" [ngClass]="displayFieldCss('password')" height="35" padding="10" fontSize="12"
                             secure="true"></TextField>
                         <StackLayout *ngIf="isFieldValid('password')" class="invalid-feedback">
                             <Label fontSize="8" text="Please enter password"></Label>
