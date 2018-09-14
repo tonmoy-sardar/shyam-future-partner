@@ -11,6 +11,7 @@ import { LoadingIndicator } from "nativescript-loading-indicator";
 import { Location } from '@angular/common';
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'edit-business-images',
@@ -31,7 +32,7 @@ export class EditBusinessImagesComponent implements OnInit {
         fullscreen: false,
         viewContainerRef: this.vcRef
     };
-    gallery_images: Array<any> = [];
+    gallery_images: any = [];
     loader = new LoadingIndicator();
     lodaing_options = {
         message: 'Loading...',
@@ -65,8 +66,10 @@ export class EditBusinessImagesComponent implements OnInit {
         private vcRef: ViewContainerRef,
         private CreatedAppService: CreatedAppService,
         private location: Location,
+        private exploreService: ExploreService
     ) {
         this.feedback = new Feedback();
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {
@@ -75,27 +78,16 @@ export class EditBusinessImagesComponent implements OnInit {
         if (full_location.length > 4) {
             this.key = full_location[4].trim();
         }
-        this.getAppDetails();
+        this.getAppBusinessImages(this.app_id);
     }
 
-    getAppDetails() {
+    getAppBusinessImages(id) {
+        
         this.loader.show(this.lodaing_options);
-        this.CreatedAppService.getCreatedAppDetails(this.app_id).subscribe(
+        this.CreatedAppService.getAppBusinessImages(id).subscribe(
             res => {
                 console.log(res)
-                this.app_details = res;
-                this.gallery_images = [];
-                if (this.app_details.app_imgs.length > 0) {
-                    this.app_details.app_imgs.forEach(x => {
-                        var data = {
-                            id: x.id,
-                            app_master_id: x.app_master_id,
-                            app_img: Globals.img_base_url + x.app_img
-                        }
-                        this.gallery_images.push(data)
-                    })
-                }
-
+                this.gallery_images = res;
                 this.visible_key = true
                 this.loader.hide();
             },
@@ -160,7 +152,7 @@ export class EditBusinessImagesComponent implements OnInit {
 
 
     updateBusinessImages(data) {
-        this.loader.show(this.lodaing_options);
+
         this.CreatedAppService.updateBusinessImages(data).subscribe(
             res => {
                 if (this.key == '') {
@@ -172,13 +164,13 @@ export class EditBusinessImagesComponent implements OnInit {
                         type: FeedbackType.Custom
                     });
                 }
-                console.log(this.app_id)
-                this.getAppDetails();
+
+                this.getAppBusinessImages(this.app_id);
                 console.log(res)
             },
             error => {
                 console.log(error)
-                this.loader.hide();
+  
             }
         )
     }

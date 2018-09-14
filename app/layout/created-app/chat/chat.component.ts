@@ -8,6 +8,7 @@ import { getString, setString, getBoolean, setBoolean, clear } from "application
 require("nativescript-websockets");
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { NotificationService } from "../../../core/services/notification.service";
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'chat',
@@ -56,9 +57,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         private router: RouterExtensions,
         private zone: NgZone,
         private CreatedAppService: CreatedAppService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private exploreService: ExploreService
     ) {
-
+        exploreService.homePageStatus(false);
         this.messages = [];
         this.message = "";
     }

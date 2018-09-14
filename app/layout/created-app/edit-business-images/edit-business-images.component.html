@@ -9,7 +9,7 @@
                 shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickBusinessImages(item.id)">
-                        <Image [src]="item.app_img" *ngIf="item.app_img != ''"></Image>
+                        <Image [src]="item.app_images" *ngIf="item.app_images != ''"></Image>
                         <Label fontSize="15" class="fa change_logo" [text]="'fa-edit' | fonticon"></Label>
                     </StackLayout>
                 </StackLayout>

@@ -25,7 +25,7 @@ export class AppComponent {
         application.android.on(application.AndroidApplication.activityBackPressedEvent, (args: any) => {
             if (this.router.canGoBack()) {
                 args.cancel = true;
-                this.router.back();
+                // this.router.back();
             } else {
                 args.cancel = false;
             }

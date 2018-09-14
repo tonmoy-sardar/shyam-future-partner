@@ -12,7 +12,7 @@
                         <Label row="0" col="1" [text]="order_details.price" class="body" verticalAlignment="center"></Label>
                         <Label row="1" col="1" *ngIf="!order_details?.is_paid" text="Not Paid"></Label>
                         <Label row="1" col="1" *ngIf="order_details?.is_paid" text="Paid"></Label>
-                        <Label row="0" col="2" [text]="order_details.created_at | date:'yy-mm-dd'" class="body" verticalAlignment="center"></Label>
+                        <Label row="0" col="2" [text]="order_details.created_at | date:'dd-MM-yyyy'" class="body" verticalAlignment="center"></Label>
                         <Label row="1" col="2" *ngIf="!order_details?.delivery_status" text="Not Delivered"></Label>
                         <Label row="1" col="2" *ngIf="order_details?.delivery_status" text="Delivered"></Label>
                     </GridLayout>

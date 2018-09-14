@@ -12,6 +12,7 @@ import { UploadSingleImageModalComponent } from "../../../core/component/upload-
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
 var ImageSourceModule = require("image-source");
+import { ExploreService } from "../../../core/services/explore.service";
 
 @Component({
     selector: 'edit-product',
@@ -75,8 +76,10 @@ export class EditProductComponent implements OnInit {
         private location: Location,
         private modal: ModalDialogService,
         private vcRef: ViewContainerRef,
+        private exploreService: ExploreService
     ) {
         this.feedback = new Feedback();
+        exploreService.homePageStatus(false);
     }
 
     ngOnInit() {
