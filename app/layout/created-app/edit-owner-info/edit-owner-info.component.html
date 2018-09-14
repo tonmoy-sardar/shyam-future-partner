@@ -1,12 +1,12 @@
 <ScrollView row="0">
-    <StackLayout class="full-dashboard">
+    <StackLayout class="full-dashboard" *ngIf="visible_key">
         <StackLayout class="form" [formGroup]="form" novalidate>
             <FlexboxLayout marginBottom="30" flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
                 <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="1" shadowOffsetHeight="1" alignSelf="flex-start">
                     <StackLayout orientation="vertical" (tap)="pickLogo()">
                         <StackLayout class="app-icon">
-                            <Image [src]="owner_details.owner_pic" *ngIf="owner_details.owner_pic != ''"></Image>
-                            <Image src="~/images/no-image-logo.jpg" *ngIf="owner_details.owner_pic == ''"></Image>
+                            <Image [src]="owner_details.owner_pic" *ngIf="owner_details.owner_pic != '' || owner_details.owner_pic != null"></Image>
+                            <Image src="~/images/no-image-logo.jpg" *ngIf="owner_details.owner_pic == '' || owner_details.owner_pic == null"></Image>
                             <Label fontSize="15" class="fa change_logo" [text]="'fa-edit' | fonticon"></Label>
                         </StackLayout>
                     </StackLayout>
