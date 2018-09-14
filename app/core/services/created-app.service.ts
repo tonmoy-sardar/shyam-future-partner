@@ -148,6 +148,12 @@ export class CreatedAppService {
     return this.http.put(Globals.apiEndpoint + 'app_subscription/' + id + '/', data)
   }
 
+
+  getAppBusinessImages(id) {
+    return this.http.get(Globals.apiEndpoint + 'app_business_images/' + id + '/')
+  }
+
+  
 }
 
 
