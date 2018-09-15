@@ -1,0 +1,60 @@
+<ScrollView row="0">
+    <StackLayout padding="10" *ngIf="visible_key">
+        <Label text="Subscription Details" textWrap="true" class="m-b-30" textAlignment="center" class="heading"></Label>
+        <Label textAlignment="center" fontSize="15" lineHeight="10" text="App details:" class="m-t-30" textWrap="true"></Label>
+        <StackLayout horizontalAlignment="right" verticalAlignment="center" backgroundColor="#fff">
+            <GridLayout rows="*,*,*" verticalAlignment="center">
+                <Label row="0" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Name - "></Span>
+                        <Span [text]="subscription_details.appmaster_data.business_name"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="1" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Owner name - "></Span>
+                        <Span [text]="subscription_details.appmaster_data.owner_name"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="2" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Category - "></Span>
+                        <Span [text]="subscription_details.appmaster_data.category"></Span>
+                    </FormattedString>
+                </Label>
+            </GridLayout>
+        </StackLayout>
+        <Label textAlignment="center" fontSize="15" lineHeight="10" text="Subscription information:" class="m-t-30"
+            textWrap="true"></Label>
+        <StackLayout horizontalAlignment="right" verticalAlignment="center" backgroundColor="#fff">
+            <GridLayout rows="*,*,*,*" verticalAlignment="center">
+                <Label row="0" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Created Date - "></Span>
+                        <Span [text]="subscription_details.created_at | date:'dd-MM-yyyy'"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="1" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Validation Untill- "></Span>
+                        <Span [text]="subscription_details.valid_until | date:'dd-MM-yyyy'"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="2" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Subscription Type - "></Span>
+                        <Span [text]="subscription_details.subscription_type.type_name"></Span>
+                    </FormattedString>
+                </Label>
+                <Label row="3" verticalAlignment="center" textAlignment="center">
+                    <FormattedString>
+                        <Span text="Total Cost - "></Span>
+                        <Span [text]="subscription_details.total_cost"></Span>
+                    </FormattedString>
+                </Label>
+            </GridLayout>
+        </StackLayout>
+        <Button class="btn btn-primary simple-btn" text="Ok" (tap)="ok()">
+        </Button>
+    </StackLayout>
+</ScrollView>

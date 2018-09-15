@@ -153,6 +153,10 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'app_business_images/' + id + '/')
   }
 
+  getSubscriptionDetails(id) {
+    return this.http.get(Globals.apiEndpoint + 'subscribe_app_details/' + id + '/')
+  }
+
   
 }
 

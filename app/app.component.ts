@@ -9,6 +9,10 @@ let deviceToken = "";
 import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import { NotificationService } from "./core/services/notification.service";
 import { Button } from "ui/button";
+import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
+import { Color } from "tns-core-modules/color";
+const connectivityModule = require("tns-core-modules/connectivity");
+const connectionType = connectivityModule.getConnectionType();
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
@@ -17,6 +21,7 @@ import { Button } from "ui/button";
 export class AppComponent {
 
     @ViewChild("button") button: ElementRef;
+    private feedback: Feedback;
     constructor(
         private router: RouterExtensions,
         private notificationService: NotificationService
@@ -51,6 +56,32 @@ export class AppComponent {
                 console.log(`firebase.init error: ${error}`);
             }
         );
+
+        // network connection issue
+        this.feedback = new Feedback();
+        switch (connectionType) {
+            case connectivityModule.connectionType.none:
+                // Denotes no Internet connection.
+                console.log("No connection");
+                this.feedback.error({
+                    title: "No connection",
+                    backgroundColor: new Color("red"),
+                    titleColor: new Color("black"),
+                    position: FeedbackPosition.Bottom,
+                    type: FeedbackType.Custom
+                });
+                break;
+            case connectivityModule.connectionType.wifi:
+                // Denotes a WiFi connection.
+                console.log("WiFi connection");
+                break;
+            case connectivityModule.connectionType.mobile:
+                // Denotes a mobile connection, i.e. cellular network or WAN.
+                console.log("Mobile connection");
+                break;
+            default:
+                break;
+        }
 
 
     }

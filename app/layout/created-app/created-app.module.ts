@@ -24,6 +24,7 @@ import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { EditSocialMediaComponent } from "./edit-social-media/edit-social-media.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { PaymentSuccessComponent } from "./payment-success/payment-success.component";
+import { SubscriptionDetailsComponent } from "./subscription-details/subscription-details.component";
 
 import { CoreModule } from "../../core/core.module";
 
@@ -54,7 +55,8 @@ import { CoreModule } from "../../core/core.module";
         OrderDetailsComponent,
         EditSocialMediaComponent,
         PaymentComponent,
-        PaymentSuccessComponent
+        PaymentSuccessComponent,
+        SubscriptionDetailsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
