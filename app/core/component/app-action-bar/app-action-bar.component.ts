@@ -52,6 +52,7 @@ export class AppActionBarComponent implements OnInit {
                 this.visible_key = true;
             },
             error => {
+                this.visible_key = true;
                 console.log(error)
             }
         )
