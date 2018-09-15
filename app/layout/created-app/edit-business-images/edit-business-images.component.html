@@ -5,21 +5,20 @@
 
 
         <FlexboxLayout flexWrap="wrap" justifyContent="space-around" alignItems="flex-start">
-            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0"
-                shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+            <CardView *ngFor="let item of gallery_images" class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickBusinessImages(item.id)">
-                        <Image [src]="item.app_images" *ngIf="item.app_images != ''"></Image>
-                        <Label fontSize="15" class="fa change_logo" [text]="'fa-edit' | fonticon"></Label>
+                        <AbsoluteLayout class="camera-icon" paddingLeft="10">
+                            <Image borderColor="#d3d3d3" borderWidth="1" [src]="item.app_images" *ngIf="item.app_images != ''"></Image>
+                            <Label backgroundColor="#cb202d" color="#fff" fontSize="8" borderRadius="50%" class="fa change_logo  upload-image" [text]="'fa-edit' | fonticon"></Label>
+                        </AbsoluteLayout>
                     </StackLayout>
                 </StackLayout>
             </CardView>
-            <CardView class="card" *ngIf="gallery_images.length < 3" elevation="0" radius="0" shadowOpacity="0"
-                shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
+            <CardView class="card" *ngIf="gallery_images.length < 3" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0" alignSelf="flex-start">
                 <StackLayout orientation="vertical">
                     <StackLayout class="app-icon" (tap)="pickNewBusinessImages()">
-                        <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa" [text]="'fa-camera' | fonticon"
-                            width="30" height="30"></Label>
+                        <Label color="#cb202d" class="upload-image " VerticalAlignment="center" class="fa" [text]="'fa-camera' | fonticon" width="30" height="30"></Label>
                         <Label class="app-name" text="New"></Label>
                     </StackLayout>
                 </StackLayout>
