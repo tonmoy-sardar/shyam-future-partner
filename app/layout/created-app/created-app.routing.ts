@@ -24,6 +24,7 @@ import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { EditSocialMediaComponent } from "./edit-social-media/edit-social-media.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { PaymentSuccessComponent } from "./payment-success/payment-success.component";
+import { SubscriptionDetailsComponent } from "./subscription-details/subscription-details.component";
 
 const routes: Routes = [
     {
@@ -58,6 +59,7 @@ const routes: Routes = [
             { path: "edit-social-media", component: EditSocialMediaComponent },
             { path: "payment", component: PaymentComponent },
             { path: "payment-success", component: PaymentSuccessComponent },
+            { path: "subscription-details", component: SubscriptionDetailsComponent },
         ]
     }
 
