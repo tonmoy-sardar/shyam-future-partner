@@ -1,60 +1,47 @@
 <ScrollView row="0">
-    <StackLayout padding="10" *ngIf="visible_key">
+    <StackLayout class="full-dashboard" *ngIf="visible_key">
         <Label text="Subscription Details" textWrap="true" class="m-b-30" textAlignment="center" class="heading"></Label>
-        <Label textAlignment="center" fontSize="15" lineHeight="10" text="App details:" class="m-t-30" textWrap="true"></Label>
-        <StackLayout horizontalAlignment="right" verticalAlignment="center" backgroundColor="#fff">
-            <GridLayout rows="*,*,*" verticalAlignment="center">
-                <Label row="0" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Name - "></Span>
-                        <Span [text]="subscription_details.appmaster_data.business_name"></Span>
-                    </FormattedString>
-                </Label>
-                <Label row="1" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Owner name - "></Span>
-                        <Span [text]="subscription_details.appmaster_data.owner_name"></Span>
-                    </FormattedString>
-                </Label>
-                <Label row="2" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Category - "></Span>
-                        <Span [text]="subscription_details.appmaster_data.category"></Span>
-                    </FormattedString>
-                </Label>
-            </GridLayout>
-        </StackLayout>
-        <Label textAlignment="center" fontSize="15" lineHeight="10" text="Subscription information:" class="m-t-30"
-            textWrap="true"></Label>
-        <StackLayout horizontalAlignment="right" verticalAlignment="center" backgroundColor="#fff">
-            <GridLayout rows="*,*,*,*" verticalAlignment="center">
-                <Label row="0" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Created Date - "></Span>
-                        <Span [text]="subscription_details.created_at | date:'dd-MM-yyyy'"></Span>
-                    </FormattedString>
-                </Label>
-                <Label row="1" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Validation Untill- "></Span>
-                        <Span [text]="subscription_details.valid_until | date:'dd-MM-yyyy'"></Span>
-                    </FormattedString>
-                </Label>
-                <Label row="2" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Subscription Type - "></Span>
-                        <Span [text]="subscription_details.subscription_type.type_name"></Span>
-                    </FormattedString>
-                </Label>
-                <Label row="3" verticalAlignment="center" textAlignment="center">
-                    <FormattedString>
-                        <Span text="Total Cost - "></Span>
-                        <Span [text]="subscription_details.total_cost"></Span>
-                    </FormattedString>
-                </Label>
-            </GridLayout>
-        </StackLayout>
-        <Button class="btn btn-primary simple-btn" text="Ok" (tap)="ok()">
-        </Button>
+        <StackLayout width="100%" textAlignment="center" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+
+        <CardView class="action-section">
+            <StackLayout>
+                <Label textAlignment="left" fontSize="15" lineHeight="10" text="App details:" paddingLeft="10" class="m-t-10" textWrap="true"></Label>
+                <StackLayout width="100%" textAlignment="center" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+                <StackLayout>
+                    <GridLayout rows="*,*,*" columns="*,*" class="list-group-item" padding="10" verticalAlignment="center">
+                        <Label row="0" col="0" text="Name" verticalAlignment="center"></Label>
+                        <Label row="0" col="1" [text]="subscription_details[0].appmaster_data.business_name" class="body" verticalAlignment="center"></Label>
+                        <Label row="1" col="0" text="Owner name" verticalAlignment="center"></Label>
+                        <Label row="1" col="1" [text]="subscription_details[0].appmaster_data.owner_name" class="body" verticalAlignment="center"></Label>
+                        <Label row="2" col="0" text="Category" verticalAlignment="center"></Label>
+                        <Label row="2" col="1" [text]="subscription_details[0].appmaster_data.category" class="body" verticalAlignment="center"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </CardView>
+
+        <StackLayout width="100%" textAlignment="center" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+
+        <CardView class="action-section">
+            <StackLayout>
+                <Label textAlignment="left" fontSize="15" lineHeight="10" text="Subscription information:" paddingLeft="10" class="m-t-10" textWrap="true"></Label>
+                <StackLayout width="100%" textAlignment="center" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+                <StackLayout>
+                    <GridLayout rows="*,*,*,*" columns="*,*" class="list-group-item" padding="10" verticalAlignment="center">
+                        <Label row="0" col="0" text="Created Date" verticalAlignment="center"></Label>
+                        <Label row="0" col="1" [text]="subscription_details[0].created_at | date:'dd-MM-yyyy'" class="body" verticalAlignment="center"></Label>
+                        <Label row="1" col="0" text="Validation Untill" verticalAlignment="center"></Label>
+                        <Label row="1" col="1" [text]="subscription_details[0].valid_until | date:'dd-MM-yyyy'" class="body" verticalAlignment="center"></Label>
+                        <Label row="2" col="0" text="Subscription Type" verticalAlignment="center"></Label>
+                        <Label row="2" col="1" [text]="subscription_details[0].subscription_type.type_name" class="body" verticalAlignment="center"></Label>
+                        <Label row="3" col="0" text="Total Cost" verticalAlignment="center"></Label>
+                        <Label row="3" col="1" [text]="subscription_details[0].total_cost" class="body" verticalAlignment="center"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </CardView>
+
+        <Button class="btn btn-primary simple-btn" text="Ok" (tap)="ok()"></Button>
+        
     </StackLayout>
 </ScrollView>
