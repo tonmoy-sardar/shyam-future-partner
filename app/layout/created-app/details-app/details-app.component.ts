@@ -88,6 +88,7 @@ export class DetailsAppComponent implements OnInit {
     this.loader.show(this.lodaing_options);
     this.CreatedAppService.getCreatedAppDetails(id).subscribe(
       res => {
+        console.log(res)
         this.app_details = res;
         this.app_data.logo = this.app_details.logo;
         this.app_data.business_name = this.app_details.business_name;
