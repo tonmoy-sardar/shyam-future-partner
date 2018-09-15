@@ -5,9 +5,11 @@
                 <CardView class="card" elevation="0" borderColor="#6c6969" shadowOffsetWidth="1" shadowOffsetHeight="1" alignSelf="flex-start">
                     <StackLayout orientation="vertical" (tap)="pickLogo()">
                         <StackLayout class="app-icon">
-                            <Image [src]="owner_details.owner_pic" *ngIf="owner_details.owner_pic != '' || owner_details.owner_pic != null"></Image>
-                            <Image src="~/images/no-image-logo.jpg" *ngIf="owner_details.owner_pic == '' || owner_details.owner_pic == null"></Image>
-                            <Label fontSize="15" class="fa change_logo" [text]="'fa-edit' | fonticon"></Label>
+                            <AbsoluteLayout class="camera-icon" paddingLeft="10">
+                                <Image borderColor="#d3d3d3" borderWidth="1" [src]="owner_details.owner_pic" *ngIf="owner_details.owner_pic != '' || owner_details.owner_pic != null"></Image>
+                                <Image borderColor="#d3d3d3" borderWidth="1" src="~/images/no-image-logo.jpg" *ngIf="owner_details.owner_pic == '' || owner_details.owner_pic == null"></Image>
+                                <Label backgroundColor="#cb202d" color="#fff" fontSize="8" borderRadius="50%" class="fa change_logo upload-image" [text]="'fa-edit' | fonticon"></Label>
+                            </AbsoluteLayout>
                         </StackLayout>
                     </StackLayout>
                 </CardView>
@@ -22,10 +24,11 @@
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="1">
-                            <DropDown #dd class="dropdown m-t-10" formControlName="owner_designation" [items]="designations" selectedIndex="{{ selectedIndex }}" [(ngModel)]="owner_details.owner_designation" [hint]="hint" (selectedIndexChanged)="onchange($event)" height="40" fontSize="12" borderWidth="1" borderColor="#dfdfdf"></DropDown>
+                            <DropDown #dd class="dropdown m-t-10" formControlName="owner_designation" [items]="designations" selectedIndex="{{ selectedIndex }}" [(ngModel)]="owner_details.owner_designation" [hint]="hint" (selectedIndexChanged)="onchange($event)" height="40" fontSize="12"
+                                borderWidth="1" borderColor="#dfdfdf"></DropDown>
                         </StackLayout>
                         <StackLayout class="input-filld" row="2">
-                            <TextField hint="Establishment Year" keyboardType="number" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="business_est_year" [(ngModel)]="owner_details.business_est_year"  height="40" padding="10" fontSize="12"></TextField>
+                            <TextField hint="Establishment Year" keyboardType="number" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="business_est_year" [(ngModel)]="owner_details.business_est_year" height="40" padding="10" fontSize="12"></TextField>
                         </StackLayout>
                         <StackLayout class="input-filld" row="3">
                             <TextView hint="Business Location" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="store_address" [(ngModel)]="owner_details.store_address" (tap)="searchLocation()" height="100" padding="10" fontSize="12"></TextView>

@@ -180,10 +180,11 @@ ActionBar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.upload-image {
+
+/* .upload-image {
     background-color: #cb202d;
     color: #fff;
-}
+} */
 
 .pull-right {
     float: right;
@@ -238,4 +239,14 @@ DropDown Label {
 
 .full-content {
     padding: 10;
+}
+
+.camera-icon .change_logo {
+    top: 32;
+    left: 33;
+    padding: 7;
+}
+
+.camera-icon Image {
+    border: 1px solid #000;
 }
