@@ -18,16 +18,16 @@
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="2">
-                            <TextField hint="Price" class="input input-border cyan-border m-t-10" height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="price" [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')"></TextField>
+                            <TextField hint="Price" class="input input-border cyan-border m-t-10" height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="price" [(ngModel)]="product_data.price" [ngClass]="displayFieldCss('price')" keyboardType="number"></TextField>
                             <StackLayout *ngIf="isFieldValid('price')" class="invalid-feedback">
                                 <Label text="Price is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="3">
-                            <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10"height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="discounted_price" [(ngModel)]="product_data.discounted_price"></TextField>
+                            <TextField hint="Discounted Price" class="input input-border cyan-border m-t-10"height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="discounted_price" [(ngModel)]="product_data.discounted_price" keyboardType="number"></TextField>
                         </StackLayout>
                         <StackLayout class="input-filld" row="4">
-                            <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10" height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="packing_charges" [(ngModel)]="product_data.packing_charges"></TextField>
+                            <TextField hint="Packing Charges" class="input input-border cyan-border m-t-10" height="40" padding="10" fontSize="12" returnKeyType="next" formControlName="packing_charges" [(ngModel)]="product_data.packing_charges" keyboardType="number"></TextField>
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="5">

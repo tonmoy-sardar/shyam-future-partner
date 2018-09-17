@@ -157,6 +157,10 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'subscribe_app_details/' + id + '/')
   }
 
+  checkReferralCode(data){
+    return this.http.post(Globals.apiEndpoint + 'check_referral_code/', data)
+  }
+
   
 }
 

@@ -44,6 +44,9 @@ export class SignupComponent implements OnInit {
       hideBezel: true,
     }
   }
+  otpForm: FormGroup;
+  showOtpSection = false;
+  otp: string;
   constructor(
     private page: Page,
     private router: RouterExtensions,
@@ -66,7 +69,12 @@ export class SignupComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(10)
       ]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      otp_flag: [0]
+    });
+
+    this.otpForm = this.formBuilder.group({
+      otp: ['', Validators.required]
     });
 
   }
@@ -87,17 +95,19 @@ export class SignupComponent implements OnInit {
       this.loginService.signup(this.form.value).subscribe(
         res => {
           this.loader.hide();
-          this.feedback.success({
-            title: 'User is successfully created',
-            backgroundColor: new Color("green"),
+          this.otp = res.otp
+          this.showOtpSection = true;
+        },
+        error => {
+          this.loader.hide();
+          console.log(error)
+          this.feedback.error({
+            title: error.error.message,
+            backgroundColor: new Color("red"),
             titleColor: new Color("black"),
             position: FeedbackPosition.Bottom,
             type: FeedbackType.Custom
           });
-          this.router.navigate(['/login'])
-        },
-        error => {
-          console.log(error)
         }
       )
     }
@@ -106,14 +116,71 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  isFieldValid(field: string) {
-    return !this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched);
+  submitOtp() {
+    if (this.otp.toLowerCase() == this.otpForm.value.otp.toLowerCase()) {
+      this.loader.show(this.lodaing_options);
+      this.form.patchValue({
+        otp_flag: 1
+      })
+      this.loginService.signup(this.form.value).subscribe(
+        res => {
+          this.loader.hide();
+          this.feedback.success({
+            title: 'Your account is successfully created',
+            backgroundColor: new Color("green"),
+            titleColor: new Color("black"),
+            position: FeedbackPosition.Bottom,
+            type: FeedbackType.Custom
+          });
+          this.router.navigate(['/login'])
+        },
+        error => {
+          this.loader.hide();
+          console.log(error)
+        }
+      )
+    }
+    else {
+      this.feedback.error({
+        title: 'Please Enter Valid OTP',
+        backgroundColor: new Color("red"),
+        titleColor: new Color("black"),
+        position: FeedbackPosition.Bottom,
+        type: FeedbackType.Custom
+      });
+
+    }
   }
 
-  displayFieldCss(field: string) {
+  resendOtp() {
+    this.loader.show(this.lodaing_options);
+    this.loginService.signup(this.form.value).subscribe(
+      res => {
+        this.loader.hide();
+        this.otp = res.otp;
+      },
+      error => {
+        this.loader.hide();
+        console.log(error)
+        this.feedback.error({
+          title: error.error.message,
+          backgroundColor: new Color("red"),
+          titleColor: new Color("black"),
+          position: FeedbackPosition.Bottom,
+          type: FeedbackType.Custom
+        });
+      }
+    )
+  }
+
+  isFieldValid(form: FormGroup, field: string) {
+    return !form.get(field).valid && (form.get(field).dirty || form.get(field).touched);
+  }
+
+  displayFieldCss(form: FormGroup, field: string) {
     return {
-      'is-invalid': this.form.get(field).invalid && (this.form.get(field).dirty || this.form.get(field).touched),
-      'is-valid': this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched)
+      'is-invalid': form.get(field).invalid && (form.get(field).dirty || form.get(field).touched),
+      'is-valid': form.get(field).valid && (form.get(field).dirty || form.get(field).touched)
     };
   }
 

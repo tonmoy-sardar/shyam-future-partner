@@ -2,13 +2,15 @@
     <StackLayout class="full-dashboard">
         <StackLayout class="full-content">
             <StackLayout class="edit-container">
-                <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0">
+                <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
+                    shadowOffsetHeight="0">
                     <GridLayout rows="auto, auto,auto,auto,auto">
                         <StackLayout row="0">
                             <Label class="section_heading" text="Subscription Type" row="0" col="0"></Label>
                             <StackLayout *ngFor="let option of subscriptionTypeOptions">
                                 <StackLayout orientation="horizontal" verticalAlignment="center">
-                                    <CheckBox #elem [checked]="option.selected" (checkedChange)="elem.checked !== option.selected && changeCheckedRadioSubscriptionMode(option)" class="checkbox" boxType="circle"></CheckBox>
+                                    <CheckBox #elem [checked]="option.selected" (checkedChange)="elem.checked !== option.selected && changeCheckedRadioSubscriptionMode(option)"
+                                        class="checkbox" boxType="circle"></CheckBox>
                                     <StackLayout verticalAlignment="center">
                                         <Label [text]="option.text" textWrap="true" (tap)="changeCheckedRadioSubscriptionMode(option)"></Label>
                                     </StackLayout>
@@ -18,12 +20,57 @@
 
                         <StackLayout row="1">
                             <Label class="section_heading" text="Item Details"></Label>
-                            <GridLayout columns="*,*" rows="*" *ngFor="let item of priceList" orientation="vertical" verticalAlignment="center">
-                                <CheckBox textAlignment="left" row="0" col="0" [text]="item.title " checked="true" verticalAlignment="center"></CheckBox>
+                            <GridLayout columns="*,*" rows="*" *ngFor="let item of priceList" orientation="vertical"
+                                verticalAlignment="center">
+                                <CheckBox textAlignment="left" row="0" col="0" [text]="item.title " checked="true"
+                                    verticalAlignment="center"></CheckBox>
                                 <Label row="0" col="1" [text]="item.cost" textAlignment="right" verticalAlignment="center"></Label>
                             </GridLayout>
                         </StackLayout>
+
                         <StackLayout row="2">
+                            <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+                            <StackLayout>
+                                <Label text="Have Coupon Code?" textAlignment="left"></Label>
+                                <StackLayout class="input-filld" row="0" col="1">
+                                    <GridLayout columns="*,*" rows="*,*" class="form" [formGroup]="cuponForm"
+                                        novalidate>
+                                        <TextField row="0" col="0" width="50%" height="35" hint="Coupon code" class="input input-border cyan-border"
+                                            padding="0" paddingLeft="2" fontSize="12" borderRadius="2" borderColor="#6c6969"
+                                            backgroundColor="#fff" returnKeyType="next" formControlName="coupon"></TextField>
+                                        <StackLayout row="1" col="0" class="m-t-5" *ngIf="isFieldValid(cuponForm,'coupon')"
+                                            class="invalid-feedback">
+                                            <Label fontSize="8" text="Please enter coupon code"></Label>
+                                        </StackLayout>
+
+                                        <Button row="0" col="1" width="30%" class="btn btn-primary simple-btn pull-right"
+                                            text="Apply" (tap)="applyOffer()"></Button>
+                                    </GridLayout>
+                                </StackLayout>
+
+
+                            </StackLayout>
+                            <StackLayout>
+                                <Label text="Have Referral Code?" textAlignment="left"></Label>
+                                <StackLayout class="input-filld" row="0" col="1">
+                                    <GridLayout columns="*,*" rows="*,*" class="form" [formGroup]="referralForm"
+                                        novalidate>
+                                        <TextField row="0" col="0" width="50%" height="35" hint="Referral code" class="input input-border cyan-border"
+                                            padding="0" paddingLeft="2" fontSize="12" borderRadius="2" borderColor="#6c6969"
+                                            backgroundColor="#fff" returnKeyType="next" formControlName="referral_code"></TextField>
+                                        <StackLayout row="1" col="0" class="m-t-5" *ngIf="isFieldValid(referralForm,'referral_code')"
+                                            class="invalid-feedback">
+                                            <Label fontSize="8" text="Please enter referral code"></Label>
+                                        </StackLayout>
+
+                                        <Button row="0" col="1" width="30%" class="btn btn-primary simple-btn pull-right"
+                                            text="Apply" (tap)="applyReferral()"></Button>
+                                    </GridLayout>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout row="3">
                             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
                             <GridLayout columns="auto,*" rows="*" *ngIf="offer_price == 0">
                                 <Label text="Total" row="0" col="0" textAlignment="left"></Label>
@@ -39,29 +86,11 @@
                             </GridLayout>
                             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
                         </StackLayout>
-                        <StackLayout row="3">
-
-                            <StackLayout>
-                                <Label text="Have Coupon Code?" textAlignment="left"></Label>
-                                <StackLayout class="input-filld" row="0" col="1">
-                                    <GridLayout columns="*,*" rows="*,*" class="form" [formGroup]="form" novalidate>
-                                        <TextField row="0" col="0" width="50%" height="35" hint="Coupon code" class="input input-border cyan-border" padding="0" paddingLeft="2" fontSize="12" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="coupon"
-                                            [(ngModel)]="coupon"></TextField>
-                                        <StackLayout row="1" col="0" class="m-t-5" *ngIf="isFieldValid('coupon')" class="invalid-feedback">
-                                            <Label fontSize="8" text="Please enter coupon code"></Label>
-                                        </StackLayout>
-
-                                        <Button row="0" col="1" width="30%" class="btn btn-primary simple-btn pull-right" text="Apply" (tap)="applyOffer()"></Button>
-                                    </GridLayout>
-                                </StackLayout>
-
-
-                            </StackLayout>
-                            <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
-                        </StackLayout>
                         <StackLayout row="4">
-                            <Button class="btn btn-primary simple-btn" text="Proceed To Pay!" (tap)="pay()"></Button>
+                            <CheckBox #terms text="Agree" [checked]="agree_terms_condition"></CheckBox>
+                            <Label text="Terms & Conditions" (tap)="openTermsModal()"></Label>
 
+                            <Button class="btn btn-primary simple-btn" text="Proceed To Pay!" (tap)="pay()"></Button>
                         </StackLayout>
 
                     </GridLayout>

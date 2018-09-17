@@ -25,7 +25,6 @@ export class EditBusinessImagesComponent implements OnInit {
     private feedback: Feedback;
     processing = false;
     app_id: string;
-    app_details: any;
     visible_key: boolean;
     options = {
         context: {},
@@ -58,6 +57,7 @@ export class EditBusinessImagesComponent implements OnInit {
         }
     }
     key: string = '';
+    is_product_service: number;
     constructor(
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
@@ -82,12 +82,13 @@ export class EditBusinessImagesComponent implements OnInit {
     }
 
     getAppBusinessImages(id) {
-        
+
         this.loader.show(this.lodaing_options);
         this.CreatedAppService.getAppBusinessImages(id).subscribe(
             res => {
                 console.log(res)
-                this.gallery_images = res;
+                this.gallery_images = res['results'];
+                this.is_product_service = res['is_product_service']
                 this.visible_key = true
                 this.loader.hide();
             },
@@ -108,7 +109,7 @@ export class EditBusinessImagesComponent implements OnInit {
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
-                    
+
                     this.updateBusinessImages(data);
                 }
                 else if (res.gallery == true) {
@@ -117,7 +118,7 @@ export class EditBusinessImagesComponent implements OnInit {
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
-                    
+
                     this.updateBusinessImages(data);
                 }
             }
@@ -134,7 +135,7 @@ export class EditBusinessImagesComponent implements OnInit {
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
-                    
+
                     this.updateBusinessImages(data);
                 }
                 else if (res.gallery == true) {
@@ -143,7 +144,7 @@ export class EditBusinessImagesComponent implements OnInit {
                         appmaster: this.app_id,
                         app_images: 'data:image/png;base64,' + res.image
                     }
-                    
+
                     this.updateBusinessImages(data);
                 }
             }
@@ -170,14 +171,14 @@ export class EditBusinessImagesComponent implements OnInit {
             },
             error => {
                 console.log(error)
-  
+
             }
         )
     }
 
     next() {
         if (this.key != '') {
-            if (this.app_details.is_product_service != 0) {
+            if (this.is_product_service != 0) {
                 this.router.navigate(['/created-app/' + this.app_id + '/products/' + 'new'])
             }
             else {

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone} from '@angular/core';
+import { Component, OnInit, NgZone, ViewContainerRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { Location } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
@@ -9,6 +9,8 @@ import { LoadingIndicator } from "nativescript-loading-indicator"
 import { Feedback, FeedbackType, FeedbackPosition } from "nativescript-feedback";
 import { Color } from "tns-core-modules/color";
 import { ExploreService } from "../../../core/services/explore.service";
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { TermsDialogComponent } from '../../../core/component/terms-dialog/terms-dialog.component';
 
 import {
     Paytm,
@@ -24,10 +26,8 @@ import {
     styleUrls: [`payment.component.css`]
 })
 export class PaymentComponent implements OnInit {
-
-    
     private feedback: Feedback;
-    form: FormGroup;
+    cuponForm: FormGroup;
     app_id: string;
     totalPrice: number;
     priceList: any = [];
@@ -38,7 +38,6 @@ export class PaymentComponent implements OnInit {
     offerList: any = [];
     offer_price: number = 0;
     coupon_code: string;
-    coupon: string;
     visible_key: boolean;
     loader = new LoadingIndicator();
     radioOptions?: Array<RadioOption>;
@@ -83,6 +82,15 @@ export class PaymentComponent implements OnInit {
     };
     key: string = '';
     subscription_type: number;
+    referralForm: FormGroup;
+    referral_code: string;
+    referral_user_id: number;
+    options = {
+        context: {},
+        fullscreen: false,
+        viewContainerRef: this.vcRef
+    };
+    agree_terms_condition: boolean = false;
     constructor(
         private route: ActivatedRoute,
         private ngZone: NgZone,
@@ -90,8 +98,10 @@ export class PaymentComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: RouterExtensions,
         private location: Location,
-        private exploreService: ExploreService
-    ) { 
+        private exploreService: ExploreService,
+        private modal: ModalDialogService,
+        private vcRef: ViewContainerRef
+    ) {
         this.feedback = new Feedback();
         exploreService.homePageStatus(false);
     }
@@ -104,8 +114,11 @@ export class PaymentComponent implements OnInit {
         this.getSubscriptionTypeList();
         this.getOfferList();
 
-        this.form = this.formBuilder.group({
+        this.cuponForm = this.formBuilder.group({
             coupon: [null, Validators.required]
+        });
+        this.referralForm = this.formBuilder.group({
+            referral_code: [null, Validators.required]
         });
     }
 
@@ -184,6 +197,12 @@ export class PaymentComponent implements OnInit {
         }
     }
 
+    openTermsModal(app_id) {
+        this.modal.showModal(TermsDialogComponent, this.options).then(res => {
+            console.log(res);
+        })
+    }
+
     // changeCheckedRadio(radioOption: RadioOption): void {
     //     radioOption.selected = !radioOption.selected;
     //     this.address_id = radioOption.id
@@ -213,30 +232,68 @@ export class PaymentComponent implements OnInit {
     }
 
     applyOffer() {
-        var valid = this.offerList.filter(x => x.offer_code == this.coupon.toUpperCase())
-        console.log(valid)
-        if (valid.length > 0) {
-            this.offer_price = valid[0].offer_value;
-            this.coupon_code = valid[0].offer_code;
-            console.log("sdadawd")
-            this.feedback.success({
-                title: 'Coupon applied successfully',
-                backgroundColor: new Color("green"),
-                titleColor: new Color("black"),
-                position: FeedbackPosition.Bottom,
-                type: FeedbackType.Custom
-              });
+        if (this.cuponForm.valid) {
+            var valid = this.offerList.filter(x => x.offer_code == this.cuponForm.value.coupon.toUpperCase())
+            console.log(valid)
+            if (valid.length > 0) {
+                this.offer_price = valid[0].offer_value;
+                this.coupon_code = valid[0].offer_code;
+                console.log("sdadawd")
+                this.feedback.success({
+                    title: 'Coupon applied successfully',
+                    backgroundColor: new Color("green"),
+                    titleColor: new Color("black"),
+                    position: FeedbackPosition.Bottom,
+                    type: FeedbackType.Custom
+                });
+            }
+            else {
+                console.log("qweqw")
+                this.feedback.error({
+                    title: 'Invalid Coupon code!',
+                    backgroundColor: new Color("red"),
+                    titleColor: new Color("black"),
+                    position: FeedbackPosition.Bottom,
+                    type: FeedbackType.Custom
+                });
+
+            }
+        } else {
+            this.markFormGroupTouched(this.referralForm)
         }
-        else {
-            console.log("qweqw")
-            this.feedback.error({
-                title:  'Invalid Coupon code!',
-                backgroundColor: new Color("red"),
-                titleColor: new Color("black"),
-                position: FeedbackPosition.Bottom,
-                type: FeedbackType.Custom
-              });
-            
+
+    }
+    applyReferral() {
+        if (this.referralForm.valid) {
+            this.referral_code = this.referralForm.value.referral_code
+            var data = {
+                referral_code: this.referral_code
+            }
+            this.CreatedAppService.checkReferralCode(data).subscribe(
+                res => {
+                    console.log(res)
+                    this.referral_user_id = res['referral_user_id'];
+                    this.feedback.success({
+                        title: 'Referral code is applied successfully',
+                        backgroundColor: new Color("green"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                    });
+                },
+                error => {
+                    console.log(error)
+                    this.feedback.error({
+                        title: 'Invalid Referral Code!',
+                        backgroundColor: new Color("red"),
+                        titleColor: new Color("black"),
+                        position: FeedbackPosition.Bottom,
+                        type: FeedbackType.Custom
+                    });
+                }
+            )
+        } else {
+            this.markFormGroupTouched(this.referralForm)
         }
     }
     getPaidTotalAfterOffer() {
@@ -289,6 +346,9 @@ export class PaymentComponent implements OnInit {
                         var coupon = arrCoupon[0]['id'];
                         subscription_data['offer_code'] = coupon;
                     }
+                    if (this.referral_user_id != null) {
+                        subscription_data['referral_code_userid'] = this.referral_user_id;
+                    }
                     // console.log(subscription_data)
                     this.appSubscribe(subscription_data)
                 }
@@ -316,14 +376,14 @@ export class PaymentComponent implements OnInit {
         });
     }
 
-    isFieldValid(field: string) {
-        return !this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched);
+    isFieldValid(form: FormGroup, field: string) {
+        return !form.get(field).valid && (form.get(field).dirty || form.get(field).touched);
     }
 
-    displayFieldCss(field: string) {
+    displayFieldCss(form: FormGroup, field: string) {
         return {
-            'is-invalid': this.form.get(field).invalid && (this.form.get(field).dirty || this.form.get(field).touched),
-            'is-valid': this.form.get(field).valid && (this.form.get(field).dirty || this.form.get(field).touched)
+            'is-invalid': form.get(field).invalid && (form.get(field).dirty || form.get(field).touched),
+            'is-valid': form.get(field).valid && (form.get(field).dirty || form.get(field).touched)
         };
     }
 

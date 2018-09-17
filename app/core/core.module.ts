@@ -29,6 +29,8 @@ import { UploadMultipleImageModalComponent } from './component/upload-multiple-i
 import { LocationModalComponent } from './component/location-modal/location-modal.component';
 import { AppActionBarComponent } from './component/app-action-bar/app-action-bar.component';
 import { CreateAppActionBarComponent } from './component/create-app-action-bar/create-app-action-bar.component';
+import { TermsDialogComponent } from './component/terms-dialog/terms-dialog.component';
+
 @NgModule({
     imports: [
         NativeScriptCommonModule,
@@ -53,7 +55,8 @@ import { CreateAppActionBarComponent } from './component/create-app-action-bar/c
         UploadMultipleImageModalComponent,
         LocationModalComponent,
         AppActionBarComponent,
-        CreateAppActionBarComponent
+        CreateAppActionBarComponent,
+        TermsDialogComponent
     ],
     exports: [
         TNSFontIconModule,
@@ -68,12 +71,13 @@ import { CreateAppActionBarComponent } from './component/create-app-action-bar/c
         CarouselDirective,
         DropDownModule,
         AppActionBarComponent,
-        CreateAppActionBarComponent
+        CreateAppActionBarComponent,
     ],
     entryComponents: [
         UploadSingleImageModalComponent,
         UploadMultipleImageModalComponent,
-        LocationModalComponent
+        LocationModalComponent,
+        TermsDialogComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
