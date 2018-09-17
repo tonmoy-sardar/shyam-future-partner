@@ -8,8 +8,7 @@
                             <Label class="section_heading" text="Subscription Type" row="0" col="0"></Label>
                             <StackLayout *ngFor="let option of subscriptionTypeOptions">
                                 <StackLayout orientation="horizontal" verticalAlignment="center">
-                                    <CheckBox #elem [checked]="option.selected" (checkedChange)="elem.checked !== option.selected && changeCheckedRadioSubscriptionMode(option)"
-                                        class="checkbox" boxType="circle"></CheckBox>
+                                    <CheckBox #elem [checked]="option.selected" (checkedChange)="elem.checked !== option.selected && changeCheckedRadioSubscriptionMode(option)" class="checkbox" boxType="circle"></CheckBox>
                                     <StackLayout verticalAlignment="center">
                                         <Label [text]="option.text" textWrap="true" (tap)="changeCheckedRadioSubscriptionMode(option)"></Label>
                                     </StackLayout>
@@ -19,14 +18,14 @@
 
                         <StackLayout row="1">
                             <Label class="section_heading" text="Item Details"></Label>
-                            <StackLayout *ngFor="let item of priceList">
-                                <CheckBox [text]="item.title " checked="true"></CheckBox>
-                                <Label [text]="item.cost" textWrap="true"></Label>
-                            </StackLayout>
+                            <GridLayout columns="*,*" rows="*" *ngFor="let item of priceList" orientation="vertical" verticalAlignment="center">
+                                <CheckBox textAlignment="left" row="0" col="0" [text]="item.title " checked="true" verticalAlignment="center"></CheckBox>
+                                <Label row="0" col="1" [text]="item.cost" textAlignment="right" verticalAlignment="center"></Label>
+                            </GridLayout>
                         </StackLayout>
                         <StackLayout row="2">
                             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
-                            <GridLayout columns="*,*" rows="*" *ngIf="offer_price == 0">
+                            <GridLayout columns="auto,*" rows="*" *ngIf="offer_price == 0">
                                 <Label text="Total" row="0" col="0" textAlignment="left"></Label>
                                 <Label [text]="getPaidTotal()" row="0" col="1" textAlignment="right"></Label>
                             </GridLayout>
@@ -42,27 +41,27 @@
                         </StackLayout>
                         <StackLayout row="3">
 
-                            <GridLayout columns="*,*" rows="*,*">
-                                <Label text="Have Coupon Code?" row="0" col="0" textAlignment="left"></Label>
+                            <StackLayout>
+                                <Label text="Have Coupon Code?" textAlignment="left"></Label>
                                 <StackLayout class="input-filld" row="0" col="1">
-                                    <StackLayout class="form" [formGroup]="form" novalidate>
-                                        <TextField hint="Coupon Code" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"
-                                            returnKeyType="next" formControlName="coupon" [(ngModel)]="coupon"></TextField>
-                                        <StackLayout *ngIf="isFieldValid('coupon')" class="invalid-feedback">
-                                            <Label text="Please enter Coupon Code"></Label>
+                                    <GridLayout columns="*,*" rows="*,*" class="form" [formGroup]="form" novalidate>
+                                        <TextField row="0" col="0" width="50%" height="35" hint="Coupon code" class="input input-border cyan-border" padding="0" paddingLeft="2" fontSize="12" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" returnKeyType="next" formControlName="coupon"
+                                            [(ngModel)]="coupon"></TextField>
+                                        <StackLayout row="1" col="0" class="m-t-5" *ngIf="isFieldValid('coupon')" class="invalid-feedback">
+                                            <Label fontSize="8" text="Please enter coupon code"></Label>
                                         </StackLayout>
 
-                                        <Button class="btn btn-primary simple-btn" text="Apply" (tap)="applyOffer()"></Button>
-                                    </StackLayout>
+                                        <Button row="0" col="1" width="30%" class="btn btn-primary simple-btn pull-right" text="Apply" (tap)="applyOffer()"></Button>
+                                    </GridLayout>
                                 </StackLayout>
 
 
-                            </GridLayout>
+                            </StackLayout>
                             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
                         </StackLayout>
                         <StackLayout row="4">
                             <Button class="btn btn-primary simple-btn" text="Proceed To Pay!" (tap)="pay()"></Button>
-                            
+
                         </StackLayout>
 
                     </GridLayout>
