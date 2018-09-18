@@ -87,9 +87,10 @@
                             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
                         </StackLayout>
                         <StackLayout row="4">
-                            <CheckBox #terms text="Agree" [checked]="agree_terms_condition"></CheckBox>
-                            <Label text="Terms & Conditions" (tap)="openTermsModal()"></Label>
-
+                            <GridLayout rows="*" columns="auto,auto">
+                                <CheckBox #terms text="Agree" checked="false" row="0" col="0" verticalAlignment="center" (tap)="toggleTermsCheck()"></CheckBox>
+                                <Label text=" Terms & Conditions" (tap)="openTermsModal()" row="0" col="1" verticalAlignment="center"></Label>
+                            </GridLayout>
                             <Button class="btn btn-primary simple-btn" text="Proceed To Pay!" (tap)="pay()"></Button>
                         </StackLayout>
 

@@ -323,10 +323,25 @@ export class PaymentComponent implements OnInit {
     // {
     //     this.router.navigate(['created-app', this.app_id , 'payment-success'])
     // }
-
+    toggleTermsCheck() {
+        this.agree_terms_condition = !this.agree_terms_condition;
+    }
     pay() {
-        var sum = this.totalPrice * this.subscription_value - this.offer_price;
-        this.getPaymentSettingsDetails(sum);
+        console.log(this.agree_terms_condition)
+        if (this.agree_terms_condition) {
+            var sum = this.totalPrice * this.subscription_value - this.offer_price;
+            this.getPaymentSettingsDetails(sum);
+        }
+        else {
+            this.feedback.error({
+                title: 'Please accept terms & conditions',
+                backgroundColor: new Color("red"),
+                titleColor: new Color("black"),
+                position: FeedbackPosition.Bottom,
+                type: FeedbackType.Custom
+            });
+        }
+
     }
 
     getPaymentSettingsDetails(amount) {
