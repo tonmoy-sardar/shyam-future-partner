@@ -135,7 +135,7 @@ export class EditAppComponent implements OnInit {
                    
                     this.loader.hide();
                     this.feedback.success({
-                        title: 'App information updated successfully',
+                        title: 'Your business details have been successfully updated',
                         backgroundColor: new Color("green"),
                         titleColor: new Color("black"),
                         position: FeedbackPosition.Bottom,

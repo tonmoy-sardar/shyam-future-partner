@@ -240,7 +240,7 @@ export class PaymentComponent implements OnInit {
                 this.coupon_code = valid[0].offer_code;
                 console.log("sdadawd")
                 this.feedback.success({
-                    title: 'Coupon applied successfully',
+                    title: 'Coupon code accepted',
                     backgroundColor: new Color("green"),
                     titleColor: new Color("black"),
                     position: FeedbackPosition.Bottom,
@@ -274,7 +274,7 @@ export class PaymentComponent implements OnInit {
                     console.log(res)
                     this.referral_user_id = res['referral_user_id'];
                     this.feedback.success({
-                        title: 'Referral code is applied successfully',
+                        title: 'Referral code accepted',
                         backgroundColor: new Color("green"),
                         titleColor: new Color("black"),
                         position: FeedbackPosition.Bottom,

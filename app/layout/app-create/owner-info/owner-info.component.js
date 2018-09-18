@@ -40,7 +40,7 @@ var OwnerInfoComponent = /** @class */ (function () {
             viewContainerRef: this.vcRef
         };
         this.selectedIndex = null;
-        this.hint = "Select Designation";
+        this.hint = "User's designation";
         this.loader = new nativescript_loading_indicator_1.LoadingIndicator();
         this.lodaing_options = {
             message: 'Loading...',

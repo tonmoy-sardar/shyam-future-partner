@@ -53,7 +53,7 @@ export class EditOwnerInfoComponent implements OnInit {
     }
 
     selectedIndex: number = null;
-    hint = "Select Designation";
+    hint = "User's designation";
     designations: ValueList<string>;
 
     loader = new LoadingIndicator();
@@ -232,7 +232,7 @@ export class EditOwnerInfoComponent implements OnInit {
                 res => {
                     this.loader.hide();
                     this.feedback.success({
-                        title: 'Owner information updated successfully',
+                        title: 'Owner details have been successfully updated',
                         backgroundColor: new Color("green"),
                         titleColor: new Color("black"),
                         position: FeedbackPosition.Bottom,

@@ -31,7 +31,7 @@
                         <StackLayout row="2">
                             <StackLayout width="100%" textAlignment="left" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
                             <StackLayout>
-                                <Label text="Have Coupon Code?" textAlignment="left"></Label>
+                                <Label text="Have a coupon?" textAlignment="left"></Label>
                                 <StackLayout class="input-filld" row="0" col="1">
                                     <GridLayout columns="*,*" rows="*,*" class="form" [formGroup]="cuponForm"
                                         novalidate>
@@ -40,7 +40,7 @@
                                             backgroundColor="#fff" returnKeyType="next" formControlName="coupon"></TextField>
                                         <StackLayout row="1" col="0" class="m-t-5" *ngIf="isFieldValid(cuponForm,'coupon')"
                                             class="invalid-feedback">
-                                            <Label fontSize="8" text="Please enter coupon code"></Label>
+                                            <Label fontSize="8" text="Enter your coupon code"></Label>
                                         </StackLayout>
 
                                         <Button row="0" col="1" width="30%" class="btn btn-primary simple-btn pull-right"
@@ -51,7 +51,7 @@
 
                             </StackLayout>
                             <StackLayout>
-                                <Label text="Have Referral Code?" textAlignment="left"></Label>
+                                <Label text="Have a referral?" textAlignment="left"></Label>
                                 <StackLayout class="input-filld" row="0" col="1">
                                     <GridLayout columns="*,*" rows="*,*" class="form" [formGroup]="referralForm"
                                         novalidate>
@@ -60,7 +60,7 @@
                                             backgroundColor="#fff" returnKeyType="next" formControlName="referral_code"></TextField>
                                         <StackLayout row="1" col="0" class="m-t-5" *ngIf="isFieldValid(referralForm,'referral_code')"
                                             class="invalid-feedback">
-                                            <Label fontSize="8" text="Please enter referral code"></Label>
+                                            <Label fontSize="8" text="Enter your referral code"></Label>
                                         </StackLayout>
 
                                         <Button row="0" col="1" width="30%" class="btn btn-primary simple-btn pull-right"

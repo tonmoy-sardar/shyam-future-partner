@@ -158,7 +158,7 @@ export class EditBusinessImagesComponent implements OnInit {
             res => {
                 if (this.key == '') {
                     this.feedback.success({
-                        title: 'Business image updated successfully',
+                        title: 'Business image has been successfully updated',
                         backgroundColor: new Color("green"),
                         titleColor: new Color("black"),
                         position: FeedbackPosition.Bottom,

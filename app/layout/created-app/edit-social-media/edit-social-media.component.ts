@@ -139,7 +139,7 @@ export class EditSocialMediaComponent implements OnInit {
             res => {
                 this.loader.hide();
                 this.feedback.success({
-                    title: 'Social media links updated successfully',
+                    title: 'Social media links have been successfully updated',
                     backgroundColor: new Color("green"),
                     titleColor: new Color("black"),
                     position: FeedbackPosition.Bottom,

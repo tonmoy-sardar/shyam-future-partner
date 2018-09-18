@@ -24,17 +24,17 @@
 
         <CardView class="action-section">
             <StackLayout>
-                <Label textAlignment="left" fontSize="15" lineHeight="10" text="Subscription information:" paddingLeft="10" class="m-t-10" textWrap="true"></Label>
+                <Label textAlignment="left" fontSize="15" lineHeight="10" text="Subscription summary:" paddingLeft="10" class="m-t-10" textWrap="true"></Label>
                 <StackLayout width="100%" textAlignment="center" class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
                 <StackLayout>
                     <GridLayout rows="*,*,*,*" columns="*,*" class="list-group-item" padding="10" verticalAlignment="center">
-                        <Label row="0" col="0" text="Created Date" verticalAlignment="center"></Label>
+                        <Label row="0" col="0" text="Created on" verticalAlignment="center"></Label>
                         <Label row="0" col="1" [text]="subscription_details[0].created_at | date:'dd-MM-yyyy'" class="body" verticalAlignment="center"></Label>
-                        <Label row="1" col="0" text="Validation Untill" verticalAlignment="center"></Label>
+                        <Label row="1" col="0" text="App expiry date" verticalAlignment="center"></Label>
                         <Label row="1" col="1" [text]="subscription_details[0].valid_until | date:'dd-MM-yyyy'" class="body" verticalAlignment="center"></Label>
-                        <Label row="2" col="0" text="Subscription Type" verticalAlignment="center"></Label>
+                        <Label row="2" col="0" text="Subscription type" verticalAlignment="center"></Label>
                         <Label row="2" col="1" [text]="subscription_details[0].subscription_type.type_name" class="body" verticalAlignment="center"></Label>
-                        <Label row="3" col="0" text="Total Cost" verticalAlignment="center"></Label>
+                        <Label row="3" col="0" text="Total cost" verticalAlignment="center"></Label>
                         <Label row="3" col="1" [text]="subscription_details[0].total_cost" class="body" verticalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>

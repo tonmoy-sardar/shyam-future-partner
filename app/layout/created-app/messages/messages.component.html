@@ -11,3 +11,13 @@
     </GridLayout>
   </ng-template>
 </ListView>
+
+<StackLayout *ngIf="chats.length==0">
+  <StackLayout borderWidth="1" borderColor="#ccc" style="margin-bottom: 5px;" class="list-group">
+      <CardView class="whiteCard">
+          <GridLayout rows="auto" columns="*" class="list-group-item" padding="10" verticalAlignment="center">
+              <Label row="0" col="0" text="No messages yet" verticalAlignment="center"></Label>
+          </GridLayout>
+      </CardView>
+  </StackLayout>
+</StackLayout>

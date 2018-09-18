@@ -30,21 +30,21 @@
                         <StackLayout class="input-filld" row="0">
                             <TextField height="40" padding="10" fontSize="12" hint="Name Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="business_name" [ngClass]="displayFieldCss('business_name')" borderRadius="2" borderColor="#6c6969"></TextField>
                             <StackLayout *ngIf="isFieldValid('business_name')" class="invalid-feedback">
-                                <Label fontSize="8" text="Name Of Your Business is required"></Label>
+                                <Label fontSize="8" text="Your business name is required"></Label>
                             </StackLayout>
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="1">
-                            <TextField height="40" padding="10" fontSize="12" hint="Website URL" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="app_website_url" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
+                            <TextField height="40" padding="10" fontSize="12" hint="Website URL (Optional)" class="input input-border cyan-border m-t-10" returnKeyType="next" formControlName="app_website_url" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextField>
 
                         </StackLayout>
 
                         <StackLayout class="input-filld" row="2">
 
-                            <TextView lineHeight="12" height="100" padding="10" fontSize="12" hint="Description Of Your Business" class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="business_description" [ngClass]="displayFieldCss('business_description')"
+                            <TextView lineHeight="12" height="100" padding="10" fontSize="12" hint="A few lines about your business" class="input input-border cyan-border m-t-10" returnKeyType="done" formControlName="business_description" [ngClass]="displayFieldCss('business_description')"
                                 borderRadius="2" borderColor="#6c6969" backgroundColor="#fff"></TextView>
                             <StackLayout *ngIf="isFieldValid('business_description')" class="invalid-feedback">
-                                <Label fontSize="8" text="Description Of Your Business is required"></Label>
+                                <Label fontSize="8" text="Your business description is required"></Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout class="input-filld" row="3">
