@@ -8,7 +8,7 @@
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "org.nativescript.shyamfuturepartner"
+    applicationId = "org.nativescript.banao.partner"
     multiDexEnabled true   
   }  
   aaptOptions {  

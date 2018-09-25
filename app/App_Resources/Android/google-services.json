@@ -1,35 +1,66 @@
 {
   "project_info": {
-    "project_number": "276561489898",
-    "firebase_url": "https://fir-2a5d9.firebaseio.com",
-    "project_id": "fir-2a5d9",
-    "storage_bucket": "fir-2a5d9.appspot.com"
+    "project_number": "96396284544",
+    "firebase_url": "https://banao-app.firebaseio.com",
+    "project_id": "banao-app",
+    "storage_bucket": "banao-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:276561489898:android:7025026edfd14c50",
+        "mobilesdk_app_id": "1:96396284544:android:a6ad7751c9f49dd9",
         "android_client_info": {
-          "package_name": "org.nativescript.shyamfuturepartner"
+          "package_name": "org.nativescript.banao.partner"
         }
       },
       "oauth_client": [
         {
-          "client_id": "276561489898-hcjgkm75ko10cftna9u9ongdcblf3k5a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.nativescript.shyamfuturepartner",
-            "certificate_hash": "a8f85f55432068dff51317110b02972b95536e22"
-          }
-        },
-        {
-          "client_id": "276561489898-crekku3qfhrg512f446me8nnfr13qi9o.apps.googleusercontent.com",
+          "client_id": "96396284544-g6a45uua8au5uaqg7trmptgh7v72h9sf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBy6_nMB5q6MlQHT6pu7Z5oGKsfWkcqt3g"
+          "current_key": "AIzaSyAbkdGEqQJOoDBVhe-n6OS_xahlIVQBS2s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96396284544:android:47ef7829da5eb281",
+        "android_client_info": {
+          "package_name": "org.nativescript.restaurantpremium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96396284544-5omaqlq8uelhbuquunk68fn9h432f046.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.nativescript.restaurantpremium",
+            "certificate_hash": "eccf7af8e68a48e3deb20b77384ff7cd4baa3b13"
+          }
+        },
+        {
+          "client_id": "96396284544-g6a45uua8au5uaqg7trmptgh7v72h9sf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbkdGEqQJOoDBVhe-n6OS_xahlIVQBS2s"
         }
       ],
       "services": {
@@ -40,7 +71,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "276561489898-crekku3qfhrg512f446me8nnfr13qi9o.apps.googleusercontent.com",
+              "client_id": "96396284544-g6a45uua8au5uaqg7trmptgh7v72h9sf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
