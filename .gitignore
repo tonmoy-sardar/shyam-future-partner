@@ -27,13 +27,13 @@ obj/**/*
 **/*.sbr
 
 # Source control files
-.gitignore
 .git/**/*
 
 # Other
 **/*.bak
 **/*.cache
 **/*.log
+**/*.jks
 
 # NativeScript files
 platforms/**/*
