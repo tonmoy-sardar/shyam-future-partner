@@ -11,7 +11,7 @@ import { Color } from "tns-core-modules/color";
 import { ExploreService } from "../../../core/services/explore.service";
 import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import { TermsDialogComponent } from '../../../core/component/terms-dialog/terms-dialog.component';
-
+import { getString, setString, getBoolean, setBoolean, clear } from "application-settings";
 import {
     Paytm,
     Order,
@@ -91,6 +91,7 @@ export class PaymentComponent implements OnInit {
         viewContainerRef: this.vcRef
     };
     agree_terms_condition: boolean = false;
+    customer_email: string;
     constructor(
         private route: ActivatedRoute,
         private ngZone: NgZone,
@@ -109,6 +110,12 @@ export class PaymentComponent implements OnInit {
     ngOnInit() {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
+        if (getString('email') != undefined) {
+            this.customer_email = getString('email')
+        }
+        else {
+            this.customer_email = "customer@" + getString('contact_no')
+        }
         this.paytm = new Paytm();
         this.getPriceList();
         this.getSubscriptionTypeList();
@@ -120,6 +127,13 @@ export class PaymentComponent implements OnInit {
         this.referralForm = this.formBuilder.group({
             referral_code: [null, Validators.required]
         });
+    }
+
+    totalPriceChange() {
+        var intial = parseFloat(this.priceList[0].cost)
+        if (this.totalPrice < intial) {
+            this.totalPrice = intial
+        }
     }
 
 
@@ -345,7 +359,7 @@ export class PaymentComponent implements OnInit {
     }
 
     getPaymentSettingsDetails(amount) {
-        this.CreatedAppService.paytmFormValue(this.app_id, amount).subscribe(
+        this.CreatedAppService.paytmFormValue(this.app_id, amount, this.customer_email).subscribe(
             (
                 data => {
                     this.paymentdetails_data = data;

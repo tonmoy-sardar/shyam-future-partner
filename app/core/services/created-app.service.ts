@@ -128,8 +128,8 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'dropdown_offer_code/')
   }
 
-  paytmFormValue(app_id, order_amount): Observable<any> {
-    return this.http.get(Globals.apiEndpoint + 'get_payment_details/?app_id=' + app_id + '&order_amount=' + order_amount + '&type=app')
+  paytmFormValue(app_id, order_amount, customer_email): Observable<any> {
+    return this.http.get(Globals.apiEndpoint + 'get_payment_details/?app_id=' + app_id + '&order_amount=' + order_amount + '&type=app' + '&customer_email=' + customer_email)
   }
 
   appSubscription(data) {
@@ -157,11 +157,11 @@ export class CreatedAppService {
     return this.http.get(Globals.apiEndpoint + 'subscribe_app_details/' + id + '/')
   }
 
-  checkReferralCode(data){
+  checkReferralCode(data) {
     return this.http.post(Globals.apiEndpoint + 'check_referral_code/', data)
   }
 
-  
+
 }
 
 
