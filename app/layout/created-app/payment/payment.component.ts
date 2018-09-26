@@ -342,11 +342,17 @@ export class PaymentComponent implements OnInit {
     }
     pay() {
         console.log(this.agree_terms_condition)
-        if (this.agree_terms_condition) {
-            var sum = this.totalPrice * this.subscription_value - this.offer_price;
-            this.getPaymentSettingsDetails(sum);
+        var intial = parseFloat(this.priceList[0].cost)
+        if (this.totalPrice < intial) {
+            this.feedback.error({
+                title: 'Price per day cannot be less than ' + intial,
+                backgroundColor: new Color("red"),
+                titleColor: new Color("black"),
+                position: FeedbackPosition.Bottom,
+                type: FeedbackType.Custom
+            });
         }
-        else {
+        else if (!this.agree_terms_condition) {
             this.feedback.error({
                 title: 'Please accept terms & conditions',
                 backgroundColor: new Color("red"),
@@ -354,6 +360,11 @@ export class PaymentComponent implements OnInit {
                 position: FeedbackPosition.Bottom,
                 type: FeedbackType.Custom
             });
+
+        }
+        else {
+            var sum = this.totalPrice * this.subscription_value - this.offer_price;
+            this.getPaymentSettingsDetails(sum);
         }
 
     }
