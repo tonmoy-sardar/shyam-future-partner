@@ -42,3 +42,6 @@ typings/**/*
 
 #NativeScript cloud files
 .cloud/**/*
+
+#production setup file 
+tj-vantoll.jks
