@@ -22,9 +22,15 @@
                             <Label class="section_heading" text="Item Details"></Label>
                             <GridLayout columns="*,*" rows="*" *ngFor="let item of priceList" orientation="vertical"
                                 verticalAlignment="center">
-                                <CheckBox textAlignment="left" row="0" col="0" [text]="item.title " checked="true"
-                                    verticalAlignment="center"></CheckBox>
-                                <Label row="0" col="1" [text]="item.cost" textAlignment="right" verticalAlignment="center"></Label>
+                                <CheckBox textAlignment="left" row="0" col="0" [text]="item.title " [checked]="item.checked"
+                                    verticalAlignment="center" [isEnabled]="item.setDisabled"></CheckBox>  
+                                <StackLayout class="input-filld" row="0" col="1" verticalAlignment="center">
+                                    <TextField width="100%" height="35" hint="Unit price" class=""
+                                        padding="0" paddingLeft="2" fontSize="12" borderRadius="2" borderColor="#6c6969"
+                                        backgroundColor="#fff" returnKeyType="done" keyboardType="number" [(ngModel)]="totalPrice"
+                                        (returnPress)="totalPriceChange($event)" (blur)="totalPriceChange($event)"></TextField>
+                                </StackLayout>
+
                             </GridLayout>
                         </StackLayout>
 
@@ -88,8 +94,10 @@
                         </StackLayout>
                         <StackLayout row="4">
                             <GridLayout rows="*" columns="auto,auto">
-                                <CheckBox #terms text="Agree" checked="false" row="0" col="0" verticalAlignment="center" (tap)="toggleTermsCheck()"></CheckBox>
-                                <Label text=" Terms & Conditions" (tap)="openTermsModal()" row="0" col="1" verticalAlignment="center"></Label>
+                                <CheckBox #terms text="Agree" checked="false" row="0" col="0" verticalAlignment="center"
+                                    (tap)="toggleTermsCheck()"></CheckBox>
+                                <Label text=" Terms & Conditions" (tap)="openTermsModal()" row="0" col="1"
+                                    verticalAlignment="center"></Label>
                             </GridLayout>
                             <Button class="btn btn-primary simple-btn" text="Proceed To Pay!" (tap)="pay()"></Button>
                         </StackLayout>
